@@ -5,9 +5,22 @@
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "socket.io": "^2.0.1"
+    "socket.io": "^2.0.1",
+    "socket.io-client": "^2.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-fbjs": "^1.1.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-flowtype": "^2.32.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jasmine": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.9.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
