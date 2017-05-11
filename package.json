@@ -2,6 +2,15 @@
   "name": "lexsur3",
   "version": "0.1.0",
   "private": true,
+  "author": "Team Mutiny",
+  "contributors": [
+    "Robin Ury",
+    "Jason Gutierrez"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "github.com:mutiny/lexsur-react-client"
+  },
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
