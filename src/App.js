@@ -47,10 +47,9 @@ class QuestionForm extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     Socket.ask({text:this.state.question});
     this.setState({question: ''})
-    this.props.updateQuestions()
-    event.preventDefault();
   }
 
   render() {
@@ -104,11 +103,6 @@ class Lex extends Component {
     this.updateUsers = this.updateUsers.bind(this)
     Socket.initSocket(this.updateQuestions,this.setId,this.updateUsers)
   }
-/*  function addNewQuestion () {
-    this.questions.push({author: this.userId, text: this.newQuestionText, votes: 0})
-    Socket.ask({author: this.userId, text: this.newQuestionText})
-    this.newQuestionText = ''
-  },*/
   updateQuestions (newQuestions) {
     this.setState({
       questions: newQuestions
@@ -131,7 +125,7 @@ class Lex extends Component {
   render() {
     return (
       <div>
-        <QuestionForm author={this.state.username} update={this.updateQuestions} />
+        <QuestionForm author={this.state.username} />
         <QuestionList questions={this.state.questions} users={this.state.users}/>
       </div>
     );
