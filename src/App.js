@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
 import './App.css';
-import io from 'socket.io-client'
 
 class Socketz {
   constructor() {
     this.io = io('localhost:3030');
-    this.id = this.io.id
+    this.id = this.io.id;
     this.initSocket = this.initSocket.bind(this);
     this.ask = this.ask.bind(this);
     this.nick = this.nick.bind(this);
   }
-  initSocket (callback, idhandler, userhandler) {
-    this.io.on('assignment', idhandler)
-    this.io.on('newQuestion', callback)
-    this.io.on('newUser', userhandler)
+  initSocket(callback, idhandler, userhandler) {
+    this.io.on('assignment', idhandler);
+    this.io.on('newQuestion', callback);
+    this.io.on('newUser', userhandler);
   }
-  ask (question) { this.io.emit('questionAsked', question) }
-  nick (newName) { this.io.emit('nameChanged', newName) }
+  ask(question) { this.io.emit('questionAsked', question); }
+  nick(newName) { this.io.emit('nameChanged', newName); }
+  vote(newVote) { this.io.emit('voteCast', newVote); }
 }
 const Socket = new Socketz();
 
@@ -27,45 +28,49 @@ class QuestionForm extends React.Component {
       author: this.props.author,
       userId: this.props.uid,
       question: '',
-      };
-    this.handleBlur   = this.handleBlur.bind(this);
+    };
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleBlur(event) {
+  handleBlur() {
     // console.log(event.target.name + ' ' + event.target.value)
-    Socket.nick(this.state.author)
+    Socket.nick(this.state.author);
   }
 
   handleChange(event) {
     const name = event.target.name;
-    const value  = event.target.value;
+    const value = event.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    Socket.ask({text:this.state.question});
-    this.setState({question: ''})
+    Socket.ask({ text: this.state.question });
+    this.setState({ question: '' });
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
+        <label htmlFor="author">
           Name:
-          <input ref={(input) => { this.nameInput = input }}
+          <input
+            ref={(input) => { this.nameInput = input; }}
             type="text" name="author" value={this.state.author}
-            onChange={this.handleChange} onBlur={this.handleBlur} />
+            onChange={this.handleChange} onBlur={this.handleBlur}
+          />
         </label>
-        <label>
+        <label htmlFor="question">
           Question:
-          <input ref={(input) => { this.qInput = input }}
+          <input
+            ref={(input) => { this.qInput = input; }}
             type="text" name="question" value={this.state.question}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -73,14 +78,32 @@ class QuestionForm extends React.Component {
   }
 }
 
+function VoteButton(props) {
+  const id = props.qid;
+  function handleVote(e) {
+    e.preventDefault();
+    Socket.vote({
+      id,
+    });
+  }
+  return (
+    <button onClick={handleVote}>
+      Vote
+    </button>
+  );
+}
 function QuestionList(props) {
-  let questions = props.questions;
-  let users = props.users
+  const questions = props.questions;
+  const users = props.users;
   if (!questions) {
     return null;
   }
-  const listItems = questions.map((question) =>
-    <li key={question.id}>{users[question.author] + '\t asks \t' + question.text}</li>
+  const listItems = questions.map(question =>
+    <li key={question.id}>
+      {`${users[question.author]}\t asks \t${question.text}`}
+      <VoteButton qid={question.id} />
+      {question.votes.length}
+    </li>,
   );
   return (
     <ul>{listItems}</ul>
@@ -90,43 +113,43 @@ function QuestionList(props) {
 
 class Lex extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       username: 'Anonymous', // TODO
       userId: '', // This initialization is required
       newQuestionText: 'Enter a question',
       questions: [],
-      users: []
-    }
-    this.updateQuestions = this.updateQuestions.bind(this)
-    this.setId = this.setId.bind(this)
-    this.updateUsers = this.updateUsers.bind(this)
-    Socket.initSocket(this.updateQuestions,this.setId,this.updateUsers)
+      users: [],
+    };
+    this.updateQuestions = this.updateQuestions.bind(this);
+    this.setId = this.setId.bind(this);
+    this.updateUsers = this.updateUsers.bind(this);
+    Socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
   }
-  updateQuestions (newQuestions) {
+  setId(newId) {
     this.setState({
-      questions: newQuestions
-    })
-    console.log(newQuestions)
+      userId: newId,
+    });
+    console.log(newId);
   }
-  setId (newId) {
+  updateQuestions(newQuestions) {
     this.setState({
-      userId: newId
-    })
-    console.log(newId)
+      questions: newQuestions,
+    });
+    console.log(newQuestions);
   }
-  updateUsers (newUsers) {
+  updateUsers(newUsers) {
     this.setState({
-      users: newUsers
-    })
-    console.log(newUsers)
+      users: newUsers,
+    });
+    console.log(newUsers);
   }
 
   render() {
     return (
       <div>
         <QuestionForm author={this.state.username} />
-        <QuestionList questions={this.state.questions} users={this.state.users}/>
+        <QuestionList questions={this.state.questions} users={this.state.users} />
       </div>
     );
   }
