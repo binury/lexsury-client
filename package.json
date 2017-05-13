@@ -12,8 +12,12 @@
     "url": "github.com:mutiny/lexsur-react-client"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-sortable": "^1.2.0",
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1"
   },
