@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 class Socket {
-  constructor() {
+  constructor(ns) {
     this.io = io('localhost:3030');
     this.id = this.io.id;
     this.initSocket = this.initSocket.bind(this);

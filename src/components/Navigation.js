@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home';
-/* import Rooms from './Rooms';*/
-import LexRoom from './Sandbox';
+import Rooms from './Rooms';
+import LexRoom from './LexRoom';
 
 const Presentation = () => (
   <div>
     <h2>Presentation</h2>
   </div>
 );
-const Rooms = ({ match }) => (
+/* const Rooms = ({ match }) => (
   <ul>
     <li><Link to="/room/test1">Test1</Link></li>
     <li><Link to="/room/test2">Test2</Link></li>
     <li><Link to="/room/test3">Test3</Link></li>
   </ul>
-  );
+  );*/
 const Navigation = () => (
   <Router>
     <div>
