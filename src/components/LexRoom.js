@@ -4,24 +4,25 @@ import '../App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 
-const socket = new Socket();
 
 class Lex extends React.Component {
   constructor(props) {
     super(props);
+    const roomName = this.props.location.pathname.split('/')[2]; // lol
     this.state = {
       username: 'Anonymous', // TODO
       userId: '', // This initialization is required
       newQuestionText: 'Enter a question',
       questions: [],
       users: [],
-      props,
+      roomid: roomName,
+      socket: new Socket(`${roomName}`),
     };
     this.updateQuestions = this.updateQuestions.bind(this);
     this.setId = this.setId.bind(this);
     this.updateUsers = this.updateUsers.bind(this);
-    socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
-    console.log(`We are at :${  props.location.pathname}`);
+    this.state.socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
+    console.log(`We are at :${props.location.pathname}`);
   }
   setId(newId) {
     this.setState({
@@ -45,7 +46,8 @@ class Lex extends React.Component {
   render() {
     return (
       <div>
-        <QuestionForm author={this.state.username} />
+        <h2>{this.state.roomid}</h2>
+        <QuestionForm author={this.state.username} sock={this.state.socket} />
         <QuestionList questions={this.state.questions} users={this.state.users} />
       </div>
     );
