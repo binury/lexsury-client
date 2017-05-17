@@ -34,7 +34,8 @@ class Lex extends React.Component {
     this.setState({
       questions: newQuestions,
     });
-    console.log(newQuestions);
+    console.log(`Updating questions:\n-----------------\n`)
+    for (let question of this.state.questions) { console.log(question.text); }
   }
   updateUsers(newUsers) {
     this.setState({
@@ -48,7 +49,7 @@ class Lex extends React.Component {
       <div>
         <h2>{this.state.roomid}</h2>
         <QuestionForm author={this.state.username} sock={this.state.socket} />
-        <QuestionList questions={this.state.questions} users={this.state.users} />
+        <QuestionList questions={this.state.questions} users={this.state.users} sock={this.state.socket} />
       </div>
     );
   }
