@@ -18,7 +18,7 @@ class Rooms extends React.Component {
     this.setState({ isLoading: true });
     axios({
       method: 'get',
-      url: 'http://localhost:3030/rooms',
+      url: '/rooms',
       timeout: 20000,
       responseType: 'json',
     }).then((newRooms) => {

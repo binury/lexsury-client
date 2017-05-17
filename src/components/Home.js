@@ -5,7 +5,7 @@ function Home(props) {
   function genNewRoom() {
     axios({
       method: 'post',
-      url: 'http://localhost:3030/rooms',
+      url: '/rooms',
       data: {
         owner: 'test_owner',
       },
