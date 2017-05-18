@@ -1,7 +1,5 @@
 import React from 'react';
-import Socket from '../Socket';
 
-const socket = new Socket();
 class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +7,7 @@ class QuestionForm extends React.Component {
       author: this.props.author,
       userId: this.props.uid,
       question: '',
+      socket: this.props.sock,
     };
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -17,7 +16,7 @@ class QuestionForm extends React.Component {
 
   handleBlur() {
     // console.log(event.target.name + ' ' + event.target.value)
-    socket.nick(this.state.author);
+    this.state.socket.nick(this.state.author);
   }
 
   handleChange(event) {
@@ -30,7 +29,7 @@ class QuestionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    socket.ask({ text: this.state.question });
+    this.state.socket.ask({ text: this.state.question });
     this.setState({ question: '' });
   }
 
