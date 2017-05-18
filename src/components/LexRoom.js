@@ -4,19 +4,20 @@ import '../App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 
-
+// TODO: Conditionally render LexRoom if token is absent
 class Lex extends React.Component {
   constructor(props) {
     super(props);
     const roomName = this.props.location.pathname.split('/')[2]; // lol
     this.state = {
-      username: 'Anonymous', // TODO
+      username: 'Anonymous', // TODO: Load from server
       userId: '', // This initialization is required
       newQuestionText: 'Enter a question',
       questions: [],
       users: [],
       roomid: roomName,
-      socket: new Socket(`${roomName}`),
+      socket: new Socket(window.localStorage.getItem('LEXSECRET'), roomName),
+      // Maybe move this token expression up to Home since it should know too
     };
     this.updateQuestions = this.updateQuestions.bind(this);
     this.setId = this.setId.bind(this);
@@ -34,8 +35,8 @@ class Lex extends React.Component {
     this.setState({
       questions: newQuestions,
     });
-    console.log(`Updating questions:\n-----------------\n`)
-    for (let question of this.state.questions) { console.log(question.text); }
+    console.log('Updating questions:\n-----------------\n');
+    for (const question of this.state.questions) { console.log(question.text); }
   }
   updateUsers(newUsers) {
     this.setState({
@@ -49,7 +50,10 @@ class Lex extends React.Component {
       <div>
         <h2>{this.state.roomid}</h2>
         <QuestionForm author={this.state.username} sock={this.state.socket} />
-        <QuestionList questions={this.state.questions} users={this.state.users} sock={this.state.socket} />
+        <QuestionList questions={this.state.questions}
+                      users={this.state.users}
+                      sock={this.state.socket}
+        />
       </div>
     );
   }

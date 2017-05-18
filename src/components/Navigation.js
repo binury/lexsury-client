@@ -3,32 +3,35 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Rooms from './Rooms';
 import LexRoom from './LexRoom';
+import Login from './Login';
 
-const Presentation = () => (
-  <div>
-    <h2>Presentation</h2>
-  </div>
-);
-/* const Rooms = ({ match }) => (
-  <ul>
-    <li><Link to="/room/test1">Test1</Link></li>
-    <li><Link to="/room/test2">Test2</Link></li>
-    <li><Link to="/room/test3">Test3</Link></li>
-  </ul>
-  );*/
-const Navigation = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/presentation">Presentation</Link></li>
-        <li><Link to="/rooms">Active Lexsurs</Link></li>
-        <hr />
-        <Route exact path="/" component={Home} />
-        <Route path="/presentation" component={Presentation} />
-        <Route path="/rooms" component={Rooms} />
-        <Route path="/room/:name" component={LexRoom} />
+// CSS is shit; i'm sorry- i tried
+const containerStyle = { display: 'block' };
+const navStyle = {
+  display: 'flex',
+  fontSize: '1.6rem',
+  justifyContent: 'space-around',
+  // TODO
+};
+
+const liStyle = {
+  display: 'inline-block',
+};
+
+// TODO : Extend Login to conditionally render Logout
+// TODO : Expose URL prop of nav to children
+const Navigation = props => (
+  <Router history={history}>
+    <div style={containerStyle}>
+      <ul style={navStyle}>
+        <li style={liStyle}><Link to="/login">Login</Link></li>
+        <li style={liStyle}><Link to="/">Home</Link></li>
       </ul>
+      <hr />
+      <Route exact path="/" component={Home} />
+      <Route path="/rooms" component={Rooms} />
+      <Route path="/room/:name" component={LexRoom} />
+      <Route path="/login" component={Login} />
     </div>
   </Router>
 );

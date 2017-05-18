@@ -5,9 +5,9 @@ import Navigation from './components/Navigation';
 /* import QuestionForm from './components/QuestionForm';
 import QuestionList from './components/QuestionList';*/
 
-function App() {
+function App(props) {
   return (
-    <Navigation />
+    <Navigation url={props.URL} />
   );
 }
 
