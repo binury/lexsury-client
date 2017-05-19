@@ -1,7 +1,8 @@
 import React from 'react';
+
 const axios = require('axios');
 
-function Home(props) {
+function Home() {
   function genNewRoom() {
     axios({
       method: 'post',

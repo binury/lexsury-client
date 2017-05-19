@@ -40,15 +40,20 @@ class QuestionForm extends React.Component {
           Name:
           <input
             ref={(input) => { this.nameInput = input; }}
-            type="text" name="author" value={this.state.author}
-            onChange={this.handleChange} onBlur={this.handleBlur}
+            type="text"
+            name="author"
+            value={this.state.author}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
           />
         </label>
         <label htmlFor="question">
           Question:
           <input
             ref={(input) => { this.qInput = input; }}
-            type="text" name="question" value={this.state.question}
+            type="text"
+            name="question"
+            value={this.state.question}
             onChange={this.handleChange}
           />
         </label>
