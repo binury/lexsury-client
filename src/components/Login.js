@@ -37,7 +37,7 @@ class Login extends React.Component {
     })
     .then((res) => {
       localStorage.setItem('LEXSECRET', res.data.accessToken);
-      window.location = 'http://localhost:3030/'; // TODO
+      window.location = 'http://localhost:3000/'; // TODO
     })
     .catch(err => console.error(err));
   }

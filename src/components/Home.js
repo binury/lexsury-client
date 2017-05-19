@@ -3,14 +3,17 @@ import React from 'react';
 
 const axios = require('axios');
 
+const URI = 'http://localhost:3030';
+const token = window.localStorage.getItem('LEXSECRET');
+
 function Home() {
   function genNewRoom() {
-    axios({
-      method: 'post',
-      url: 'http://localhost:3030/rooms', // TODO
-      data: {
-        owner: 'test_owner',
-      },
+    if (!token) {
+      window.location += 'login';
+      return;
+    }
+    axios.post(`${URI}/rooms`, {}, {
+      headers: { Authorization: token },
     })
     .then(res => window.location += `room/${res.data.name}`)
     .catch(err => console.log(`There was an error: ${err}`));

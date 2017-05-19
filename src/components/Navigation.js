@@ -20,11 +20,14 @@ const liStyle = {
 
 // TODO : Extend Login to conditionally render Logout
 // TODO : Expose URL prop of nav to children
-const Navigation = props => (
+const token = window.localStorage.getItem('LEXSECRET');
+const routeName = !token ? 'Login' : 'Logout';
+
+const Navigation = () => (
   <Router history={history}>
     <div style={containerStyle}>
       <ul style={navStyle}>
-        <li style={liStyle}><Link to="/login">Login</Link></li>
+        <li style={liStyle}><Link to="/login">{routeName}</Link></li>
         <li style={liStyle}><Link to="/">Home</Link></li>
       </ul>
       <hr />
