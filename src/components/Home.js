@@ -1,9 +1,9 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
+
 const axios = require('axios');
 
-// TODO: Should also have an input component for going directly to rooms
-function Home(props) {
+function Home() {
   function genNewRoom() {
     axios({
       method: 'post',
