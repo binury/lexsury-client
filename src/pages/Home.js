@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
 import axios from 'axios';
-import RoomJoinForm from './RoomJoinForm';
+import RoomJoinForm from '../components/RoomJoinForm';
 
 const URI = 'http://localhost:3030';
 const token = window.localStorage.getItem('LEXSECRET');

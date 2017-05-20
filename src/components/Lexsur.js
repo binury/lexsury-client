@@ -1,8 +1,8 @@
 import React from 'react';
-import Socket from '../Socket';
-import '../App.css';
+import '../styles/App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
+import Socket from '../Socket';
 
 // TODO: Conditionally render LexRoom if token is absent
 class Lex extends React.Component {

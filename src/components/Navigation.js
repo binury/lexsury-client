@@ -1,9 +1,10 @@
+/* eslint-disable prefer-const */
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import browserHistory from 'history';
-import Home from './Home';
+import Home from '../pages/Home';
 import Rooms from './Rooms';
-import LexRoom from './LexRoom';
+import LexRoom from '../pages/LexRoom';
 import Login from './Login';
 import Logout from './Logout';
 import SignUpForm from './SignUpForm';
@@ -17,11 +18,16 @@ const navStyle = {
   // TODO
 };
 
-const liStyle = {
+const normal = {
   display: 'inline-block',
 };
 
-// TODO : Extend Login to conditionally render Logout
+const hidden = {
+  display: 'none',
+};
+
+let liStyle = (window.location.href.includes('room')) ? hidden : normal;
+// TODO : Extend to conditionally render things
 // TODO : Expose URL prop of nav to children
 const token = window.localStorage.getItem('LEXSECRET');
 const routeName = !token ? 'Login' : 'Logout';
@@ -30,7 +36,7 @@ const Navigation = () => (
   <Router history={browserHistory}>
     <div style={containerStyle}>
       <ul style={navStyle}>
-        <li style={liStyle}><Link to="/">Home</Link></li>
+        <li style={normal}><Link to="/">Home</Link></li>
         <li style={liStyle}><Link to={`/${routeName.toLowerCase()}`}>{routeName}</Link></li>
         <li style={liStyle}><Link to="/signup">Sign Up</Link></li>
       </ul>
