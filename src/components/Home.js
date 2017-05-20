@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
-
-const axios = require('axios');
+import axios from 'axios';
+import RoomJoinForm from './RoomJoinForm';
 
 const URI = 'http://localhost:3030';
 const token = window.localStorage.getItem('LEXSECRET');
@@ -20,6 +20,7 @@ function Home() {
   }
   return (
     <div>
+      <RoomJoinForm />
       <button onClick={genNewRoom}>Create a new presentation</button>
     </div>
   );
