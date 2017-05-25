@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => (
-  <h1>Poll</h1>
+  <h1>Polls go here</h1>
 );
