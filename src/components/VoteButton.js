@@ -17,6 +17,6 @@ function VoteButton(props) {
 export default VoteButton;
 
 VoteButton.propTypes = {
-  qid: PropTypes.number.isRequired,
+  qid: PropTypes.string.isRequired,
   sock: PropTypes.instanceOf(Object).isRequired,
 };
