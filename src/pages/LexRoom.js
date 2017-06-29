@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Route, Link, MemoryRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import Socket from '../Socket';
 import Lexsur from '../components/Lexsur';
 import Admin from '../components/Admin';
@@ -58,4 +60,23 @@ const LexRoom = ({ match }) => {
   }
   return sockedLex();
 };
+
 export default LexRoom;
+
+LexRoom.defaultProps = {
+  match: PropTypes.oneOfType([
+    PropTypes.bool, // isExact
+    PropTypes.object, // params -> name
+    PropTypes.string, // path
+    PropTypes.string, // url
+  ]),
+};
+
+LexRoom.propTypes = {
+  match: PropTypes.oneOfType([
+    PropTypes.bool.isRequired, // isExact
+    PropTypes.instanceOf(Object), // params -> name
+    PropTypes.string.isRequired, // path
+    PropTypes.string.isRequired, // url
+  ]),
+};

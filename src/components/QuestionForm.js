@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -62,4 +63,15 @@ class QuestionForm extends React.Component {
     );
   }
 }
+
 export default QuestionForm;
+
+QuestionForm.defaultProps = {
+  uid: PropTypes.func,
+};
+
+QuestionForm.propTypes = {
+  author: PropTypes.string.isRequired,
+  uid: PropTypes.func,
+  sock: PropTypes.instanceOf(Object).isRequired,
+};

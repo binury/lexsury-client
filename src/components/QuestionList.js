@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import VoteButton from './VoteButton';
 
 const QuestionList = (props) => {
@@ -13,4 +14,10 @@ const QuestionList = (props) => {
     <ul>{listItems}</ul>
   );
 };
+
 export default QuestionList;
+
+QuestionList.propTypes = {
+  questions: PropTypes.instanceOf(Array).isRequired,
+  sock: PropTypes.instanceOf(Object).isRequired,
+};

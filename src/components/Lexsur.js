@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import '../styles/App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
@@ -56,3 +58,7 @@ class Lex extends React.Component {
 }
 
 export default Lex;
+
+Lex.propTypes = {
+  sock: PropTypes.instanceOf(Object).isRequired,
+};
