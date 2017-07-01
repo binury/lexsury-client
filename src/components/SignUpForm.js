@@ -36,20 +36,19 @@ class SignUpForm extends React.Component {
     const payload = {
       email: this.state.email,
       password: this.state.password,
-      responseType: 'json',
     };
     Axios
-    .post('http://localhost:3030/users', payload)
+    .post(`http://${window.location.hostname}:3030/users`, payload)
     .then(() => {
       Axios.post(
-        'http://localhost:3030/authentication',
+        `http://${window.location.hostname}:3030/authentication`,
         Object.assign(payload, { strategy: 'local' },
       ))
       .then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       })
       .then(() => {
-        window.location = 'http://localhost:3000/';
+        window.location = `http://${window.location.hostname}:3000/`;
       });
     })
     .catch(err => console.error(err));

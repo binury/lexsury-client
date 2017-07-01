@@ -31,7 +31,7 @@ class RoomJoinForm extends React.Component {
     event.preventDefault();
     axios({
       method: 'get',
-      url: `http://localhost:3030/rooms?name=${this.state.roomname}`, // TODO
+      url: `http://${window.location.hostname}:3030/rooms?name=${this.state.roomname}`, // TODO
       timeout: 5000,
       responseType: 'json',
     })

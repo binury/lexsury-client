@@ -7,7 +7,6 @@ import Socket from '../Socket';
 import Lexsur from '../components/Lexsur';
 import Admin from '../components/Admin';
 import Presentation from '../components/Presentation';
-import Poll from '../components/Poll';
 import QuestionForm from '../components/QuestionForm';
 import QuestionList from '../components/QuestionList';
 
@@ -52,7 +51,6 @@ const LexRoom = ({ match }) => {
             <Route exact path="/" component={sockedLex} />
             <Route path="/admin" component={Admin} />
             <Route path="/presentation" component={Presentation} />
-            <Route path="/poll" component={Poll} />
           </div>
         </MemoryRouter>
       </div>

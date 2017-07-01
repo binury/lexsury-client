@@ -3,7 +3,6 @@ import React from 'react';
 import axios from 'axios';
 import RoomJoinForm from '../components/RoomJoinForm';
 
-const URI = 'http://localhost:3030';
 const token = window.localStorage.getItem('LEXSECRET');
 
 function Home() {
@@ -12,7 +11,7 @@ function Home() {
       window.location += 'login';
       return;
     }
-    axios.post(`${URI}/rooms`, {}, {
+    axios.post(`http://${window.location.hostname}/rooms`, {}, {
       headers: { Authorization: token },
     })
     .then(res => window.location += `room/${res.data.name}`)

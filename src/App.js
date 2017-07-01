@@ -1,20 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-/* import Socket from './Socket';*/
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
 import './styles/App.css';
 import Navigation from './components/Navigation';
-/* import QuestionForm from './components/QuestionForm';
-import QuestionList from './components/QuestionList';*/
 
-function App(props) {
+function App() {
   return (
-    <Navigation url={props.url} />
+    <Navigation />
   );
 }
 
-App.propTypes = {
-  url: PropTypes.string.isRequired,
-};
-
 export default App;
-

@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const qInputStyles = {
+  display: 'block',
+  width: '-webkit-fill-available',
+  height: '2.9em',
+  border: '2px solid lightgray',
+};
+
 class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -37,8 +44,19 @@ class QuestionForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <label htmlFor="question">
+          Q:
+          <input
+            ref={(input) => { this.qInput = input; }}
+            type="text"
+            name="question"
+            value={this.state.question}
+            onChange={this.handleChange}
+            style={qInputStyles}
+          />
+        </label>
         <label htmlFor="author">
-          Name:
+          N:
           <input
             ref={(input) => { this.nameInput = input; }}
             type="text"
@@ -46,16 +64,6 @@ class QuestionForm extends React.Component {
             value={this.state.author}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
-          />
-        </label>
-        <label htmlFor="question">
-          Question:
-          <input
-            ref={(input) => { this.qInput = input; }}
-            type="text"
-            name="question"
-            value={this.state.question}
-            onChange={this.handleChange}
           />
         </label>
         <input type="submit" value="Submit" />

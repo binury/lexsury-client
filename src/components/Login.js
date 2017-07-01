@@ -29,7 +29,7 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    Axios.post('http://localhost:3030/authentication', { // TODO
+    Axios.post(`${window.location.hostname}:3030/authentication`, { // TODO
       strategy: 'local',
       email: this.state.email,
       password: this.state.password,
@@ -37,7 +37,7 @@ class Login extends React.Component {
     })
     .then((res) => {
       localStorage.setItem('LEXSECRET', res.data.accessToken);
-      window.location = 'http://localhost:3000/'; // TODO
+      window.location = `${window.location.hostname + window.location.port}`;
     })
     .catch(err => console.error(err));
   }

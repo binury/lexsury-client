@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 
 class Socket {
   constructor(token, ns = '') {
-    this.io = io(`localhost:3030/${ns}`, { query: `token=${token}` }); // TODO
+    this.io = io(`${window.location.hostname}:3030/${ns}`, { query: `token=${token}` }); // TODO
     this.id = this.io.id;
     this.initSocket = this.initSocket.bind(this);
     this.ask = this.ask.bind(this);
