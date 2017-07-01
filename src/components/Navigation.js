@@ -1,4 +1,4 @@
-/* eslint-disable prefer-const */
+/* eslint-disable prefer-const, prefer-template */
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import browserHistory from 'history';
@@ -35,9 +35,10 @@ const routeName = !token ? 'Login' : 'Logout';
 const Navigation = () => (
   <Router history={browserHistory}>
     <div style={containerStyle}>
+      <span>{process.env.NODE_ENV === 'development' ? 'DEVELOPMENT MODE' : ''}</span>
       <ul style={navStyle}>
         <li style={normal}><Link to="/">Home</Link></li>
-        <li style={liStyle}><Link to={`/${routeName.toLowerCase()}`}>{routeName}</Link></li>
+        <li style={liStyle}><Link to={'/' + routeName.toLowerCase()}>{routeName}</Link></li>
         <li style={liStyle}><Link to="/signup">Sign Up</Link></li>
       </ul>
       <hr />
