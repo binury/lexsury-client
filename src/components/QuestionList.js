@@ -20,23 +20,28 @@ export default class QuestionList extends Component {
   }
 
   render() {
-    if (!this.props.questions) { return null; }
-    const voteItems = this.props.questions.sort((x, y) => y.votes.length - x.votes.length)
-          .map(question =>
-              (<li key={question.id}>
-                {this.props.users[question.author]} asks {question.text}
-                <VoteButton qid={question.id} sock={this.props.sock} /> {question.votes.length} </li>),
-          );
-    const dateItems = this.props.questions.sort((x, y) => y.date > x.date)
-        .map(question =>
-            (<li key={question.id}>
-              {this.props.users[question.author]} asks {question.text}
-              <VoteButton qid={question.id} sock={this.props.sock} /> { moment(question.date).format('YYYY MM DD HH:mm:ss') } </li>),
-        );
+    if (!this.props.questions) {
+      return null;
+    }
+    const sortDate = (x, y) => y.date > x.date;
+    const sortVotes = (x, y) => y.votes.length - x.votes.length;
+    const questions = this.props.questions
+      .sort(this.state.sortByDate ? sortDate : sortVotes)
+      .map(question => (
+        <li key={question.id}>
+          {moment(question.date).format('HH:mm:ss')}
+          {this.props.users[question.author]} asks {question.text}
+          <VoteButton qid={question.id} sock={this.props.sock} />
+          {question.votes.length}
+        </li>
+      ));
     return (
-        this.state.sortByDate ?
-          <div><button onClick={() => this.toggleDateSort()}>Sort By Date</button><ul>{voteItems}</ul></div> :
-          <div><button onClick={() => this.toggleDateSort()}>Sort By Votes</button><ul>{dateItems}</ul></div>
+      <div>
+        <button onClick={() => this.toggleDateSort()}>
+          {`Sort by: ${this.state.sortByDate ? 'Votes' : 'Time'}`}
+        </button>
+        <ul>{questions}</ul>
+      </div>
     );
   }
 }
