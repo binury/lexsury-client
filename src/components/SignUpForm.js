@@ -8,15 +8,14 @@ const formStyle = {
   justifyContent: 'center',
   flexDirection: 'column',
 };
-// TODO: Add register for new users
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fname: '',
-      lname: '',
       username: '',
       email: '',
+      emailValid: false,
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -26,16 +25,20 @@ class SignUpForm extends React.Component {
   handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
+
+    function validateEmail(email) {
+      const reg = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]){2,}$/;
+      return reg.test(email);
+    }
+    if (name === 'email') this.setState({ emailValid: validateEmail(value) });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const payload = {
-      email: this.state.email,
-      password: this.state.password,
+      email: this.state.email.trim(),
+      password: this.state.password.trim(),
     };
     Axios
     .post(`http://${window.location.hostname}:3030/users`, payload)
@@ -82,7 +85,11 @@ class SignUpForm extends React.Component {
           value={this.state.password}
           onChange={this.handleChange}
         />
-        <input type="submit" value="Sign Up" />
+        <input
+          type="submit"
+          value="Sign Up"
+          disabled={!this.state.emailValid || !this.state.username || !this.state.password}
+        />
       </form>
     );
   }
