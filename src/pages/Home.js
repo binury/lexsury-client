@@ -5,13 +5,14 @@ import RoomJoinForm from '../components/RoomJoinForm';
 
 const token = window.localStorage.getItem('LEXSECRET');
 
+// TODO: Port number of URI may need revisiting
 function Home() {
   function genNewRoom() {
     if (!token) {
       window.location += 'login';
       return;
     }
-    axios.post(`http://${window.location.hostname}/rooms`, {}, {
+    axios.post(`http://${window.location.hostname}:3030/rooms`, {}, {
       headers: { Authorization: token },
     })
     .then(res => window.location += `room/${res.data.name}`)
