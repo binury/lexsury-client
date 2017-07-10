@@ -18,3 +18,5 @@ yarn-error.log*
 
 # IntelliJ
 .idea
+
+\.tern-port
