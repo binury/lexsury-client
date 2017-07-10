@@ -12,7 +12,7 @@ function Home() {
       window.location += 'login';
       return;
     }
-    axios.post(`http://${window.location.hostname}:3030/rooms`, {}, {
+    axios.post(`http://${window.location.hostname}:3030/room`, {}, {
       headers: { Authorization: token },
     })
     .then(res => window.location += `room/${res.data.name}`)

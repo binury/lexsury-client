@@ -2,19 +2,25 @@ import io from 'socket.io-client';
 
 class Socket {
   constructor(token, ns = '') {
-    this.io = io(`${window.location.hostname}:3030/${ns}`, { query: `token=${token}` }); // TODO
+    // ns: room.name && token: jwt authentication
+    this.io = io(`${window.location.hostname}:3030/${ns}`, { query: `token=${token}` });
     this.id = this.io.id;
+    // Bindings allow usage in exported environment
     this.initSocket = this.initSocket.bind(this);
     this.ask = this.ask.bind(this);
     this.nick = this.nick.bind(this);
   }
+
+  // Functions invoked upon message receipt
   initSocket(callback, idhandler, userhandler) {
     this.io.on('assignment', idhandler);
-    this.io.on('newQuestion', callback);
+    this.io.on('questionAsked', callback);
     this.io.on('newUser', userhandler);
   }
+
+  // Methods for emitting messages
   ask(question) { this.io.emit('questionAsked', question); }
   nick(newName) { this.io.emit('nameChanged', newName); }
-  vote(newVote) { this.io.emit('voteCast', newVote); }
+  vote(questionId) { this.io.emit('voteCast', questionId); }
 }
 export default Socket;

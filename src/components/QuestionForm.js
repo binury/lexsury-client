@@ -37,7 +37,7 @@ class QuestionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.state.socket.ask({ text: this.state.question });
+    this.state.socket.ask(this.state.question);
     this.setState({ question: '' });
   }
 

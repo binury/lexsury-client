@@ -7,7 +7,7 @@ const formStyle = {
   justifyContent: 'center',
   flexDirection: 'column',
 };
-// TODO: Add register for new users
+
 class Login extends React.Component {
   constructor(props) {
     super(props);

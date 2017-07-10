@@ -5,7 +5,7 @@ function VoteButton(props) {
   const id = props.qid;
   function handleVote(e) {
     e.preventDefault();
-    props.sock.vote({ id });
+    props.sock.vote(id);
   }
   return (
     <button onClick={handleVote}>
@@ -17,6 +17,6 @@ function VoteButton(props) {
 export default VoteButton;
 
 VoteButton.propTypes = {
-  qid: PropTypes.string.isRequired,
+  qid: PropTypes.number.isRequired,
   sock: PropTypes.instanceOf(Object).isRequired,
 };

@@ -48,7 +48,7 @@ export default class QuestionList extends Component {
               {moment(question.date).format('HH:mm:ss')}
             </p>
             <p>
-              {this.props.users[question.author]} asks
+              {question.author} asks
             </p>
             <p>{question.text}</p>
             <p>
@@ -61,7 +61,7 @@ export default class QuestionList extends Component {
     return (
       <div>
         <button onClick={() => this.toggleDateSort()}>
-          {`Sort by: ${this.state.sortByDate ? 'Votes' : 'Time'}`}
+          {this.state.sortByDate ? 'Best' : 'Newest'}
         </button>
         <ul style={listStyle}>{questions}</ul>
       </div>
@@ -70,7 +70,6 @@ export default class QuestionList extends Component {
 }
 
 QuestionList.propTypes = {
-  users: PropTypes.instanceOf(Object).isRequired,
   questions: PropTypes.instanceOf(Array).isRequired,
   sock: PropTypes.instanceOf(Object).isRequired,
 };

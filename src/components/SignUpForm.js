@@ -41,7 +41,7 @@ class SignUpForm extends React.Component {
       password: this.state.password.trim(),
     };
     Axios
-    .post(`http://${window.location.hostname}:3030/users`, payload)
+    .post(`http://${window.location.hostname}:3030/user`, payload)
     .then(() => {
       Axios.post(
         `http://${window.location.hostname}:3030/authentication`,
