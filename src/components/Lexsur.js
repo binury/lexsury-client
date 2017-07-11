@@ -11,7 +11,6 @@ class Lex extends React.Component {
     const roomName = window.location.pathname.split('/')[2];
     this.state = {
       username: 'Anonymous', // TODO: Load from server
-      userId: '', // This initialization is required
       newQuestionText: 'Enter a question',
       questions: [],
       roomName,

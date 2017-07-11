@@ -13,10 +13,15 @@ class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      displayName: '',
+      firstName: '',
+      lastName: '',
       email: '',
-      emailValid: false,
       password: '',
+      confirmPassword: '',
+      dob: '',
+      emailValid: false,
+      passwordConfirmed: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,15 +37,21 @@ class SignUpForm extends React.Component {
       return reg.test(email);
     }
     if (name === 'email') this.setState({ emailValid: validateEmail(value) });
+    else if (name === 'confirmPassword') this.setState({ passwordConfirmed: this.state.password === value });
   }
+
 
   handleSubmit(event) {
     event.preventDefault();
     const hostname = window.location.hostname;
     const port = window.location.port;
     const payload = {
+      displayName: this.state.displayName.trim(),
+      firstName: this.state.displayName.trim(),
+      lastName: this.state.displayName.trim(),
       email: this.state.email.trim(),
       password: this.state.password.trim(),
+      dob: this.state.dob,
     };
     Axios
     .post(`http://${hostname}:3030/user`, payload)
@@ -66,31 +77,65 @@ class SignUpForm extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <label htmlFor="username">username</label>
+        <label htmlFor="displayName">Handle</label>
         <input
           type="text"
-          name="username"
-          value={this.state.username}
+          name="displayName"
+          value={this.state.displayName}
           onChange={this.handleChange}
         />
-        <label htmlFor="email">E-Mail</label>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          value={this.state.firstName}
+          onChange={this.handleChange}
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          value={this.state.lastName}
+          onChange={this.handleChange}
+        />
+        <label htmlFor="email">Email</label>
         <input
           type="text"
           name="email"
           value={this.state.email}
           onChange={this.handleChange}
         />
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           value={this.state.password}
           onChange={this.handleChange}
         />
+        <label htmlFor="password">Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          value={this.state.confirmPassword}
+          onChange={this.handleChange}
+        />
+        <label htmlFor="dob">Birthday</label>
+        <input
+          type="date"
+          name="dob"
+          value={this.state.dob}
+          onChange={this.handleChange}
+        />
         <input
           type="submit"
           value="Sign Up"
-          disabled={!this.state.emailValid || !this.state.username || !this.state.password}
+          disabled={
+            !this.state.emailValid
+            || !this.state.displayName
+            || !this.state.password
+            || !this.state.dob
+            || !this.state.passwordConfirmed
+          }
         />
       </form>
     );
