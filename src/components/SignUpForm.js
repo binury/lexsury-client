@@ -36,22 +36,24 @@ class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const hostname = window.location.hostname;
+    const port = window.location.port;
     const payload = {
       email: this.state.email.trim(),
       password: this.state.password.trim(),
     };
     Axios
-    .post(`http://${window.location.hostname}:3030/user`, payload)
+    .post(`http://${hostname}:3030/user`, payload)
     .then(() => {
       Axios.post(
-        `http://${window.location.hostname}:3030/authentication`,
+        `http://${hostname}:3030/authentication`,
         Object.assign(payload, { strategy: 'local' },
       ))
       .then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       })
       .then(() => {
-        window.location = `http://${window.location.hostname}:3000/`;
+        window.location = `http://${hostname}:${port}`;
       });
     })
     .catch(err => console.error(err));
