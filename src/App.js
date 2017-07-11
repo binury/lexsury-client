@@ -1,9 +1,8 @@
 import React from 'react';
-/* import Socket from './Socket';*/
-import './App.css';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
+import './styles/App.css';
 import Navigation from './components/Navigation';
-/* import QuestionForm from './components/QuestionForm';
-import QuestionList from './components/QuestionList';*/
 
 function App() {
   return (

@@ -1,28 +1,28 @@
 import React from 'react';
-import Socket from '../Socket';
-import '../App.css';
+import PropTypes from 'prop-types';
+
+import '../styles/App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
-
-
+// TODO: Conditionally render LexRoom if token is absent
 class Lex extends React.Component {
   constructor(props) {
     super(props);
-    const roomName = this.props.location.pathname.split('/')[2]; // lol
+    const roomName = window.location.pathname.split('/')[2];
     this.state = {
-      username: 'Anonymous', // TODO
+      username: 'Anonymous', // TODO: Load from server
       userId: '', // This initialization is required
       newQuestionText: 'Enter a question',
       questions: [],
+      roomName,
       users: [],
-      roomid: roomName,
-      socket: new Socket(`${roomName}`),
+      socket: props.sock,
     };
     this.updateQuestions = this.updateQuestions.bind(this);
     this.setId = this.setId.bind(this);
     this.updateUsers = this.updateUsers.bind(this);
     this.state.socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
-    console.log(`We are at :${props.location.pathname}`);
+    console.log(`We are at :${this.state.roomName}.`);
   }
   setId(newId) {
     this.setState({
@@ -34,8 +34,6 @@ class Lex extends React.Component {
     this.setState({
       questions: newQuestions,
     });
-    console.log(`Updating questions:\n-----------------\n`)
-    for (let question of this.state.questions) { console.log(question.text); }
   }
   updateUsers(newUsers) {
     this.setState({
@@ -49,10 +47,18 @@ class Lex extends React.Component {
       <div>
         <h2>{this.state.roomid}</h2>
         <QuestionForm author={this.state.username} sock={this.state.socket} />
-        <QuestionList questions={this.state.questions} users={this.state.users} sock={this.state.socket} />
+        <QuestionList
+          questions={this.state.questions}
+          users={this.state.users}
+          sock={this.state.socket}
+        />
       </div>
     );
   }
 }
 
 export default Lex;
+
+Lex.propTypes = {
+  sock: PropTypes.instanceOf(Object).isRequired,
+};
