@@ -29,7 +29,7 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    Axios.post(`${window.location.hostname}:3030/authentication`, { // TODO
+    Axios.post(`http://${window.location.hostname}:3030/authentication`, { // TODO
       strategy: 'local',
       email: this.state.email,
       password: this.state.password,
