@@ -10,11 +10,21 @@ import Logout from './Logout';
 import SignUpForm from './SignUpForm';
 
 // CSS is shit; i'm sorry- i tried
-const containerStyle = { display: 'block' };
+const containerStyle = {
+  display: 'block',
+};
+
+const navBarStyle = {
+  background: 'black',
+  color: 'white',
+  padding: '1em',
+};
+
 const navStyle = {
   display: 'flex',
   fontSize: '1.6rem',
   justifyContent: 'space-around',
+  WebkitPaddingStart: '0px',
   // TODO
 };
 
@@ -35,12 +45,14 @@ const routeName = !token ? 'Login' : 'Logout';
 const Navigation = () => (
   <Router history={browserHistory}>
     <div style={containerStyle}>
-      <span>{process.env.NODE_ENV === 'development' ? 'DEVELOPMENT MODE' : ''}</span>
-      <ul style={navStyle}>
-        <li style={normal}><Link to="/">Home</Link></li>
-        <li style={liStyle}><Link to={'/' + routeName.toLowerCase()}>{routeName}</Link></li>
-        <li style={liStyle}><Link to="/signup">Sign Up</Link></li>
-      </ul>
+      <div style={navBarStyle}>
+        <span>{process.env.NODE_ENV === 'development' ? 'DEVELOPMENT MODE' : ''}</span>
+        <ul style={navStyle}>
+          <li style={normal}><Link to="/">Home</Link></li>
+          <li style={liStyle}><Link to={'/' + routeName.toLowerCase()}>{routeName}</Link></li>
+          <li style={liStyle}><Link to="/signup">Sign Up</Link></li>
+        </ul>
+      </div>
       <hr />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />

@@ -50,14 +50,14 @@ class RoomJoinForm extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <label htmlFor="roomname">Room Name</label>
         <input
           type="text"
           name="roomname"
           value={this.state.roomname}
           onChange={this.handleChange}
+          placeholder="Enter Lexsur Code"
         />
-        <input type="submit" value="Submit" />
+        <button>Join</button>
       </form>
     );
   }

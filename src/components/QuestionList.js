@@ -11,8 +11,8 @@ const listStyle = {
 };
 
 const questionStyle = {
-  border: '2px solid #af5f5f',
-  backgroundImage: 'linear-gradient( 135deg, #F97794 0%, #623AA2 100%)',
+  // border: '2px solid black',
+  background: 'black',
   borderRadius: '0.6em',
   color: 'white',
   padding: '1.1em',
@@ -48,12 +48,12 @@ export default class QuestionList extends Component {
               {moment(question.date).format('HH:mm:ss')}
             </p>
             <p>
-              {question.author} asks
+              {question.author} asks:
             </p>
             <p>{question.text}</p>
             <p>
+              <span className="votes">{question.votes.length}</span>
               <VoteButton qid={question.id} sock={this.props.sock} />
-              {question.votes.length}
             </p>
           </blockquote>
         </li>

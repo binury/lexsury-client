@@ -3,9 +3,17 @@ import React from 'react';
 import axios from 'axios';
 import RoomJoinForm from '../components/RoomJoinForm';
 
-const token = window.localStorage.getItem('LEXSECRET');
+const homeStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column',
+};
 
-// TODO: Port number of URI may need revisiting
+const joinStyle = {
+  margin: '3em',
+};
+
+const token = window.localStorage.getItem('LEXSECRET');
 function Home() {
   function genNewRoom() {
     if (!token) {
@@ -19,9 +27,12 @@ function Home() {
     .catch(err => console.log(`There was an error: ${err}`));
   }
   return (
-    <div>
+    <div style={homeStyle}>
+      <button style={joinStyle} onClick={genNewRoom}>
+        Start a new Lexsur
+      </button>
+      <p>- OR -</p>
       <RoomJoinForm />
-      <button onClick={genNewRoom}>Create a new presentation</button>
     </div>
   );
 }

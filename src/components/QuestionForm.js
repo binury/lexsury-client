@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const qInputStyles = {
+const qInputStyle = {
   display: 'block',
   width: '-webkit-fill-available',
   height: '2.9em',
-  border: '2px solid lightgray',
+  border: '1px solid black',
+  background: 'white',
 };
 
 class QuestionForm extends React.Component {
@@ -52,7 +53,7 @@ class QuestionForm extends React.Component {
             name="question"
             value={this.state.question}
             onChange={this.handleChange}
-            style={qInputStyles}
+            style={qInputStyle}
           />
         </label>
         <label htmlFor="author">
@@ -64,9 +65,10 @@ class QuestionForm extends React.Component {
             value={this.state.author}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
+            style={qInputStyle}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <button>Send</button>
       </form>
     );
   }
