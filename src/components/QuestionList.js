@@ -34,8 +34,15 @@ export default class QuestionList extends Component {
   }
 
   render() {
-    if (!this.props.questions) {
-      return null;
+    if (this.props.questions.length === 0) {
+      return (
+        <div style={{ margin: '5em' }}>
+          <h3>No questions have been asked yet
+          <span role="img" aria-label="sad cat face"> 😿 </span>
+          </h3>
+          <h2>Be the first one!</h2>
+        </div>
+      );
     }
     const sortDate = (x, y) => y.date > x.date;
     const sortVotes = (x, y) => y.votes.length - x.votes.length;
