@@ -1,6 +1,7 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
 import Axios from 'axios';
+import generate from 'project-name-generator';
 
 const formStyle = {
   display: 'inline-flex',
@@ -25,6 +26,18 @@ class SignUpForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.randomizeDisplayName = this.randomizeDisplayName.bind(this);
+  }
+
+  randomizeDisplayName(e) {
+    e.preventDefault();
+    const capitalize = word => (word[0].toUpperCase() + word.slice(1));
+    const displayName = generate({
+      words: 2,
+      number: false,
+      alliterative: true,
+    }).raw.map(capitalize).join('');
+    this.setState({ displayName });
   }
 
   handleChange(event) {
@@ -84,6 +97,7 @@ class SignUpForm extends React.Component {
           value={this.state.displayName}
           onChange={this.handleChange}
         />
+        <button onClick={this.randomizeDisplayName}>Randomize</button>
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
