@@ -59,3 +59,21 @@ hr {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.questions-enter {
+  opacity: 0.01;
+}
+
+.questions-enter.questions-enter-active {
+  opacity: 1;
+  transition: opacity 2500ms ease-in;
+}
+
+.questions-leave {
+  opacity: 1;
+}
+
+.questions-leave.questions-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

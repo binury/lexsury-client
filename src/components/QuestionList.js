@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { CSSTransitionGroup } from 'react-transition-group';
 import VoteButton from './VoteButton';
 
 const listStyle = {
@@ -70,7 +71,16 @@ export default class QuestionList extends Component {
         <button onClick={() => this.toggleDateSort()}>
           {this.state.sortByDate ? 'Best' : 'Newest'}
         </button>
-        <ul style={listStyle}>{questions}</ul>
+        <ul style={listStyle}>
+          <CSSTransitionGroup
+            transitionName="questions"
+            transitionEnterTimeout={2500}
+            transitionLeaveTimeout={300}
+            transitionAppearTimeout={500}
+          >
+            {questions}
+          </CSSTransitionGroup>
+        </ul>
       </div>
     );
   }
