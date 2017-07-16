@@ -44,7 +44,7 @@ export default class QuestionList extends Component {
         </div>
       );
     }
-    const sortDate = (x, y) => y.date > x.date;
+    const sortDate = (x, y) => moment(y.date).isBefore(x.date) ? -1 : 1; // eslint-disable-line no-confusing-arrow
     const sortVotes = (x, y) => y.votes.length - x.votes.length;
     const questions = this.props.questions
       .sort(this.state.sortByDate ? sortDate : sortVotes)
