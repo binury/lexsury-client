@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
 
 const qInputStyle = {
   display: 'block',
@@ -13,14 +14,23 @@ class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      author: this.props.author,
+      author: '',
       userId: this.props.uid,
       question: '',
       socket: this.props.sock,
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const setName = res => this.setState({ author: res.data[0].displayName });
+
+    Axios.get(`http://${window.location.hostname}:3030/user`, {
+      headers: { Authorization: localStorage.LEXSECRET },
+    }).then(setName);
   }
 
   handleBlur() {
@@ -81,7 +91,6 @@ QuestionForm.defaultProps = {
 };
 
 QuestionForm.propTypes = {
-  author: PropTypes.string.isRequired,
   uid: PropTypes.func,
   sock: PropTypes.instanceOf(Object).isRequired,
 };

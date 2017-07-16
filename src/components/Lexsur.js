@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import '../styles/App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
-// TODO: Conditionally render LexRoom if token is absent
+
 class Lex extends React.Component {
   constructor(props) {
     super(props);
     const roomName = window.location.pathname.split('/')[2];
     this.state = {
-      username: 'Anonymous', // TODO: Load from server
+      username: '', // TODO: Load from server
       newQuestionText: 'Enter a question',
       questions: [],
       roomName,
-      users: [],
+      users: [], // Unused
       socket: props.sock,
     };
     this.updateQuestions = this.updateQuestions.bind(this);
@@ -23,17 +23,20 @@ class Lex extends React.Component {
     this.state.socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
     console.log(`We are at :${this.state.roomName}.`);
   }
+
   setId(newId) {
     this.setState({
       userId: newId,
     });
     console.log(newId);
   }
+
   updateQuestions(newQuestions) {
     this.setState({
       questions: newQuestions,
     });
   }
+
   updateUsers(newUsers) {
     this.setState({
       users: newUsers,
@@ -42,10 +45,11 @@ class Lex extends React.Component {
   }
 
   render() {
+    if (!localStorage.LEXSECRET) return <h1>Unauthorized</h1>; // TODO Redirect to home
     return (
       <div>
         <h2>{this.state.roomid}</h2>
-        <QuestionForm author={this.state.username} sock={this.state.socket} />
+        <QuestionForm sock={this.state.socket} />
         <QuestionList
           questions={this.state.questions}
           users={this.state.users}
