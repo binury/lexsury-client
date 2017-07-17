@@ -1,6 +1,6 @@
 body {
   color: black;
-  font-family: Helvetica;
+  font-family: 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -36,7 +36,6 @@ hr {
 
 .App {
   text-align: center;
-  font-family: "Roboto",serif;
 }
 
 .App-logo {
@@ -76,4 +75,12 @@ hr {
 .questions-leave.questions-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+p.questions {
+  font-style: italic;
+}
+
+p.authors {
+  font-family: 'News Cycle', sans-serif;
 }

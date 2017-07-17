@@ -52,13 +52,13 @@ export default class QuestionList extends Component {
       .map(question => (
         <li key={question.id}>
           <blockquote style={questionStyle}>
-            <p>
+            <p className="timestamps">
               {moment(question.date).format('HH:mm:ss')}
             </p>
             <p>
-              {question.author} asks:
+              <span className="authors">{question.author}</span> asks:
             </p>
-            <p>{question.text}</p>
+            <p className="questions">{question.text}</p>
             <p>
               <span className="votes">{question.votes.length}</span>
               <VoteButton qid={question.id} sock={this.props.sock} />
