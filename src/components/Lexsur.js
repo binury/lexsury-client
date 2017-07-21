@@ -10,7 +10,6 @@ class Lex extends React.Component {
     super(props);
     const roomName = window.location.pathname.split('/')[2];
     this.state = {
-      username: '', // TODO: Load from server
       newQuestionText: 'Enter a question',
       questions: [],
       roomName,

@@ -26,9 +26,8 @@ class QuestionForm extends React.Component {
   }
 
   componentDidMount() {
-    const setName = res => this.setState({ author: res.data[0].displayName });
-
-    Axios.get(`http://${window.location.hostname}:3030/user`, {
+    const setName = res => this.setState({ author: res.data.data[0].displayName });
+    Axios.get(`${process.env.PUBLIC_URL}/user`, {
       headers: { Authorization: localStorage.LEXSECRET },
     }).then(setName);
   }

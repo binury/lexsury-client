@@ -11,6 +11,7 @@ const homeStyle = {
 
 const joinStyle = {
   margin: '3em',
+  fontSize: 'xx-large',
 };
 
 const token = window.localStorage.getItem('LEXSECRET');
@@ -20,7 +21,7 @@ function Home() {
       window.location += 'login';
       return;
     }
-    axios.post(`http://${window.location.hostname}:3030/room`, {}, {
+    axios.post(`${process.env.PUBLIC_URL}/room`, {}, {
       headers: { Authorization: token },
     })
     .then(res => window.location += `room/${res.data.name}`)

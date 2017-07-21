@@ -31,7 +31,7 @@ class RoomJoinForm extends React.Component {
     event.preventDefault();
     axios({
       method: 'get',
-      url: `http://${window.location.hostname}:3030/rooms?name=${this.state.roomname}`, // TODO
+      url: `/room?name=${this.state.roomname}`, // TODO
       timeout: 5000,
       responseType: 'json',
     })
@@ -55,7 +55,7 @@ class RoomJoinForm extends React.Component {
           name="roomname"
           value={this.state.roomname}
           onChange={this.handleChange}
-          placeholder="Enter Lexsur Code"
+          placeholder="Code"
         />
         <button>Join</button>
       </form>

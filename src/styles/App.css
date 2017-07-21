@@ -11,7 +11,9 @@ a {
 
 button {
   color: black;
+  font-family: 'Nunito', sans-serif;
   text-decoration: none;
+  text-transform: uppercase;
   border: 2px solid black;
   border-radius: 20px;
   transition-duration: .2s;
