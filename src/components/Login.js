@@ -51,14 +51,14 @@ class Login extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <label htmlFor="email">name</label>
+        <label htmlFor="email">Email</label>
         <input
           type="text"
           name="email"
           value={this.state.email}
           onChange={this.handleChange}
         />
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
