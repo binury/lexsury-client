@@ -56,8 +56,6 @@ class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const hostname = window.location.hostname;
-    const port = window.location.port;
     const payload = {
       displayName: this.state.displayName.trim(),
       firstName: this.state.displayName.trim(),
@@ -67,17 +65,17 @@ class SignUpForm extends React.Component {
       dob: this.state.dob,
     };
     Axios
-    .post(`http://${hostname}:3030/user`, payload)
+    .post(`${process.env.PUBLIC_URL}/user`, payload)
     .then(() => {
       Axios.post(
-        `http://${hostname}:3030/authentication`,
+        `${process.env.PUBLIC_URL}/authentication`,
         Object.assign(payload, { strategy: 'local' },
       ))
       .then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       })
       .then(() => {
-        window.location = `http://${hostname}:${port}`;
+        window.location = `${process.env.PUBLIC_URL}`;
       });
     })
     .catch(err => console.error(err));

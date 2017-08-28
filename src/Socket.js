@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 class Socket {
   constructor(token, ns = '') {
     // ns: room.name && token: jwt authentication
-    this.io = io(`${window.location.hostname}:3030/${ns}`, { query: `token=${token}` });
+    this.io = io(`${process.env.PUBLIC_URL}/${ns}`, { query: `token=${token}` });
     this.id = this.io.id;
     // Bindings allow usage in exported environment
     this.initSocket = this.initSocket.bind(this);
