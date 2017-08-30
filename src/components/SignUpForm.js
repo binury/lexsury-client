@@ -8,6 +8,19 @@ const formStyle = {
   fontSize: '1.5rem',
   justifyContent: 'center',
   flexDirection: 'column',
+  width: '100%',
+  padding: '5%',
+};
+
+const buttonStyle = {
+  width: '45%',
+  alignSelf: 'flex-end',
+  marginRight: '4%',
+};
+
+const submitStyle = {
+  width: '45%',
+  alignSelf: 'center',
 };
 
 class SignUpForm extends React.Component {
@@ -49,10 +62,14 @@ class SignUpForm extends React.Component {
       const reg = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]){2,}$/;
       return reg.test(email);
     }
-    if (name === 'email') this.setState({ emailValid: validateEmail(value) });
-    else if (name === 'confirmPassword') this.setState({ passwordConfirmed: this.state.password === value });
-  }
 
+    if (name === 'email') {
+      this.setState({ emailValid: validateEmail(value) });
+    } else if (name === 'confirmPassword') {
+      this.setState(
+        { passwordConfirmed: this.state.password === value });
+    }
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -64,21 +81,16 @@ class SignUpForm extends React.Component {
       password: this.state.password.trim(),
       dob: this.state.dob,
     };
-    Axios
-    .post(`${process.env.PUBLIC_URL}/user`, payload)
-    .then(() => {
+    Axios.post(`${process.env.PUBLIC_URL}/user`, payload).then(() => {
       Axios.post(
         `${process.env.PUBLIC_URL}/authentication`,
         Object.assign(payload, { strategy: 'local' },
-      ))
-      .then((res) => {
-        localStorage.setItem('LEXSECRET', res.data.accessToken);
-      })
-      .then(() => {
-        window.location = `${process.env.PUBLIC_URL}`;
-      });
-    })
-    .catch(err => console.error(err));
+        )).then((res) => {
+          localStorage.setItem('LEXSECRET', res.data.accessToken);
+        }).then(() => {
+          window.location = `${process.env.PUBLIC_URL}`;
+        });
+    }).catch(err => console.error(err));
   }
 
   render() {
@@ -88,59 +100,79 @@ class SignUpForm extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <label htmlFor="displayName">Handle</label>
-        <input
-          type="text"
-          name="displayName"
-          value={this.state.displayName}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.randomizeDisplayName}>Randomize</button>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          value={this.state.firstName}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          value={this.state.lastName}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="password">Confirm Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          value={this.state.confirmPassword}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="dob">Birthday</label>
-        <input
-          type="date"
-          name="dob"
-          value={this.state.dob}
-          onChange={this.handleChange}
-        />
-        <input
-          type="submit"
-          value="Sign Up"
+        <div className="input-group">
+          <label htmlFor="displayName">Handle</label>
+          <input
+            type="text"
+            name="displayName"
+            placeholder="Saint John Szechuan"
+            value={this.state.displayName}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button
+          onClick={this.randomizeDisplayName}
+          style={buttonStyle}
+        >Randomize</button>
+        <div className="input-group">
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="Rick"
+            value={this.state.firstName}
+            onChange={this.handleChange}
+            required
+          /></div>
+        <div className="input-group">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Sanchez"
+            value={this.state.lastName}
+            onChange={this.handleChange}
+            required
+          /></div>
+        <div className="input-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={this.state.email}
+            placeholder="wubalubbadubdub@xyz.sci"
+            onChange={this.handleChange}
+            required
+          /></div>
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
+          /></div>
+        <div className="input-group">
+          <label htmlFor="password">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={this.state.confirmPassword}
+            onChange={this.handleChange}
+            required
+          /></div>
+        <div className="input-group">
+          <label htmlFor="dob">Birthday</label>
+          <input
+            type="date"
+            name="dob"
+            value={this.state.dob}
+            onChange={this.handleChange}
+            required
+          /></div>
+        <button
+          style={submitStyle}
           disabled={
             !this.state.emailValid
             || !this.state.displayName
@@ -148,7 +180,7 @@ class SignUpForm extends React.Component {
             || !this.state.dob
             || !this.state.passwordConfirmed
           }
-        />
+        >LXRFY ME</button>
       </form>
     );
   }

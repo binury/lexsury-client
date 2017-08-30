@@ -8,7 +8,7 @@ import LexRoom from '../pages/LexRoom';
 import Login from './Login';
 import Logout from './Logout';
 import Navbar from './Navbar';
-import SignUpForm from './SignUpForm';
+import SignUp from '../pages/SignUp';
 
 // CSS is shit; i'm sorry- i tried
 const containerStyle = {
@@ -25,7 +25,7 @@ const Navigation = () => (
       <Route path="/room/:name" component={LexRoom} />
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
-      <Route path="/signup" component={SignUpForm} />
+      <Route path="/signup" component={SignUp} />
     </div>
   </Router>
 );

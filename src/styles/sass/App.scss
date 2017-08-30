@@ -25,18 +25,36 @@ button {
   background-color: white;
   padding: 4px 30px;
   outline: none;
-}
-
-button:hover {
-  color: white;
-  background-color: black;
-  transition-duration: .2s;
-  -webkit-transition-duration: .2s;
-  -moz-transition-duration: .2s;
+  &:hover, &:active {
+    &:not([disabled]) {
+      color: white;
+      background-color: black;
+      transition-duration: .2s;
+      -webkit-transition-duration: .2s;
+      -moz-transition-duration: .2s;
+    }
+  }
+  &:disabled {
+    opacity: 0.39;
+  }
 }
 
 hr {
   margin-top: 0;
+}
+
+.input-group {
+  margin: 1em auto;
+  display: inherit;
+  width: 90%;
+  justify-content: space-between;
+  label {
+    display: block;
+    text-decoration: underline;
+  }
+  button {
+    display: block; // yo
+  }
 }
 
 .App {
