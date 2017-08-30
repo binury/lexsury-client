@@ -44,9 +44,9 @@ const Navbar = () =>
       <span id="emblem" style={emblem}>Lexsury</span>
       <ul style={navStyle}>
         <li style={normal}><Link to="/">Home</Link></li>
-        <li style={normal}>Features</li>
-        <li style={normal}>Pricing</li>
-        <li style={normal}>Dashboard</li>
+        <li style={normal}><Link to="/features">Features</Link></li>
+        <li style={normal}><Link to="/pricing">Pricing</Link></li>
+        <li style={normal}><Link to="/dashboard">Dashboard</Link></li>
         <li style={liStyle}><Link to={`/${routeName.toLowerCase()}`}>{routeName}</Link></li>
       </ul>
     </div>
