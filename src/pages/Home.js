@@ -1,37 +1,31 @@
-/* eslint-disable no-return-assign */
+/* eslint-disable quotes */
 import React from 'react';
-import axios from 'axios';
+import RoomJoinButton from '../components/RoomJoinButton';
 import RoomJoinForm from '../components/RoomJoinForm';
+import Shapes from '../components/Shapes';
 
 const homeStyle = {
+  flexDirection: 'column',
   display: 'flex',
   alignItems: 'center',
-  flexDirection: 'column',
+  overflow: 'hidden',
 };
 
-const joinStyle = {
-  margin: '3em',
-  fontSize: 'xx-large',
-};
+// Just for funs :)
+const prompts = [
+  `I've been meaning to ask you something for a long time now...`,
+  `Meeting à gogo`,
+  `I hope someone shows up this time!`,
+  `As if everyone wasn't on their phone already`,
+];
+const randomPrompt = prompts[Math.floor(Math.random() * 3)];
 
-const token = window.localStorage.getItem('LEXSECRET');
 function Home() {
-  function genNewRoom() {
-    if (!token) {
-      window.location += 'login';
-      return;
-    }
-    axios.post(`${process.env.PUBLIC_URL}/room`, {}, {
-      headers: { Authorization: token },
-    })
-    .then(res => window.location += `room/${res.data.name}`)
-    .catch(err => console.log(`There was an error: ${err}`));
-  }
   return (
-    <div style={homeStyle}>
-      <button style={joinStyle} onClick={genNewRoom}>
-        Start a new Lexsur
-      </button>
+    <div id="homecontainer" style={homeStyle}>
+      <Shapes />
+      <p id="clickprompt">{randomPrompt}</p>
+      <RoomJoinButton />
       <p>- OR -</p>
       <RoomJoinForm />
     </div>

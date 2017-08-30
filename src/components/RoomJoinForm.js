@@ -57,7 +57,7 @@ class RoomJoinForm extends React.Component {
           onChange={this.handleChange}
           placeholder="Code"
         />
-        <button>Join</button>
+        <button>Join In</button>
       </form>
     );
   }

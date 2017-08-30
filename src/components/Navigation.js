@@ -1,12 +1,13 @@
 /* eslint-disable prefer-const, prefer-template */
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import browserHistory from 'history';
 import Home from '../pages/Home';
 import Rooms from './Rooms';
 import LexRoom from '../pages/LexRoom';
 import Login from './Login';
 import Logout from './Logout';
+import Navbar from './Navbar';
 import SignUpForm from './SignUpForm';
 
 // CSS is shit; i'm sorry- i tried
@@ -14,45 +15,10 @@ const containerStyle = {
   display: 'block',
 };
 
-const navBarStyle = {
-  background: 'black',
-  color: 'white',
-  padding: '1em',
-};
-
-const navStyle = {
-  display: 'flex',
-  fontSize: '1.6rem',
-  justifyContent: 'space-around',
-  WebkitPaddingStart: '0px',
-  // TODO
-};
-
-const normal = {
-  display: 'inline-block',
-};
-
-const hidden = {
-  display: 'none',
-};
-
-let liStyle = (window.location.href.includes('room')) ? hidden : normal;
-// TODO : Extend to conditionally render things
-// TODO : Expose URL prop of nav to children
-const token = window.localStorage.getItem('LEXSECRET');
-const routeName = !token ? 'Login' : 'Logout';
-
 const Navigation = () => (
   <Router history={browserHistory}>
     <div style={containerStyle}>
-      <div style={navBarStyle}>
-        <span>{process.env.NODE_ENV === 'development' ? 'DEVELOPMENT MODE' : ''}</span>
-        <ul style={navStyle}>
-          <li style={normal}><Link to="/">Home</Link></li>
-          <li style={liStyle}><Link to={'/' + routeName.toLowerCase()}>{routeName}</Link></li>
-          <li style={liStyle}><Link to="/signup">Sign Up</Link></li>
-        </ul>
-      </div>
+      <Navbar />
       <hr />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />
