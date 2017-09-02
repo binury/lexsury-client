@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/scss/bootstrap.scss';
 import App from './App';
-import './styles/index.css';
 
 ReactDOM.render(
   <App url={URL} />,

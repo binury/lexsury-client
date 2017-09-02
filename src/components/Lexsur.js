@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/App.css';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 

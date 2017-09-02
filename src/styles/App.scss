@@ -12,32 +12,7 @@ a {
   text-decoration: none;
 }
 
-button {
-  color: black;
-  font-family: 'Nunito', sans-serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  border: 2px solid black;
-  border-radius: 20px;
-  transition-duration: .2s;
-  -webkit-transition-duration: .2s;
-  -moz-transition-duration: .2s;
-  background-color: white;
-  padding: 4px 30px;
-  outline: none;
-  &:hover, &:active {
-    &:not([disabled]) {
-      color: white;
-      background-color: black;
-      transition-duration: .2s;
-      -webkit-transition-duration: .2s;
-      -moz-transition-duration: .2s;
-    }
-  }
-  &:disabled {
-    opacity: 0.39;
-  }
-}
+// button { color: black; font-family: 'Nunito', sans-serif; text-decoration: none; text-transform: uppercase; border: 2px solid black; border-radius: 20px; transition-duration: .2s; -webkit-transition-duration: .2s; -moz-transition-duration: .2s; background-color: white; padding: 4px 30px; outline: none; &:hover, &:active { &:not([disabled]) { color: white; background-color: black; transition-duration: .2s; -webkit-transition-duration: .2s; -moz-transition-duration: .2s; } } &:disabled { opacity: 0.39; } }
 
 hr {
   margin-top: 0;

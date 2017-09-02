@@ -135,6 +135,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.scss$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -176,7 +177,7 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.css$/,
+        test: /\.s?css$/,
         use: [
           require.resolve('style-loader'),
           {
@@ -188,8 +189,9 @@ module.exports = {
           {
             loader: require.resolve('postcss-loader'),
             options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+              ident: 'postcss',
               plugins: () => [
+                require('precss'),
                 require('postcss-flexbugs-fixes'),
                 autoprefixer({
                   browsers: [
@@ -202,6 +204,9 @@ module.exports = {
                 }),
               ],
             },
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },
