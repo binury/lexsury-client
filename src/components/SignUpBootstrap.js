@@ -11,6 +11,18 @@ export default class SignUpBootstrap extends React.Component {
       <Container>
       <Form>
         <FormGroup row>
+          <Col sm="6">
+            <Button outline color="primary">
+              Facebook
+            </Button>
+          </Col>
+          <Col sm="6">
+            <Button outline>
+              Github
+            </Button>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
           <Label for="email" sm={2}>Email *</Label>
           <Col sm={8}>
             <Input
@@ -21,10 +33,10 @@ export default class SignUpBootstrap extends React.Component {
               required
             />
           </Col>
+          <FormText class="col-md-6" color="muted">
+            Your privacy is important to us. No unsolicited emails. Ever.
+          </FormText>
         </FormGroup>
-        <FormText color="muted">
-          Your privacy is important to us. No unsolicited emails. Ever.
-        </FormText>
         <FormGroup row>
           <Label for="password" sm={2}>Password *</Label>
           <Col sm={8}>
@@ -53,14 +65,14 @@ export default class SignUpBootstrap extends React.Component {
             <FormGroup check>
               <Label check>
                 <Input type="checkbox" id="newsletter" />{' '}
-                Keep me in the loop about Lexsury happenings.
+                Keep me in the loop about Lexsury happenings
               </Label>
             </FormGroup>
           </Col>
         </FormGroup>
         <FormGroup check row>
           <Col sm={{ size: 10, offset: 2 }}>
-            <Button>Submit</Button>
+            <Button size="lg" color="dark" block>Submit</Button>
           </Col>
         </FormGroup>
       </Form>

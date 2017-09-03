@@ -21,6 +21,7 @@ const prompts = [
 ];
 const randomPrompt = prompts[Math.floor(Math.random() * 3)]; // eslint-disable-line no-unused-vars
 
+// TODO ---OR--- seperator
 function Home() {
   return (
     <div id="homecontainer" style={homeStyle}>
