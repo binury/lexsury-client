@@ -1,13 +1,7 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
 import axios from 'axios';
-
-const joinStyle = {
-  maxWidth: '6em',
-  fontSize: 'xx-large',
-  marginTop: '.1em',
-  padding: '.65em',
-};
+import { Button } from 'reactstrap';
 
 const token = window.localStorage.getItem('LEXSECRET');
 function genNewRoom() {
@@ -23,6 +17,11 @@ function genNewRoom() {
 }
 
 const RoomJoinButton = () => (
-  <button style={joinStyle} onClick={genNewRoom}> Start Your Lexsur </button>
+  <Button
+    color="dark"
+    size="lg"
+    outline
+    onClick={genNewRoom}
+  >Start Your Lexsur</Button>
 );
 export default RoomJoinButton;

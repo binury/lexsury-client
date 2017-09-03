@@ -1,31 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 
-
-const navBarStyle = {
-  background: 'black',
-  color: 'white',
-  padding: '.1em', // 1em
-};
-
-const navStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  fontSize: '1.0rem', // 1.6
-  lineHeight: '.45',
-  WebkitPaddingStart: '0px',
-};
-
-const normal = {
-  display: 'inline-block',
-  position: 'relative',
-};
-
-const hidden = {
-  display: 'none',
-};
-
-const liStyle = (window.location.href.includes('room')) ? hidden : normal;
+// const normal = { display: 'inline-block', position: 'relative', };
+// const hidden = { display: 'none', };
+// const liStyle = (window.location.href.includes('room')) ? hidden : normal;
 const token = window.localStorage.getItem('LEXSECRET');
 const routeName = !token ? 'Signup' : 'Logout';
 
@@ -38,18 +17,53 @@ const emblem = {
   position: 'relative',
 };
 
-const Navbar = () =>
-  (
-    <div style={navBarStyle}>
-      <span id="emblem" style={emblem}>Lexsury</span>
-      <ul style={navStyle}>
-        <li style={normal}><Link to="/">Home</Link></li>
-        <li style={normal}><Link to="/features">Features</Link></li>
-        <li style={normal}><Link to="/pricing">Pricing</Link></li>
-        <li style={normal}><Link to="/dashboard">Dashboard</Link></li>
-        <li style={liStyle}><Link to={`/${routeName.toLowerCase()}`}>{routeName}</Link></li>
-      </ul>
-    </div>
-  );
+// TODO: We should collapse when an item is clicked too
+// since we're using a router the page doesn't reload
+export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default Navbar;
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false,
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Navbar class="navbar-expand-sm navbar-dark" color="dark" toggleable>
+          <NavbarToggler right onClick={this.toggle} />
+          <NavbarBrand href="/">
+            <span id="emblem" style={emblem}>Lexsury</span>
+          </NavbarBrand>
+          <Collapse
+            class="navbar-toggleable-md"
+            isOpen={this.state.isOpen}
+            navbar
+          >
+            <Nav class="mr-auto" navbar>
+              <NavItem>
+                <Link class="nav-link" to="/features">Features</Link>
+              </NavItem>
+              <NavItem>
+                <Link class="nav-link" to="/features">Features</Link>
+              </NavItem>
+              <NavItem>
+                <Link class="nav-link" to="/dashboard">Dashboard</Link>
+              </NavItem>
+              <NavItem>
+                <Link class="nav-link" to={`/${routeName.toLowerCase()}`}>{routeName}</Link>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
+    );
+  }
+}
+

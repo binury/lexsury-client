@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 
+// TODO: Move to bootstrap form
 const formStyle = {
   display: 'flex',
   fontSize: '1.5rem',
@@ -50,14 +52,21 @@ class RoomJoinForm extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <input
-          type="text"
-          name="roomname"
-          value={this.state.roomname}
-          onChange={this.handleChange}
-          placeholder="Code"
-        />
-        <button>Join In</button>
+        <InputGroup>
+          <InputGroupAddon>#</InputGroupAddon>
+          <Input
+            type="text"
+            name="roomname"
+            value={this.state.roomname}
+            onChange={this.handleChange}
+            placeholder="Code"
+            required // TODO Validation
+          />
+        </InputGroup>
+        <Button
+          color="dark"
+          size="lg"
+        >Join In</Button>
       </form>
     );
   }

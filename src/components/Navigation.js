@@ -7,21 +7,16 @@ import Rooms from './Rooms';
 import LexRoom from '../pages/LexRoom';
 import Login from './Login';
 import Logout from './Logout';
-import Navbar from './Navbar';
+import NavBar from './Navbar';
 import SignUp from '../pages/SignUp';
 import Features from '../pages/Features';
 import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
 
-// CSS is shit; i'm sorry- i tried
-const containerStyle = {
-  display: 'block',
-};
-
 const Navigation = () => (
   <Router history={browserHistory}>
-    <div style={containerStyle}>
-      <Navbar />
+    <div>
+      <NavBar />
       <hr />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />

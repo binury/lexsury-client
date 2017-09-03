@@ -3,12 +3,12 @@ import React from 'react';
 const shapeStyles = {
   float: 'inline-start',
   zIndex: -1,
-  // overflow: 'hidden',
   position: 'absolute',
-  height: '75vh',
+  height: '100%',
+  width: '100%',
 };
 
-const SHAPES_COUNT = 15;
+const SHAPES_COUNT = 8;
 const shapesHTML = new Array(SHAPES_COUNT).fill('').map((_, i) => {
   const shapeClass = `shape-container--${i} shape-animation`;
   return <div className={shapeClass}><div className="random-shape" /></div>;
