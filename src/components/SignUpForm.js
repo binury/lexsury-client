@@ -143,7 +143,6 @@ class SignUpForm extends React.Component {
             type="text"
             name="email"
             value={this.state.email}
-            placeholder="wubalubbadubdub@xyz.sci"
             onChange={this.handleChange}
             required
           /></div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
 
 function VoteButton(props) {
   const id = props.qid;
@@ -8,9 +9,9 @@ function VoteButton(props) {
     props.sock.vote(id);
   }
   return (
-    <button onClick={handleVote}>
-      Vote
-    </button>
+    <Button color="dark" outline onClick={handleVote}>
+      ❤
+    </Button>
   );
 }
 

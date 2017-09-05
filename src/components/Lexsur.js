@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 
+const joinBadgeStyle = {
+  backgroundColor: '#FFF',
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+};
+
 class Lex extends React.Component {
   constructor(props) {
     super(props);
@@ -46,13 +53,19 @@ class Lex extends React.Component {
     if (!localStorage.LEXSECRET) return <h1>Unauthorized</h1>; // TODO Redirect to home
     return (
       <div>
-        <h2>{this.state.roomid}</h2>
         <QuestionForm sock={this.state.socket} />
         <QuestionList
           questions={this.state.questions}
           users={this.state.users}
           sock={this.state.socket}
         />
+        <div
+          id="join-badge"
+          style={joinBadgeStyle}
+          className="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+        >
+          Join in @ lxsr.us/{this.state.roomName}
+        </div>
       </div>
     );
   }

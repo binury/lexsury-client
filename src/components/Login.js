@@ -1,12 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-
-const formStyle = {
-  display: 'inline-flex',
-  fontSize: '1.5rem',
-  justifyContent: 'center',
-  flexDirection: 'column',
-};
+import {
+  Button, Col, Container, Form, Input, InputGroup, InputGroupAddon, Label,
+  Row,
+} from 'reactstrap';
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -41,34 +38,64 @@ class Login extends React.Component {
       localStorage.setItem('LEXSECRET', res.data.accessToken);
       window.location = `${process.env.PUBLIC_URL}`;
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err)); // Invalid login or 500 ?
   }
 
   // loginError() {} TODO
 
   render() {
     return (
-      <form
-        style={formStyle}
-        onSubmit={this.handleSubmit}
-        encType="application/json"
+      <Container
+        class="d-flex align-items-center flex-column"
       >
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Submit" />
-      </form>
+        <Form
+          onSubmit={this.handleSubmit}
+          encType="application/json"
+        >
+          <Row>
+            <Col>
+              <Button outline color="primary">
+                Facebook
+              </Button>
+            </Col>
+            <Col>
+              <Button outline>
+                Github
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <InputGroup>
+              <Label htmlFor="email" hidden>Email</Label>
+              <InputGroupAddon>@</InputGroupAddon>
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                placeholder="Email"
+              />
+            </InputGroup>
+            <InputGroup>
+              <Label htmlFor="password" hidden>Password</Label>
+              <Input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                placeholder="Password"
+              />
+            </InputGroup>
+          </Row>
+          <Row>
+            <InputGroup>
+              <Col sm={{ size: 10, offset: 2 }}>
+                <Button size="lg" color="dark" block>Login</Button>
+              </Col>
+            </InputGroup>
+          </Row>
+        </Form>
+      </Container>
     );
   }
 }

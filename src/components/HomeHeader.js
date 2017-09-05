@@ -2,8 +2,8 @@ import React from 'react';
 import { Container } from 'reactstrap';
 
 const HomeHeader = () => (
-  <Container>
-    <h1 className="display-4">
+  <Container id="header">
+    <h1 className="display-3">
       Activate Your Audience
     </h1>
     <h3 className="text-muted">

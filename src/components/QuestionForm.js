@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
+import {
+  Button, Col, Container, Form, FormGroup, Input,
+  Label,
+} from 'reactstrap';
 
-const qInputStyle = {
-  display: 'block',
-  width: '-webkit-fill-available',
-  height: '2.9em',
-  border: '1px solid black',
-  background: 'white',
-};
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
@@ -55,32 +52,47 @@ class QuestionForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="question">
-          Q:
-          <input
-            ref={(input) => { this.qInput = input; }}
-            type="text"
-            name="question"
-            value={this.state.question}
-            onChange={this.handleChange}
-            style={qInputStyle}
-          />
-        </label>
-        <label htmlFor="author">
-          N:
-          <input
-            ref={(input) => { this.nameInput = input; }}
-            type="text"
-            name="author"
-            value={this.state.author}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            style={qInputStyle}
-          />
-        </label>
-        <button>Send</button>
-      </form>
+      <Container class="d-lg-none d-xl-none">
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup row class="align-items-center">
+            <Label htmlFor="question" hidden>Question</Label>
+            <Col xs={12} md={8} lg={0}>
+              <Input
+                ref={(input) => { this.qInput = input; }}
+                type="text"
+                name="question"
+                value={this.state.question}
+                onChange={this.handleChange}
+                placeholder="What would you like to ask?"
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row class="align-items-center">
+            <Label htmlFor="author" hidden>Username</Label>
+            <Col xs={12} md={8}>
+              <Input
+                ref={(input) => { this.nameInput = input; }}
+                type="text"
+                name="author"
+                value={this.state.author}
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row class="align-items-center">
+            <Col xs={4}>
+              <Button>Ask!</Button>
+            </Col>
+            <Col xs={7}>
+              <Label check>
+                <Input type="checkbox" id="anon" />{' '}
+              Ask anonymously
+            </Label>
+            </Col>
+          </FormGroup>
+        </Form>
+      </Container>
     );
   }
 }

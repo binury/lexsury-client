@@ -34,115 +34,177 @@ nav {
   }
 }
 
-  hr {
-    margin-top: 0;
-  }
+hr {
+  margin-top: 0;
+}
 
-  .input-group {
-    margin: 1em auto;
-    display: inherit;
-    width: 90%;
-    justify-content: space-between;
-    label {
-      display: block;
-      text-decoration: underline;
-    }
-    button {
-      display: block; // yo
-    }
+.input-group {
+  margin: 1em auto;
+  display: inherit;
+  width: 90%;
+  justify-content: space-between;
+  label {
+    display: block;
+    text-decoration: underline;
   }
-
-  .questions-enter {
-    opacity: 0.01;
+  button {
+    display: block; // yo
   }
+}
 
-  .questions-enter.questions-enter-active {
-    opacity: 1;
-    transition: opacity 2500ms ease-in;
-  }
+.questions-enter {
+  opacity: 0.01;
+}
 
-  .questions-leave {
-    opacity: 1;
-  }
+.questions-enter.questions-enter-active {
+  opacity: 1;
+  transition: opacity 2500ms ease-in;
+}
 
-  .questions-leave.questions-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
-  }
+.questions-leave {
+  opacity: 1;
+}
 
-  p.questions {
-    font-style: italic;
-  }
+.questions-leave.questions-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 
-  p.authors {
-    font-family: 'News Cycle', sans-serif;
-  }
+p.questions {
+  font-style: italic;
+}
 
-  // NOT working with Bootstrap yet
-  li {
-    &:hover,
-    &:focus,
-    &:active {
-      cursor: pointer;
-      &:after {
-        width: 99%;
-        border-radius: 45%;
-      }
-    }
+p.authors {
+  font-family: 'News Cycle', sans-serif;
+}
+
+// NOT working with Bootstrap yet
+nav li {
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
     &:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      height: 2px;
-      background-color: #d6d6d1;
-      width: 0;
-      transition: width .25s;
+      width: 99%;
+      border-radius: 45%;
+    }
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px;
+    background-color: #d6d6d1;
+    width: 0;
+    transition: width .25s;
+  }
+}
+
+#clickprompt {
+  max-width: 80%;
+  text-align: center;
+}
+
+////////////////////////////////
+.shape {
+  position: relative;
+}
+// Todo, fix Safari Mobile rendering of overflow
+
+$colors: #FFD700, #FFF8DC, #DB7093, #C2B7FE, #95A9FF;
+$shapes: '\f005', '\f0c8', '\f1db', '\f096', '\f1d8', '\f1cb';
+$shape-count: 8;
+@for $i from 1 through $shape-count {
+  $shape-size: random(10) + 10;
+  $rotation: random(360);
+  $speed: 40 + random(10);
+  $color-key: random(length($colors));
+  $shape-color: nth($colors, $color-key);
+  $shape-key: random(length($shapes));
+  $shape-type: nth($shapes, $shape-key);
+  $text: random(10);
+
+  @keyframes shape-#{$i} {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(#{$rotation + 0}deg);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) rotate(#{$rotation + 360}deg);
     }
   }
 
-  #clickprompt {
-    max-width: 80%;
-    text-align: center;
-  }
+  .shape-container--#{$i} {
+    animation: shape-#{$i} #{$speed}s linear infinite;
 
-  ////////////////////////////////
-  .shape {
+    .random-shape:after {
+      // margin: #{$shape-size}rem;
+      color: $shape-color;
+      font-size: #{$shape-size * 0.2}rem;
+      content: '?'
+    }
+  }
+}
+
+#header {
+  margin-bottom: 10vw;
+}
+
+#or-container {
+  text-align: center;
+  color: #6a737c;
+  font-variant: small-caps;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  display: block;
+}
+
+#or-hr {
+  margin-bottom: 0;
+  position: relative;
+  top: 23px;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #e4e6e8;
+  color: #9fa6ad;
+  background-color: #9fa6ad;
+  display: block;
+  unicode-bidi: isolate;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  overflow: hidden;
+}
+
+#or {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  background-color: #FFF;
+  margin: auto;
+  border: 0;
+  vertical-align: baseline;
+  text-align: center;
+  font-variant-ligatures: normal;
+  font-variant-caps: small-caps;
+  font-variant-numeric: normal;
+}
+
+#questions-list {
+  margin-top: 3vw;
+}
+.question {
+  p:last-child {
+    float: right;
     position: relative;
-  }
-  // Todo, fix Safari Mobile rendering of overflow
+    bottom: 2em;
 
-  $colors: #FFD700, #FFF8DC, #DB7093, #C2B7FE, #95A9FF;
-  $shapes: '\f005', '\f0c8', '\f1db', '\f096', '\f1d8', '\f1cb';
-  $shape-count: 8;
-  @for $i from 1 through $shape-count {
-    $shape-size: random(10) + 10;
-    $rotation: random(360);
-    $speed: 40 + random(10);
-    $color-key: random(length($colors));
-    $shape-color: nth($colors, $color-key);
-    $shape-key: random(length($shapes));
-    $shape-type: nth($shapes, $shape-key);
-    $text: random(10);
-
-    @keyframes shape-#{$i} {
-      0% {
-        transform: translate3d(0, 0, 0) rotate(#{$rotation + 0}deg);
-      }
-      100% {
-        transform: translate3d(0, 0, 0) rotate(#{$rotation + 360}deg);
-      }
-    }
-
-    .shape-container--#{$i} {
-      animation: shape-#{$i} #{$speed}s linear infinite;
-
-      .random-shape:after {
-        margin: #{$shape-size}rem;
-        color: $shape-color;
-        font-size: #{$shape-size * 0.2}rem;
-        content: '?'
-      }
+    span {
+      margin-right: 1em;
     }
   }
+
+}
 

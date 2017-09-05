@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row } from 'reactstrap';
 
 /*
  TODO:
@@ -8,8 +9,18 @@ import React from 'react';
 export default () => {
   window.localStorage.removeItem('LEXSECRET');
   return (
-    <div>
-      <h2>You have been signed out</h2>
-    </div>
+    <Container class="d-flex align-items-center flex-column">
+      <Row>
+        <h2>You have been signed out</h2>
+      </Row>
+      <Row>
+        <h4>Come back soon!</h4>
+      </Row>
+      <Row>
+        <a className="btn btn-outline-dark" href="/login">
+          <p>Log in again</p>
+        </a>
+      </Row>
+    </Container>
   );
 };

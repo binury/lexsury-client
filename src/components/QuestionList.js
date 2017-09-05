@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { Button, Container } from 'reactstrap';
 import VoteButton from './VoteButton';
 
 const listStyle = {
@@ -11,11 +12,19 @@ const listStyle = {
   listStyle: 'none',
 };
 
+const colors = [
+  '#FFD700',
+  '#FFF8DC',
+  '#DB7093',
+  '#C2B7FE',
+  '#95A9FF',
+];
+
 const questionStyle = {
   // border: '2px solid black',
-  background: 'black',
+  background: colors[Math.floor(Math.random() * 5)],
   borderRadius: '0.6em',
-  color: 'white',
+  color: '#343A3F',
   padding: '1.1em',
 };
 
@@ -51,7 +60,7 @@ export default class QuestionList extends Component {
       .sort(this.state.sortByDate ? sortDate : sortVotes)
       .map(question => (
         <li key={question.id}>
-          <blockquote style={questionStyle}>
+          <blockquote style={questionStyle} className="question blockquote">
             <p className="timestamps">
               {moment(question.date).format('HH:mm:ss')}
             </p>
@@ -67,11 +76,11 @@ export default class QuestionList extends Component {
         </li>
       ));
     return (
-      <div>
-        <button onClick={() => this.toggleDateSort()}>
+      <Container id="questions-container">
+        <Button color="dark" outline onClick={() => this.toggleDateSort()}>
           {this.state.sortByDate ? 'Best' : 'Newest'}
-        </button>
-        <ul style={listStyle}>
+        </Button>
+        <ul style={listStyle} id="questions-list">
           <CSSTransitionGroup
             transitionName="questions"
             transitionEnterTimeout={2500}
@@ -81,7 +90,7 @@ export default class QuestionList extends Component {
             {questions}
           </CSSTransitionGroup>
         </ul>
-      </div>
+      </Container>
     );
   }
 }
