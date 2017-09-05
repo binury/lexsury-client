@@ -34,6 +34,13 @@ class RoomJoinForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    window.location = `/room/${this.state.roomname}`;
+    /*
+     CURRENTLY DISABLED
+         We let the user join the room they entered and hope for the best
+         we can't let them search through rooms safely yet, since we switched to
+         Sequelize. The room object now contains users / messages / etc
+    */
     axios({
       method: 'get',
       url: `${URL}/room?name=${this.state.roomname}`,
