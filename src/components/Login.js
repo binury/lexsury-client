@@ -1,9 +1,16 @@
+/* eslint-disable spaced-comment */
 import React from 'react';
 import Axios from 'axios';
 import {
   Button, Col, Container, Form, Input, InputGroup, InputGroupAddon, Label,
   Row,
 } from 'reactstrap';
+
+/////////////////////////////////
+////////////.FLAGS.//////////////
+/////////////////////////////////
+const OAUTH_ENABLE = false;
+/////////////////////////////////
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -52,7 +59,7 @@ class Login extends React.Component {
           onSubmit={this.handleSubmit}
           encType="application/json"
         >
-          <Row>
+          <Row class={OAUTH_ENABLE ? 'd-inline' : 'd-none'}>
             <Col>
               <Button outline color="primary">
                 Facebook

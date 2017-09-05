@@ -6,6 +6,12 @@ import {
   Container,
 } from 'reactstrap';
 
+/////////////////////////////////
+////////////.FLAGS.//////////////
+/////////////////////////////////
+const OAUTH_ENABLE = false;
+/////////////////////////////////
+
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
@@ -68,7 +74,7 @@ export default class SignUpBootstrap extends React.Component {
         onSubmit={this.handleSubmit}
         encType="application/json"
       >
-        <FormGroup row>
+        <FormGroup class={OAUTH_ENABLE ? 'd-inline' : 'd-none'} row>
           <Col sm="6">
             <Button outline color="primary">
               Facebook
