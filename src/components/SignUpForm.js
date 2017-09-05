@@ -23,6 +23,9 @@ const submitStyle = {
   alignSelf: 'center',
 };
 
+// Client development server runs on different port than actual backend server
+const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -81,14 +84,14 @@ class SignUpForm extends React.Component {
       password: this.state.password.trim(),
       dob: this.state.dob,
     };
-    Axios.post(`${process.env.PUBLIC_URL}/user`, payload).then(() => {
+    Axios.post(`${URL}/user`, payload).then(() => {
       Axios.post(
         `${process.env.PUBLIC_URL}/authentication`,
         Object.assign(payload, { strategy: 'local' },
         )).then((res) => {
           localStorage.setItem('LEXSECRET', res.data.accessToken);
         }).then(() => {
-          window.location = `${process.env.PUBLIC_URL}`;
+          window.location = `${URL}`; // TODO: Display Welcome MSG
         });
     }).catch(err => console.error(err));
   }

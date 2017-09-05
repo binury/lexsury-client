@@ -9,6 +9,8 @@ const qInputStyle = {
   border: '1px solid black',
   background: 'white',
 };
+// Client development server runs on different port than actual backend server
+const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class QuestionForm extends React.Component {
 
   componentDidMount() {
     const setName = res => this.setState({ author: res.data.data[0].displayName });
-    Axios.get(`${process.env.PUBLIC_URL}/user`, {
+    Axios.get(`${URL}/user`, {
       headers: { Authorization: localStorage.LEXSECRET },
     }).then(setName);
   }

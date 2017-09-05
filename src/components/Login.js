@@ -8,6 +8,8 @@ const formStyle = {
   flexDirection: 'column',
 };
 
+// Client development server runs on different port than actual backend server
+const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    Axios.post(`${process.env.PUBLIC_URL}/authentication`, {
+    Axios.post(`${URL}/authentication`, {
       strategy: 'local',
       email: this.state.email,
       password: this.state.password,

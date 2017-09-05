@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 
+// Client development server runs on different port than actual backend server
+const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
+
 // TODO: Move to bootstrap form
 const formStyle = {
   display: 'flex',
@@ -33,7 +36,7 @@ class RoomJoinForm extends React.Component {
     event.preventDefault();
     axios({
       method: 'get',
-      url: `/room?name=${this.state.roomname}`, // TODO
+      url: `${URL}/room?name=${this.state.roomname}`,
       timeout: 5000,
       responseType: 'json',
     })

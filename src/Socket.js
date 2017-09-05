@@ -1,9 +1,13 @@
 import io from 'socket.io-client';
 
+// Client development server runs on different port than actual backend server
+const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
+
 class Socket {
   constructor(token, ns = '') {
     // ns: room.name && token: jwt authentication
     this.io = io(`${process.env.PUBLIC_URL}/${ns}`, { query: `token=${token}` });
+    this.io = io(`${URL}/${ns}`, { query: `token=${token}` });
     this.id = this.io.id;
     // Bindings allow usage in exported environment
     this.initSocket = this.initSocket.bind(this);
