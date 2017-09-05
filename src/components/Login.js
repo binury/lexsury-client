@@ -43,7 +43,7 @@ class Login extends React.Component {
     })
     .then((res) => {
       localStorage.setItem('LEXSECRET', res.data.accessToken);
-      window.location = `${process.env.PUBLIC_URL}`;
+      window.location = '/?welcomeback';
     })
     .catch(err => console.error(err)); // Invalid login or 500 ?
   }
