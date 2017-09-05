@@ -16,7 +16,7 @@ function genNewRoom() {
   axios.post(`${URL}/room`, {}, {
     headers: { Authorization: token },
   })
-  .then(res => window.location += `room/${res.data.name}`)
+  .then(res => window.location = `/room/${res.data.name}`)
   .catch(err => console.log(`There was an error: ${err}`));
 }
 

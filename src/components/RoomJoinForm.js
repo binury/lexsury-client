@@ -41,7 +41,7 @@ class RoomJoinForm extends React.Component {
       responseType: 'json',
     })
     .then((roomData) => {
-      if (roomData.data.total !== 0) { window.location += `room/${this.state.roomname}`; }
+      if (roomData.data.total !== 0) { window.location = `/room/${this.state.roomname}`; }
     })
     .catch(err => console.error(err));
   }
