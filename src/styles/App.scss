@@ -112,7 +112,7 @@ nav li {
 }
 // Todo, fix Safari Mobile rendering of overflow
 
-$colors: #FFD700, #FFF8DC, #DB7093, #C2B7FE, #95A9FF;
+$colors: #F2BB2A, #FFF8DC, #DB7093, #C2B7FE, #95A9FF;
 $shapes: '\f005', '\f0c8', '\f1db', '\f096', '\f1d8', '\f1cb';
 $shape-count: 8;
 @for $i from 1 through $shape-count {
@@ -192,6 +192,14 @@ $shape-count: 8;
   font-variant-numeric: normal;
 }
 
+#home-section-1 {
+  margin-bottom: 10vw;
+}
+
+#home-section-2 {
+  margin-bottom: 10vw;
+}
+
 #questions-list {
   margin-top: 3vw;
 }
@@ -208,3 +216,13 @@ $shape-count: 8;
 
 }
 
+//////////////////////////
+//  Bootstrap Overrides //
+//////////////////////////
+.card-text:last-child {
+  font-weight: 100;
+}
+
+.card {
+  border-color: #FFF;
+}
