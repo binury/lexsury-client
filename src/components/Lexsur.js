@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
@@ -10,6 +11,25 @@ const joinBadgeStyle = {
   bottom: 0,
   left: 0,
 };
+
+function toggleFullscreen() {
+  const doc = window.document;
+  const docEl = doc.documentElement;
+
+  const requestFullScreen = docEl.requestFullscreen ||
+    docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen ||
+    docEl.msRequestFullscreen;
+  const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen ||
+    doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+  if (!doc.fullscreenElement && !doc.mozFullScreenElement &&
+    !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    requestFullScreen.call(docEl);
+  } else {
+    cancelFullScreen.call(doc);
+  }
+}
+
 
 class Lex extends React.Component {
   constructor(props) {
@@ -48,11 +68,20 @@ class Lex extends React.Component {
     });
     console.log(newUsers);
   }
-
   render() {
     if (!localStorage.LEXSECRET) return <h1>Unauthorized</h1>; // TODO Redirect to home
     return (
       <div>
+        <ArrowMaximize
+          style={{
+            color: '#FFF',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+          }}
+          size={30}
+          onClick={toggleFullscreen}
+        />
         <QuestionForm sock={this.state.socket} />
         <QuestionList
           questions={this.state.questions}
