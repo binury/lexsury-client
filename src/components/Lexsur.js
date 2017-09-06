@@ -1,13 +1,16 @@
+/* eslint-disable spaced-comment */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
-// FLAG
 
-const msgNotifications = false;
-
+/////////////////////////////////
+////////////.FLAGS.//////////////
+/////////////////////////////////
+const NOTIFICATIONS_ENABLED = false;
+/////////////////////////////////
 
 const joinBadgeStyle = {
   backgroundColor: '#FFF',
@@ -34,7 +37,11 @@ function toggleFullscreen() {
   }
 }
 
-const newMsg = msg => Notification.requestPermission(() => new Notification(msg || 'New Question'));
+const sendBrowserNotification = (msg) => {
+  if (typeof msg !== 'undefined') {
+    Notification.requestPermission(() => new Notification(msg));
+  }
+};
 
 class Lex extends React.Component {
   constructor(props) {
@@ -62,12 +69,20 @@ class Lex extends React.Component {
   }
 
   updateQuestions(newQuestions) {
+    if (newQuestions.length === 0) {
+      return;
+    }
     this.setState({
       questions: newQuestions,
     });
-
-    if (msgNotifications) {
-      newMsg();
+    /*
+     This relies on the newQs arg to be sorted by ID
+     if this changes the code will break and instead
+     should be sorted manually before dereferencing the array.
+    */
+    if (NOTIFICATIONS_ENABLED) {
+      const newQ = newQuestions[newQuestions.length - 1];
+      sendBrowserNotification(`${newQ.author} asks:${newQ.text}`);
     }
   }
 
