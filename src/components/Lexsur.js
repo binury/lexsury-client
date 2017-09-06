@@ -4,6 +4,10 @@ import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
+// FLAG
+
+const msgNotifications = false;
+
 
 const joinBadgeStyle = {
   backgroundColor: '#FFF',
@@ -30,6 +34,7 @@ function toggleFullscreen() {
   }
 }
 
+const newMsg = msg => Notification.requestPermission(() => new Notification(msg || 'New Question'));
 
 class Lex extends React.Component {
   constructor(props) {
@@ -60,6 +65,10 @@ class Lex extends React.Component {
     this.setState({
       questions: newQuestions,
     });
+
+    if (msgNotifications) {
+      newMsg();
+    }
   }
 
   updateUsers(newUsers) {
@@ -68,6 +77,7 @@ class Lex extends React.Component {
     });
     console.log(newUsers);
   }
+
   render() {
     if (!localStorage.LEXSECRET) return <h1>Unauthorized</h1>; // TODO Redirect to home
     return (
