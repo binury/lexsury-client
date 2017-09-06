@@ -23,6 +23,7 @@ export default class SignUpBootstrap extends React.Component {
       email: '',
       password: '',
       bio: '',
+      optin: true,
       emailValid: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,8 +31,9 @@ export default class SignUpBootstrap extends React.Component {
   }
 
   handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const target = event.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value });
 
     function validateEmail(email) {
@@ -50,10 +52,12 @@ export default class SignUpBootstrap extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const payload = {
+      // TODO: Maybe just trim as needed and pass state object?
       displayName: this.state.displayName.trim(),
       email: this.state.email.trim(),
       password: this.state.password,
       bio: this.state.bio,
+      optin: this.state.optin,
     };
     Axios.post(`${URL}/user`, payload).then(() => {
       Axios.post(
@@ -139,19 +143,26 @@ export default class SignUpBootstrap extends React.Component {
           <Col sm={8}>
             <Input
               type="textarea"
-              name="text"
+              name="bio"
               id="bio"
               placeholder="In 140 characters or less, tell other participants about you. Go!"
+              value={this.state.bio}
               onChange={this.handleChange}
             />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="newsletter" sm={2}>Email updates</Label>
+          <Label for="optin" sm={2}>Email updates</Label>
           <Col sm={{ size: 10 }}>
             <FormGroup check>
               <Label check>
-                <Input type="checkbox" id="newsletter" />{' '}
+                <Input
+                  type="checkbox"
+                  name="optin"
+                  id="optin"
+                  checked={this.state.optin}
+                  onChange={this.handleChange}
+                />{' '}
                 Keep me in the loop about Lexsury happenings
               </Label>
             </FormGroup>

@@ -1,4 +1,5 @@
 /* eslint-disable no-return-assign */
+/* DEPRECATED in favor of SignUpFormBootstrap
 import React from 'react';
 import Axios from 'axios';
 import generate from 'project-name-generator';
@@ -190,3 +191,4 @@ class SignUpForm extends React.Component {
 
 export default SignUpForm;
 
+*/
