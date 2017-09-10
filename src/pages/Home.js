@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import RoomJoinButton from '../components/RoomJoinButton';
+import RoomCreateButton from '../components/RoomCreateButton';
 import RoomJoinForm from '../components/RoomJoinForm';
 import Shapes from '../components/Shapes';
 import HomeHeader from '../components/HomeHeader';
@@ -32,7 +32,7 @@ function Home() {
         <p id="clickprompt">{}</p>
         <Row class="justify-content-center align-items-center">
           <Col xs={7} md={3}>
-            <RoomJoinButton />
+            <RoomCreateButton buttonLabel={'Start your Lexsur'} />
           </Col>
           <Col xs={7} md={4}>
             <div id="or-container">

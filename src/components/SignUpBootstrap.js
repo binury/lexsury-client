@@ -53,7 +53,7 @@ export default class SignUpBootstrap extends React.Component {
     event.preventDefault();
     const payload = {
       // TODO: Maybe just trim as needed and pass state object?
-      displayName: this.state.displayName.trim(),
+      displayName: ( this.state.displayName.trim() || 'Anonymous' ),
       email: this.state.email.trim(),
       password: this.state.password,
       bio: this.state.bio,
@@ -168,7 +168,7 @@ export default class SignUpBootstrap extends React.Component {
             </FormGroup>
           </Col>
         </FormGroup>
-        <FormGroup check row>
+        <FormGroup row>
           <Col sm={{ size: 10, offset: 2 }}>
             <Button size="lg" color="dark" block>Submit</Button>
           </Col>
