@@ -4,8 +4,8 @@ const shapeStyles = {
   float: 'inline-start',
   zIndex: -1,
   position: 'absolute',
-  height: '100%',
-  width: '100%',
+  height: '50%',
+  width: '90%',
 };
 
 const SHAPES_COUNT = 8;
@@ -18,3 +18,4 @@ const shapesHTML = new Array(SHAPES_COUNT).fill('').map((_, i) => {
 export default function Shapes() {
   return <div id="shape-root" style={shapeStyles}>{shapesHTML}</div>;
 }
+
