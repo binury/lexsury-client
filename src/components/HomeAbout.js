@@ -12,7 +12,7 @@ import Msgs from 'react-icons/lib/ti/messages';
 const HomeAbout = () => (
   <Container id="home-about" fluid>
     <Row>
-      <h1 className="display-3">How it works</h1>
+      <h1 className="display-3" id="how">How it works</h1>
     </Row>
     <CardDeck>
       <Card>

@@ -47,7 +47,7 @@ export default class NavBar extends React.Component {
             navbar
           >
             <Nav class="mr-auto" navbar>
-              <NavItem>
+              <NavItem hidden>
                 <Link class="nav-link" to="/pricing">Pricing</Link>
               </NavItem>
               <NavItem>
