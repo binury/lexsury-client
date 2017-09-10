@@ -31,16 +31,14 @@ function Home() {
         </Row>
         <p id="clickprompt">{}</p>
         <Row class="justify-content-center align-items-center">
-          <Col xs={7} md={3}>
+          <Col xs={6} md={6} lg={4}>
             <RoomCreateButton buttonLabel={'Start your Lexsur'} />
           </Col>
-          <Col xs={7} md={4}>
-            <div id="or-container">
-              <hr id="or-hr" />
-              <div id="or">or</div>
-            </div>
+          <Col xs={10} md={8} lg={4} id="or-container">
+            <hr id="or-hr" />
+            <div id="or">or</div>
           </Col>
-          <Col xs={7} md={4}>
+          <Col xs={8} md={8} lg={4}>
             <RoomJoinForm />
           </Col>
         </Row>

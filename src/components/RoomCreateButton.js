@@ -34,6 +34,7 @@ class RoomJoinButton extends React.Component {
           size="lg"
           outline
           onClick={this.toggle}
+          block
         >{this.props.buttonLabel}</Button>
         <Modal
           isOpen={this.state.modal}
