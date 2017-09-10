@@ -22,7 +22,7 @@ class Socket {
   }
 
   // Methods for emitting messages
-  ask(question) { this.io.emit('questionAsked', question); }
+  ask(question, anon) { this.io.emit('questionAsked', question, anon); }
   nick(newName) { this.io.emit('nameChanged', newName); }
   vote(questionId) { this.io.emit('voteCast', questionId); }
 }

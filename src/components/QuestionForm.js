@@ -17,6 +17,7 @@ class QuestionForm extends React.Component {
       userId: this.props.uid,
       question: '',
       socket: this.props.sock,
+      anonymous: false,
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -37,22 +38,21 @@ class QuestionForm extends React.Component {
   }
 
   handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value,
-    });
+    const target = event.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.state.socket.ask(this.state.question);
+    this.state.socket.ask(this.state.question, this.state.anonymous);
     this.setState({ question: '' });
   }
 
   render() {
     return (
-      <Container class="d-lg-none d-xl-none">
+      <Container class="d-md-none d-lg-none d-xl-none">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row class="align-items-center">
             <Label htmlFor="question" hidden>Question</Label>
@@ -77,6 +77,7 @@ class QuestionForm extends React.Component {
                 value={this.state.author}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
+                placeholder="To whom should we attribute the question?"
               />
             </Col>
           </FormGroup>
@@ -86,7 +87,12 @@ class QuestionForm extends React.Component {
             </Col>
             <Col xs={7}>
               <Label check>
-                <Input type="checkbox" id="anon" />{' '}
+                <Input
+                  type="checkbox"
+                  name="anonymous"
+                  checked={this.state.anonymous}
+                  onChange={this.handleChange}
+                />{' '}
               Ask anonymously
             </Label>
             </Col>
