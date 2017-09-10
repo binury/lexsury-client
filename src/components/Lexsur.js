@@ -17,6 +17,7 @@ const joinBadgeStyle = {
   position: 'fixed',
   bottom: 0,
   left: 0,
+  zIndex: 999,
 };
 
 function toggleFullscreen() {
@@ -99,7 +100,7 @@ class Lex extends React.Component {
       <div>
         <ArrowMaximize
           style={{
-            color: '#FFF',
+            color: '#000',
             position: 'absolute',
             top: 0,
             right: 0,
@@ -112,6 +113,7 @@ class Lex extends React.Component {
           questions={this.state.questions}
           users={this.state.users}
           sock={this.state.socket}
+          roomName={this.state.roomName}
         />
         <div
           id="join-badge"

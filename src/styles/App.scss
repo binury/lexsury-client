@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Shrikhand');
+@import 'iphone.scss';
 
 body {
   color: black;
   font-family: 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+p {
+  font-weight: 300;
 }
 
 a {
@@ -52,6 +57,73 @@ hr {
   }
 }
 
+#questions-list {
+  margin-top: 3vw;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  align-items: flex-end;
+  @media (max-width: 650px) {
+    align-items: unset;
+  }
+}
+
+.question {
+  background-color: #efefef;
+  border-radius: 0.6em;
+  color: #343A3F;
+  padding: 0.3em;
+  display: inline-block;
+  width: 30rem;
+  margin: auto;
+  p:nth-child(2) {
+    display: none;
+  }
+  p:nth-child(3) {
+    padding-left: 1em;
+  }
+  p:nth-child(4) {
+    padding-left: 1.5em;
+    font-weight: bold;
+  }
+  p:last-child {
+    float: right;
+    padding-right: 0.5em;
+    span {
+      margin-right: 1em;
+    }
+  }
+  @media screen and (max-width: 568px) {
+    & {
+      width: 100%;
+    }
+  }
+}
+
+.avatar-container {
+  // display: inline-flex;
+  display: none;
+  position: absolute;
+  right: 35rem;
+  z-index: 1;
+  @media screen and (max-width: 700px) {
+    & {
+      justify-content: center;
+      border: 3px solid #343A3F;
+      border-radius: 50%;
+      overflow: hidden;
+      height: 5rem;
+      width: 5rem;
+      float: left;
+      position: unset;
+      img {
+        position: relative;
+        top: -1.5em;
+      }
+    }
+  }
+}
 .questions-enter {
   opacity: 0.01;
 }
@@ -200,20 +272,14 @@ $shape-count: 8;
   margin-bottom: 10vw;
 }
 
-#questions-list {
-  margin-top: 3vw;
-}
-.question {
-  p:last-child {
-    float: right;
-    position: relative;
-    bottom: 2em;
 
-    span {
-      margin-right: 1em;
-    }
-  }
-
+.pop-marker {
+  color: white;
+  border-bottom: 1px dotted white;
+  margin-left: 1em;
+  padding: 0.25em;
+  border-radius: 25%;
+  background: lightgray;
 }
 
 //////////////////////////
@@ -226,3 +292,5 @@ $shape-count: 8;
 .card {
   border-color: #FFF;
 }
+
+

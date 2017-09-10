@@ -1,0 +1,57 @@
+$background-color: #EC5F51;
+$iphone-screen-color: #343A3F;
+$iphone-body-color: #ECF0F1;
+$iphone-home-button-color: #D5D5D5;
+$iphone-perspective-visual-color: #D2D7D8;
+$iphone-earphone-color: #5C5C5C;
+
+.iphone {
+  @media screen and (max-width: 750px) {
+    & {
+      display: none;
+    }
+  }
+  background: $iphone-screen-color;
+  color: #FFF;
+  font-family: Roboto;
+  text-rendering: optimizeLegibility;
+  display: inline-block;
+  width: 11.7em;
+  height: 21.826em;
+  border-radius: 1.4018em;
+  border: 1px solid $iphone-body-color;
+  border-width: 3.212em .9em;
+  box-shadow: 0 7px $iphone-perspective-visual-color;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-left: -5.85em;
+  margin-top: 2em;
+  padding-top: 1em;
+  &:before {
+    content: "";
+    width: 50px;
+    height: 5px;
+    background: $iphone-earphone-color;
+    position: absolute;
+    z-index: 99999;
+    top: -30px;
+    margin: 0 auto;
+    border-radius: 10px;
+    left: 3.5em;
+  }
+  &:after {
+    content: "";
+    border-radius: 50%;
+    bottom: -48px;
+    position: absolute;
+    border: 4px solid $iphone-home-button-color;
+    width: 30px;
+    height: 30px;
+    left: 4em;
+  }
+}
+
+#mobile-badge {
+  line-height: 1em;
+}

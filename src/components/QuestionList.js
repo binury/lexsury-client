@@ -5,13 +5,14 @@ import moment from 'moment';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Button, Container } from 'reactstrap';
 import VoteButton from './VoteButton';
+import * as Avatar from '../assets/avatars';
+import Shapes from './Shapes';
 
 const listStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  listStyle: 'none',
 };
 
+// TODO
+// eslint-disable-next-line no-unused-vars
 const colors = [
   '#FFD700',
   '#FFF8DC',
@@ -20,19 +21,12 @@ const colors = [
   '#95A9FF',
 ];
 
-const questionStyle = {
-  // border: '2px solid black',
-  background: colors[Math.floor(Math.random() * 5)],
-  borderRadius: '0.6em',
-  color: '#343A3F',
-  padding: '1.1em',
-};
-
 export default class QuestionList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       sortByDate: false,
+      roomName: this.props.roomName,
     };
   }
 
@@ -46,12 +40,16 @@ export default class QuestionList extends Component {
   render() {
     if (this.props.questions.length === 0) {
       return (
-        <div style={{ margin: '5em' }}>
-          <h3>No questions have been asked yet
-          <span role="img" aria-label="sad cat face"> 😿 </span>
-          </h3>
-          <h2>Be the first one!</h2>
-        </div>
+        <Container class="text-align-center">
+          <Shapes />
+          <i className="iphone">
+            <Container id="mobile-badge" class="text-align-center">
+              <p>Join the presentation @</p>
+              <p>lxsr.us/</p>
+              <p>{`${this.state.roomName}`}</p>
+            </Container>
+          </i>
+        </Container>
       );
     }
     const sortDate = (x, y) => moment(y.date).isBefore(x.date) ? -1 : 1; // eslint-disable-line no-confusing-arrow
@@ -59,10 +57,13 @@ export default class QuestionList extends Component {
     const questions = this.props.questions
       .sort(this.state.sortByDate ? sortDate : sortVotes)
       .map(question => (
-        <li key={question.id}>
-          <blockquote style={questionStyle} className="question blockquote">
+        <li style={{ padding: '1.25em' }} key={question.id}>
+          <div className="question">
+            <div className="avatar-container">
+              <img src={Avatar.ChillDude} width="150px" height="150px" alt="avatar" />
+            </div>
             <p className="timestamps">
-              {moment(question.date).format('HH:mm:ss')}
+              {moment(question.date).format('H:mm:ss')}
             </p>
             <p>
               <span className="authors">{question.author}</span> asks:
@@ -72,11 +73,11 @@ export default class QuestionList extends Component {
               <span className="votes">{question.votes.length}</span>
               <VoteButton qid={question.id} sock={this.props.sock} />
             </p>
-          </blockquote>
+          </div>
         </li>
       ));
     return (
-      <Container id="questions-container">
+      <Container id="questions-container" fluid>
         <Button color="dark" outline onClick={() => this.toggleDateSort()}>
           {this.state.sortByDate ? 'Best' : 'Newest'}
         </Button>
@@ -98,4 +99,5 @@ export default class QuestionList extends Component {
 QuestionList.propTypes = {
   questions: PropTypes.instanceOf(Array).isRequired,
   sock: PropTypes.instanceOf(Object).isRequired,
+  roomName: PropTypes.instanceOf(String).isRequired,
 };
