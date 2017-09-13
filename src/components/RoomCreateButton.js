@@ -15,10 +15,18 @@ class RoomJoinButton extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('go')) {
+      this.toggle();
+    }
+  }
+
   toggle() {
+    // TODO: Anonymous registration of temporary user
     const token = window.localStorage.getItem('LEXSECRET');
     if (!token) {
-      window.location += 'signup';
+      window.location.assign('/signup');
       return;
     }
     this.setState({
