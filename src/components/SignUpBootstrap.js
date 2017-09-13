@@ -66,7 +66,7 @@ export default class SignUpBootstrap extends React.Component {
         )).then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       }).then(() => {
-        window.location = '/?welcome'; // TODO: Display Welcome MSG
+        window.location.assign('/welcome');
       });
     }).catch(err => console.error(err));
   }

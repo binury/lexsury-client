@@ -12,6 +12,7 @@ import SignUp from '../pages/SignUp';
 import Features from '../pages/Features';
 import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
+import Welcome from '../pages/Welcome';
 
 const Routes = () => (
   <Router history={browserHistory}>
@@ -27,6 +28,7 @@ const Routes = () => (
       <Route path="/features" component={Features} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/pricing" component={Pricing} />
+      <Route path="/welcome" component={Welcome} />
     </div>
   </Router>
 );

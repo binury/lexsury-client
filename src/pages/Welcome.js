@@ -1,0 +1,61 @@
+import React from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
+const Welcome = () => (
+  <Container>
+    <Row center>
+      <Col shape={{ size: 'auto' }}>
+        <h1 className="display-3" id="welcome">Welcome to Lexsury!</h1>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <a href="features">
+          <h2 className="lead" id="getStarted">
+          How to: Using Lexsury in your presentation
+        </h2>
+        </a>
+      </Col>
+      <Col>
+        <a href="features">
+          <h2 className="lead" id="getTheMost">
+          Tips: Gaining the most out of real-time audience interaction
+        </h2>
+        </a>
+      </Col>
+    </Row>
+    <Row class="justify-content-center">
+      <Col shape={{ size: 'auto' }}>
+        <Link to="/?go" className="btn btn-dark btn-lg" role="button">
+          Get Started
+        </Link>
+      </Col>
+      <Col>
+        <Link to="/features" className="btn btn-dark btn-lg" role="button">
+          Learn More
+        </Link>
+      </Col>
+    </Row>
+    <Row>
+      <hr />
+    </Row>
+    <Row>
+      <Col shape={{ size: 'auto' }}>
+        <h2>A message from the development team:</h2>
+        <blockquote className="blockquote">
+          {`
+            Thank you for joining the Lexsury beta release. We are so excited to share our creation with you!
+            Our vision is a world in which all presenters have all of the best tools conveniently at hand.
+            We want to strengthen the brief connection between presenters and speakers and provide more opportunities to build lasting partnerships.
+            We thank you again for helping to make this vision a reality.
+            If you'd like to provide feedback or have any concerns / questions we would love to hear from you.
+          `}
+        </blockquote>
+        <footer className="blockquote-footer">Bin Ury, Founder</footer>
+      </Col>
+    </Row>
+  </Container>
+);
+
+export default Welcome;
