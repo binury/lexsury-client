@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Shrikhand');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 @import 'iphone.scss';
 
 body {
   color: black;
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -37,6 +39,24 @@ nav {
     height: 1px;
     width: 100%;
   }
+}
+
+h1 {
+  font-style: italic;
+  font-weight: normal;
+}
+
+#welcome {
+  font-weight: normal;
+  text-align: center;
+}
+
+#getTheMost {
+
+}
+
+#getStarted {
+
 }
 
 hr {
