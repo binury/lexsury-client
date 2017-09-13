@@ -3,11 +3,11 @@ import React from 'react';
 // import { createStore } from 'redux';
 import 'normalize.css';
 import './styles/App.scss';
-import Navigation from './components/Navigation';
+import Routes from './components/Routes';
 
 function App() {
   return (
-    <Navigation />
+    <Routes />
   );
 }
 

@@ -13,7 +13,7 @@ import Features from '../pages/Features';
 import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
 
-const Navigation = () => (
+const Routes = () => (
   <Router history={browserHistory}>
     <div>
       <NavBar />
@@ -30,4 +30,4 @@ const Navigation = () => (
     </div>
   </Router>
 );
-export default Navigation;
+export default Routes;
