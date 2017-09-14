@@ -46,8 +46,8 @@ const Welcome = () => (
         <blockquote className="blockquote">
           {`
             Thank you for joining the Lexsury beta release. We are so excited to share our creation with you!
-            Our vision is a world in which all presenters have all of the best tools conveniently at hand.
-            We want to strengthen the brief connection between presenters and speakers and provide more opportunities to build lasting partnerships.
+            Our vision is a world in which event organizers can have all of the best tools conveniently at hand.
+            We want to help you evolve the disconnected and brief connection between audiences and speakers and provide more opportunities to build lasting partnerships.
             We thank you again for helping to make this vision a reality.
             If you'd like to provide feedback or have any concerns / questions we would love to hear from you.
           `}
