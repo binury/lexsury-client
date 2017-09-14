@@ -1,47 +1,61 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const axios = require('axios');
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
-class Rooms extends React.Component {
+class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rooms: [],
+      profile: [],
       isLoading: false,
     };
   }
   componentDidMount() {
-    this.fetchRooms();
+    this.fetchProfile();
   }
-  fetchRooms() {
+  fetchProfile() {
     this.setState({ isLoading: true });
     axios({
       method: 'get',
-      url: `${URL}/room`,
+      url: `${URL}/user`,
       timeout: 20000,
       responseType: 'json',
       headers: {
         Authorization: window.localStorage.getItem('LEXSECRET'),
       },
-    }).then((newRooms) => {
+    }).then((profile) => {
+      console.log(profile.data.data[0]);
       this.setState({
         isLoading: false,
-        rooms: newRooms.data.data,
+        profile: profile.data.data[0],
       });
     });
   }
   render() {
     if (this.state.isLoading) {
-      return <p>{"You haven't created any rooms yet"}</p>;
+      return <p>{'…'}</p>;
     }
-    // TODO: Change interactivity if room has expired
     return (
-      <ul>{this.state.rooms.map(room => <li key={room.id}> <Link to={`/room/${room.name}`}>{room.name}</Link> </li>)}</ul>
+      <ul>
+        <li>
+          Email: {this.state.profile.email}
+        </li>
+        <li>
+          Handle: {this.state.profile.displayName}
+        </li>
+        <li>
+          First Name: {this.state.profile.firstName}
+        </li>
+        <li>
+          Last Name: {this.state.profile.lastName}
+        </li>
+      </ul>
     );
   }
 }
-export default Rooms;
+export default Profile;
+

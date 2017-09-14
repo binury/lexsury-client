@@ -302,6 +302,12 @@ $shape-count: 8;
   background: lightgray;
 }
 
+#dashboard {
+  ul {
+    list-style: none;
+  }
+}
+
 //////////////////////////
 //  Bootstrap Overrides //
 //////////////////////////

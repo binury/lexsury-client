@@ -22,7 +22,6 @@ const liStyle = {
 };
 
 // TODO: Redirect to anon user here?
-// TODO: Fullscreen button
 const LexRoom = ({ match }) => {
   const roomName = match.params.name;
   const sock = new Socket(window.localStorage.getItem('LEXSECRET'), roomName);
