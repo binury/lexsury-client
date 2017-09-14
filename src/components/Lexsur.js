@@ -95,7 +95,9 @@ class Lex extends React.Component {
   }
 
   render() {
-    if (!localStorage.LEXSECRET) return <h1>Unauthorized</h1>; // TODO Redirect to home
+    if (!localStorage.LEXSECRET) {
+      window.location.assign('/signup');
+    }
     return (
       <div>
         <ArrowMaximize
