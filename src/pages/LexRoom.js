@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, Link, MemoryRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Container } from 'reactstrap';
 
 import Socket from '../Socket';
 import Lexsur from '../components/Lexsur';
@@ -9,6 +10,8 @@ import Admin from '../components/Admin'; // TODO: Not yet implemented
 import Presentation from '../components/Presentation';
 import QuestionForm from '../components/QuestionForm';
 import QuestionList from '../components/QuestionList';
+import RoomJoinButton from '../components/RoomCreateButton';
+import RoomJoinForm from '../components/RoomJoinForm';
 
 const navStyle = {
   display: 'flex',
@@ -26,6 +29,16 @@ const LexRoom = ({ match }) => {
   const roomName = match.params.name;
   const sock = new Socket(window.localStorage.getItem('LEXSECRET'), roomName);
 
+  if (!roomName) {
+    return (
+      <Container>
+        <p className="lead">
+          Enter the three-word-phrase provided by your presenter
+        </p>
+        <RoomJoinForm />
+      </Container>
+    );
+  }
   const sockedLex = () => (
     <Lexsur sock={sock} />
   );

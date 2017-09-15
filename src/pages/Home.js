@@ -38,7 +38,7 @@ function Home() {
             <hr id="or-hr" />
             <div id="or">or</div>
           </Col>
-          <Col xs={8} sm={8} md={8} lg={4}>
+          <Col xs={10} sm={8} md={8} lg={4}>
             <RoomJoinForm />
           </Col>
         </Row>

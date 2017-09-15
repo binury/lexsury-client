@@ -1,18 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input } from 'reactstrap';
 
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
-
-// TODO: Move to bootstrap form
-const formStyle = {
-  display: 'flex',
-  fontSize: '1.5rem',
-  justifyContent: 'center',
-  flexDirection: 'column',
-};
 
 class RoomJoinForm extends React.Component {
   constructor(props) {
@@ -60,63 +52,75 @@ class RoomJoinForm extends React.Component {
 
   render() {
     return (
-      <form
-        style={formStyle}
-        onSubmit={this.handleSubmit}
-        encType="application/json"
-      >
-        <InputGroup>
-          <label htmlFor="code-1" hidden>Code 1</label>
-          <Input
-            type="text"
-            id="code-1"
-            inputMode="verbatim"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            name="word1"
-            value={this.state.word1}
-            onChange={this.handleChange}
-            placeholder="Room"
-            required // TODO Validation
-          />
-          <label htmlFor="code-2" hidden>Code 2</label>
-          <Input
-            type="text"
-            id="code-2"
-            inputMode="verbatim"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            name="word2"
-            value={this.state.word2}
-            onChange={this.handleChange}
-            placeholder="Code"
-            required // TODO Validation
-          />
-          <label htmlFor="code-3" hidden>Code 3</label>
-          <Input
-            type="text"
-            id="code-3"
-            inputMode="verbatim"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            name="word3"
-            value={this.state.word3}
-            onChange={this.handleChange}
-            placeholder="Words"
-            required // TODO Validation
-          />
-        </InputGroup>
-        <Button
-          color="dark"
-          size="lg"
-        >Join in</Button>
-      </form>
+      <Container>
+        <Form
+          onSubmit={this.handleSubmit}
+          encType="application/json"
+        >
+          <FormGroup row class="align-items-center" id="room-phrase">
+            <Col>
+              <label htmlFor="code-1" hidden>Code 1</label>
+              <Input
+                type="text"
+                id="code-1"
+                inputMode="verbatim"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                name="word1"
+                value={this.state.word1}
+                onChange={this.handleChange}
+                placeholder="Secret"
+                required
+              />
+            </Col>
+            <Col>
+              <label htmlFor="code-2" hidden>Code 2</label>
+              <Input
+                type="text"
+                id="code-2"
+                inputMode="verbatim"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                name="word2"
+                value={this.state.word2}
+                onChange={this.handleChange}
+                placeholder="Room"
+                required
+              />
+            </Col>
+            <Col>
+              <label htmlFor="code-3" hidden>Code 3</label>
+              <Input
+                type="text"
+                id="code-3"
+                inputMode="verbatim"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                name="word3"
+                value={this.state.word3}
+                onChange={this.handleChange}
+                placeholder="Phrase"
+                required
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row class="align-items-center">
+            <Col>
+              <Button
+                color="dark"
+                size="lg"
+                block
+              >Join in</Button>
+            </Col>
+          </FormGroup>
+        </Form>
+      </Container>
     );
   }
 }

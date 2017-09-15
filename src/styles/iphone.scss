@@ -6,7 +6,7 @@ $iphone-perspective-visual-color: #D2D7D8;
 $iphone-earphone-color: #5C5C5C;
 
 .iphone {
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 768px) {
     & {
       display: none;
     }
