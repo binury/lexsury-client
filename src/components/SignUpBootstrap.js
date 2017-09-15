@@ -73,7 +73,9 @@ export default class SignUpBootstrap extends React.Component {
 
   render() {
     return (
-      <Container class="col-xs-10 col-sm-8 col-md-8 col-lg-9 col-xl-9">
+      <Container
+        class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 justify-content-center"
+      >
       <Form
         onSubmit={this.handleSubmit}
         encType="application/json"
@@ -97,12 +99,12 @@ export default class SignUpBootstrap extends React.Component {
           <Input
             type="text"
             name="displayName"
-            placeholder="username"
+            placeholder="Username"
             value={this.state.displayName}
             onChange={this.handleChange}
           />
           </Col>
-          <FormText class="col-md-6" color="muted">
+          <FormText class="col-md-8" color="muted">
             Displayed alongside your submissions.
           </FormText>
         </FormGroup>
@@ -114,7 +116,7 @@ export default class SignUpBootstrap extends React.Component {
               type="email"
               name="email"
               id="email"
-              placeholder="email"
+              placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
               required
@@ -132,7 +134,7 @@ export default class SignUpBootstrap extends React.Component {
               type="password"
               name="password"
               id="password"
-              placeholder="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
               required
@@ -170,7 +172,7 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Col sm={{ size: 10, offset: 2 }}>
+          <Col class="col-auto">
             <Button size="lg" color="dark" block>Submit</Button>
           </Col>
         </FormGroup>
