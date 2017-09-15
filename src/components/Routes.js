@@ -21,7 +21,7 @@ const Routes = () => (
       <hr />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />
-      <Route path="/room/:name" component={LexRoom} />
+      <Route path="/lxr/:name" component={LexRoom} />
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
       <Route path="/signup" component={SignUp} />

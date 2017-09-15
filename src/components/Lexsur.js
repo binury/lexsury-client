@@ -2,9 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
+import { QRCode } from 'react-qr-svg';
+import { Container } from 'reactstrap';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
+import Login from './Login';
 
 /////////////////////////////////
 ////////////.FLAGS.//////////////
@@ -15,7 +18,7 @@ const NOTIFICATIONS_ENABLED = false;
 const joinBadgeStyle = {
   backgroundColor: '#FFF',
   position: 'fixed',
-  bottom: 0,
+  bottom: '20%',
   left: 0,
   zIndex: 999,
 };
@@ -96,7 +99,14 @@ class Lex extends React.Component {
 
   render() {
     if (!localStorage.LEXSECRET) {
-      window.location.assign('/signup');
+      return (
+        <Container>
+          <p className="lead">
+            Please register or sign-in to join the Lexsur
+          </p>
+          <Login redirect={window.location.href} />
+        </Container>
+      );
     }
     return (
       <div>
@@ -117,13 +127,28 @@ class Lex extends React.Component {
           sock={this.state.socket}
           roomName={this.state.roomName}
         />
-        <div
+        <Container
           id="join-badge"
           style={joinBadgeStyle}
-          className="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+          className="d-none d-sm-none d-md-inline d-lg-inline d-xl-inline col-sm-4"
         >
-          Join in @ lxsr.us/{this.state.roomName}
-        </div>
+          <QRCode
+            bgColor="#FFFFFF"
+            fgColor="#000000"
+            level="Q"
+            style={{ width: '150px' }}
+            value={`http://lxsr.us/${this.state.roomName}`}
+          />
+          <p className="lead">
+            Join in on your devices
+          </p>
+          <p className="lead">
+            www.lxsr.us
+          </p>
+          <p className="lead">
+            {this.state.roomName.split(',').join(' ')}
+          </p>
+        </Container>
       </div>
     );
   }

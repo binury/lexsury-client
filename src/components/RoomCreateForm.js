@@ -39,7 +39,7 @@ class RoomCreateForm extends React.Component {
       headers: { Authorization: token },
     })
     // eslint-disable-next-line no-return-assign
-      .then(res => window.location = `/room/${res.data.name}`)
+      .then(res => window.location = `/lxr/${res.data.name}`)
       .catch(err => console.log(`There was an error: ${err}`));
   }
 

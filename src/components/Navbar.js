@@ -50,7 +50,7 @@ export default class NavBar extends React.Component {
               <NavItem hidden>
                 <Link class="nav-link" to="/pricing">Pricing</Link>
               </NavItem>
-              <NavItem>
+              <NavItem hidden>
                 <Link class="nav-link" to="/features">Features</Link>
               </NavItem>
               <NavItem>

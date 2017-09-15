@@ -73,7 +73,7 @@ export default class SignUpBootstrap extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container class="col-xs-10 col-sm-8 col-md-8 col-lg-9 col-xl-9">
       <Form
         onSubmit={this.handleSubmit}
         encType="application/json"
@@ -92,54 +92,55 @@ export default class SignUpBootstrap extends React.Component {
         </FormGroup>
 
         <FormGroup row>
-          <Label htmlFor="displayName" sm={2}>Handle</Label>
+          <Label htmlFor="displayName" sm={2} hidden>Handle</Label>
           <Col sm={8}>
           <Input
             type="text"
             name="displayName"
-            placeholder="Saint John Szechuan"
+            placeholder="username"
             value={this.state.displayName}
             onChange={this.handleChange}
           />
           </Col>
           <FormText class="col-md-6" color="muted">
-            Pick a name. Any name! You can pick one later, too.
+            Displayed alongside your submissions.
           </FormText>
         </FormGroup>
 
         <FormGroup row>
-          <Label for="email" sm={2}>Email *</Label>
+          <Label for="email" sm={2} hidden>Email *</Label>
           <Col sm={8}>
             <Input
               type="email"
               name="email"
               id="email"
-              placeholder="wubalub@dub.dub"
+              placeholder="email"
               value={this.state.email}
               onChange={this.handleChange}
               required
             />
           </Col>
-          <FormText class="col-md-6" color="muted">
-            Your privacy is important to us. No unsolicited emails. Ever.
+          <FormText class="col-md-8" color="muted">
+            We value privacy. No unsolicited emails. Ever.
           </FormText>
         </FormGroup>
 
-        <FormGroup row>
-          <Label for="password" sm={2}>Password *</Label>
+        <FormGroup row shape={{ size: 'auto' }}>
+          <Label for="password" sm={2} hidden>Password *</Label>
           <Col sm={8}>
             <Input
               type="password"
               name="password"
               id="password"
+              placeholder="password"
               value={this.state.password}
               onChange={this.handleChange}
               required
             />
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Label for="bio" sm={2}>Bio</Label>
+        <FormGroup row hidden>
+          <Label for="bio" sm={2} hidden>Bio</Label>
           <Col sm={8}>
             <Input
               type="textarea"
@@ -151,8 +152,8 @@ export default class SignUpBootstrap extends React.Component {
             />
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Label for="optin" sm={2}>Email updates</Label>
+        <FormGroup row hidden>
+          <Label for="optin" sm={2} hidden>Email updates</Label>
           <Col sm={{ size: 10 }}>
             <FormGroup check>
               <Label check>

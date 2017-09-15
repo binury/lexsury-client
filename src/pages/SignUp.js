@@ -6,6 +6,8 @@ import SignUpBootstrap from '../components/SignUpBootstrap';
 
 // const responseFacebook = (response) => { console.log(response); };
 
+// TODO: Add terms and conditions link
+// TODO: This form should be designed with event organizers in mind
 
 const SignUp = () => (
   <Container id="signupcontainer">

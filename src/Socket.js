@@ -6,7 +6,7 @@ const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : '
 class Socket {
   constructor(token, ns = '') {
     // ns: room.name && token: jwt authentication
-    this.io = io(`${URL}/${ns}`, { query: `token=${token}` });
+    this.io = io(`${URL}/${ns.split(',').join('')}`, { query: `token=${token}` });
     this.id = this.io.id;
     // Bindings allow usage in exported environment
     this.initSocket = this.initSocket.bind(this);

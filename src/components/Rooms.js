@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const axios = require('axios');
+const decode = require('jwt-decode');
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -18,14 +19,16 @@ class Rooms extends React.Component {
     this.fetchRooms();
   }
   fetchRooms() {
+    const token = window.localStorage.getItem('LEXSECRET');
+    const claims = decode(token);
     this.setState({ isLoading: true });
     axios({
       method: 'get',
-      url: `${URL}/room`,
+      url: `${URL}/room?creatorId=${claims.userId}`,
       timeout: 20000,
       responseType: 'json',
       headers: {
-        Authorization: window.localStorage.getItem('LEXSECRET'),
+        Authorization: token,
       },
     }).then((newRooms) => {
       this.setState({
@@ -40,7 +43,7 @@ class Rooms extends React.Component {
     }
     // TODO: Change interactivity if room has expired
     return (
-      <ul>{this.state.rooms.map(room => <li key={room.id}> <Link to={`/room/${room.name}`}>{room.name}</Link> </li>)}</ul>
+      <ul>{this.state.rooms.map(room => <li key={room.id}> <Link to={`/lxr/${room.name}`}>{room.name}</Link> </li>)}</ul>
     );
   }
 }

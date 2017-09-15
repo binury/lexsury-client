@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Button, Input, InputGroup } from 'reactstrap';
 
 
 // Client development server runs on different port than actual backend server
@@ -18,7 +18,9 @@ class RoomJoinForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomname: '',
+      word1: '',
+      word2: '',
+      word3: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,13 +30,14 @@ class RoomJoinForm extends React.Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value,
+      [name]: value.toLowerCase(),
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    window.location = `/room/${this.state.roomname}`;
+    const roomname = Object.values(this.state).join(',');
+    window.location = `/lxr/${roomname}`;
     /*
      CURRENTLY DISABLED
          We let the user join the room they entered and hope for the best
@@ -43,12 +46,12 @@ class RoomJoinForm extends React.Component {
     */
     axios({
       method: 'get',
-      url: `${URL}/room?name=${this.state.roomname}`,
+      url: `${URL}/room?name=${roomname}`,
       timeout: 5000,
       responseType: 'json',
     })
     .then((roomData) => {
-      if (roomData.data.total !== 0) { window.location = `/room/${this.state.roomname}`; }
+      if (roomData.data.total !== 0) { window.location = `/lxr/${roomname}`; }
     })
     .catch(err => console.error(err));
   }
@@ -63,20 +66,56 @@ class RoomJoinForm extends React.Component {
         encType="application/json"
       >
         <InputGroup>
-          <InputGroupAddon>#</InputGroupAddon>
+          <label htmlFor="code-1" hidden>Code 1</label>
           <Input
             type="text"
-            name="roomname"
-            value={this.state.roomname}
+            id="code-1"
+            inputMode="verbatim"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            name="word1"
+            value={this.state.word1}
+            onChange={this.handleChange}
+            placeholder="Room"
+            required // TODO Validation
+          />
+          <label htmlFor="code-2" hidden>Code 2</label>
+          <Input
+            type="text"
+            id="code-2"
+            inputMode="verbatim"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            name="word2"
+            value={this.state.word2}
             onChange={this.handleChange}
             placeholder="Code"
+            required // TODO Validation
+          />
+          <label htmlFor="code-3" hidden>Code 3</label>
+          <Input
+            type="text"
+            id="code-3"
+            inputMode="verbatim"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            name="word3"
+            value={this.state.word3}
+            onChange={this.handleChange}
+            placeholder="Words"
             required // TODO Validation
           />
         </InputGroup>
         <Button
           color="dark"
           size="lg"
-        >Join In</Button>
+        >Join in</Button>
       </form>
     );
   }

@@ -84,7 +84,7 @@ hr {
   flex-direction: column;
   list-style: none;
   align-items: flex-end;
-  @media (max-width: 650px) {
+  @media (max-width: 768px) {
     align-items: unset;
   }
 }
@@ -315,4 +315,11 @@ $shape-count: 8;
   border-color: #FFF;
 }
 
+input.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: unset;
+  padding-left: 0.1em;
+}
 

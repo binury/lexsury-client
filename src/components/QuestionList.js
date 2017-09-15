@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Button, Container } from 'reactstrap';
+import { QRCode } from 'react-qr-svg';
 import VoteButton from './VoteButton';
 import * as Avatar from '../assets/avatars';
 import Shapes from './Shapes';
@@ -43,11 +44,13 @@ export default class QuestionList extends Component {
         <Container class="text-align-center">
           <Shapes />
           <i className="iphone">
-            <Container id="mobile-badge" class="text-align-center">
-              <p>Join the presentation @</p>
-              <p>lxsr.us/</p>
-              <p>{`${this.state.roomName}`}</p>
-            </Container>
+            <QRCode
+              bgColor="#343A3F"
+              fgColor="#FFF"
+              level="Q"
+              style={{ width: '80%', marginLeft: '0.85em' }}
+              value={`http://lxsr.us/${this.state.roomName}`}
+            />
           </i>
         </Container>
       );

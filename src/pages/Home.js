@@ -31,7 +31,7 @@ function Home() {
         </Row>
         <p id="clickprompt">{}</p>
         <Row class="justify-content-center align-items-center">
-          <Col xs={8} sm={8} md={8} lg={4}>
+          <Col xs={10} sm={8} md={8} lg={4}>
             <RoomCreateButton buttonLabel={'Start your Lexsur'} />
           </Col>
           <Col xs={5} sm={5} md={5} lg={4} id="or-container">
