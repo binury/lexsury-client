@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import Axios from 'axios';
-import Crypto from 'crypto';
+import { randomBytes } from 'crypto';
 import {
   Col, Button, Form, FormGroup, Label, Input, FormText,
   Container,
@@ -78,8 +78,8 @@ export default class SignUpBootstrap extends React.Component {
       Object.assign(payload, {
         // Could cause issues if an email conflict occurred
         displayName: 'Guest',
-        email: `${Crypto.randomBytes(5).toString('hex')}@lxr.io`,
-        password: Crypto.randomBytes(8).toString('hex'),
+        email: `${randomBytes(5).toString('hex')}@lxr.io`,
+        password: randomBytes(8).toString('hex'),
       });
     }
     Axios.post(`${URL}/user`, payload).then(() => {

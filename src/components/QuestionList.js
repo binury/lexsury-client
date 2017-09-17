@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import { format, isBefore } from 'date-fns';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Button, Container } from 'reactstrap';
 import { QRCode } from 'react-qr-svg';
@@ -55,7 +55,7 @@ export default class QuestionList extends Component {
         </Container>
       );
     }
-    const sortDate = (x, y) => moment(y.date).isBefore(x.date) ? -1 : 1; // eslint-disable-line no-confusing-arrow
+    const sortDate = (x, y) => isBefore(new Date(y.date), new Date(x.date)) ? -1 : 1; // eslint-disable-line no-confusing-arrow
     const sortVotes = (x, y) => y.votes.length - x.votes.length;
     const questions = this.props.questions
       .sort(this.state.sortByDate ? sortDate : sortVotes)
@@ -66,7 +66,7 @@ export default class QuestionList extends Component {
               <img src={Avatar.ChillDude} width="150px" height="150px" alt="avatar" />
             </div>
             <p className="timestamps">
-              {moment(question.date).format('H:mm:ss')}
+              {format(new Date(question.date), 'H:mm:ss')}
             </p>
             <p>
               <span className="authors">{question.author}</span> asks:

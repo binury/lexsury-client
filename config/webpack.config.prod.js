@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -8,6 +9,8 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const WebpackBundleSizeAnalyzerPlugin = require(
+  'webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -210,6 +213,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new WebpackBundleSizeAnalyzerPlugin(`${fs.realpathSync(process.cwd())}/log/webpack-analysis.txt`),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -238,6 +242,8 @@ module.exports = {
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
+    // Merge chunks
+    new webpack.optimize.AggressiveMergingPlugin(),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
