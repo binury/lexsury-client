@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Container } from 'reactstrap';
 import Rooms from '../components/Rooms';
 import Profile from '../components/Profile';
+import { checkAndPurgeGuestToken } from '../helpers';
 
 const Dashboard = () => {
   const token = window.localStorage.getItem('LEXSECRET');
@@ -9,6 +10,7 @@ const Dashboard = () => {
     window.location.assign('/signup'); // TODO: This shouldn't reload the page
     return null;
   }
+  if (checkAndPurgeGuestToken()) return null;
   return (
     <Container id="dashboard">
       <Col id="db-rooms">

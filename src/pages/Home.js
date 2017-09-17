@@ -6,6 +6,7 @@ import RoomJoinForm from '../components/RoomJoinForm';
 import Shapes from '../components/Shapes';
 import HomeHeader from '../components/HomeHeader';
 import HomeAbout from '../components/HomeAbout';
+import { checkAndPurgeGuestToken } from '../helpers';
 
 // Just for funs :)
 const prompts = [
@@ -19,6 +20,7 @@ const randomPrompt = prompts[Math.floor(Math.random() * 3)]; // eslint-disable-l
 // TODO ---OR--- seperator
 
 function Home() {
+  if (checkAndPurgeGuestToken()) return null;
   return (
     <Container>
       <Container

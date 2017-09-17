@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import Axios from 'axios';
+import Crypto from 'crypto';
 import {
   Col, Button, Form, FormGroup, Label, Input, FormText,
   Container,
@@ -24,10 +25,24 @@ export default class SignUpBootstrap extends React.Component {
       password: '',
       bio: '',
       optin: true,
+      inviteCode: '',
+      originIsInvite: false,
       emailValid: false,
+      redirect: this.props.redirect || '/welcome', // TODO: Props val
+      quick: this.props.quick || false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('invite_code')) {
+      this.setState({
+        inviteCode: urlParams.get('invite_code'),
+      });
+    }
   }
 
   handleChange(event) {
@@ -50,7 +65,7 @@ export default class SignUpBootstrap extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    if (typeof event !== 'undefined') event.preventDefault();
     const payload = {
       // TODO: Maybe just trim as needed and pass state object?
       displayName: ( this.state.displayName.trim() || 'Anonymous' ),
@@ -59,6 +74,14 @@ export default class SignUpBootstrap extends React.Component {
       bio: this.state.bio,
       optin: this.state.optin,
     };
+    if (this.state.quick) {
+      Object.assign(payload, {
+        // Could cause issues if an email conflict occurred
+        displayName: 'Guest',
+        email: `${Crypto.randomBytes(5).toString('hex')}@lxr.io`,
+        password: Crypto.randomBytes(8).toString('hex'),
+      });
+    }
     Axios.post(`${URL}/user`, payload).then(() => {
       Axios.post(
         `${URL}/authentication`,
@@ -66,19 +89,28 @@ export default class SignUpBootstrap extends React.Component {
         )).then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       }).then(() => {
-        window.location.assign('/welcome');
+        window.location = this.state.redirect;
       });
     }).catch(err => console.error(err));
+  }
+
+  componentDidMount() {
+    if (this.state.quick) this.handleSubmit();
   }
 
   render() {
     return (
       <Container
-        class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 justify-content-center"
+        class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 justify-content-center"
+        fluid
       >
+        <p className="lead" hidden={!this.state.quick}>
+          Determining shortest hyperspace route to your event's Lexsur…
+        </p>
       <Form
         onSubmit={this.handleSubmit}
         encType="application/json"
+        hidden={this.state.quick}
       >
         <FormGroup class={OAUTH_ENABLE ? 'd-inline' : 'd-none'} row>
           <Col sm="6">
@@ -119,10 +151,13 @@ export default class SignUpBootstrap extends React.Component {
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
-              required
+              required={!this.state.quick}
             />
           </Col>
-          <FormText class="col-md-8" color="muted">
+          <FormText
+            class="col-md-8"
+            color="muted"
+          >
             We value privacy. No unsolicited emails. Ever.
           </FormText>
         </FormGroup>
@@ -137,7 +172,7 @@ export default class SignUpBootstrap extends React.Component {
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
-              required
+              required={!this.state.quick}
             />
           </Col>
         </FormGroup>
@@ -171,7 +206,8 @@ export default class SignUpBootstrap extends React.Component {
             </FormGroup>
           </Col>
         </FormGroup>
-        <FormGroup row>
+        <FormGroup row
+        >
           <Col class="col-auto">
             <Button size="lg" color="dark" block>Submit</Button>
           </Col>

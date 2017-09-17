@@ -1,19 +1,114 @@
-/* eslint-disable spaced-comment */
+/* eslint-disable spaced-comment,react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
 import { QRCode } from 'react-qr-svg';
-import { Container } from 'reactstrap';
+import {
+  Button,
+  Col, Container, Modal, ModalBody, ModalFooter,
+  ModalHeader,
+} from 'reactstrap';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
-import Login from './Login';
+import SignUpBootstrap from './SignUpBootstrap';
+// import SignUpBootstrap from './SignUpBootstrap';
+// import Login from './Login';
 
 /////////////////////////////////
 ////////////.FLAGS.//////////////
 /////////////////////////////////
 const NOTIFICATIONS_ENABLED = false;
 /////////////////////////////////
+
+class AuthModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      signUp: false,
+      guest: false,
+    };
+    this.toggle = this.toggle.bind(this);
+    this.toggleSignUp = this.toggleSignUp.bind(this);
+    this.toggleGuest = this.toggleGuest.bind(this);
+  }
+
+  componentDidMount() {
+    const token = window.localStorage.getItem('LEXSECRET');
+    if (!token) this.toggle();
+  }
+
+  toggle() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+  toggleSignUp() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      signUp: !this.state.signUp,
+    });
+  }
+  toggleGuest() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      guest: !this.state.guest,
+    });
+  }
+
+  render() {
+    return (
+      <Container>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalHeader toggle={this.toggle}>Join the event</ModalHeader>
+          <ModalBody class="d-flex justify-content-center">
+            <Button
+              color="primary"
+              onClick={this.toggleSignUp}
+            >Create your profile</Button>
+            <Modal
+              isOpen={this.state.signUp}
+              toggle={this.toggleSignUp}
+            >
+              <ModalBody>
+                <Container fluid>
+                  <SignUpBootstrap redirect={window.location.href} />
+                </Container>
+              </ModalBody>
+            </Modal>
+            <Col xs={1} sm={2} md={3} lg={4} id="or-container" style={{ paddingBottom: '0.5em' }}>
+              <hr id="or-hr" />
+              <div id="or">or</div>
+            </Col>
+            <Button
+              color="secondary"
+              onClick={this.toggleGuest}
+            >Join as guest</Button>
+            <Modal
+              isOpen={this.state.guest}
+              toggle={this.guest}
+            >
+              <ModalBody>
+                <Container fluid>
+                  <SignUpBootstrap redirect={window.location.href} quick />
+                </Container>
+              </ModalBody>
+            </Modal>
+          </ModalBody>
+          <ModalFooter hidden>
+            #EIGHT_TOES
+          </ModalFooter>
+        </Modal>
+      </Container>
+    );
+  }
+}
 
 const joinBadgeStyle = {
   backgroundColor: '#FFF',
@@ -98,16 +193,7 @@ class Lex extends React.Component {
   }
 
   render() {
-    if (!localStorage.LEXSECRET) {
-      return (
-        <Container>
-          <p className="lead">
-            Please register or sign-in to join the Lexsur
-          </p>
-          <Login redirect={window.location.href} />
-        </Container>
-      );
-    }
+    if (!localStorage.LEXSECRET) return <AuthModal />;
     return (
       <div>
         <ArrowMaximize
