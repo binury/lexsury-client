@@ -3,8 +3,7 @@ import React from 'react';
 import Axios from 'axios';
 import { randomBytes } from 'crypto';
 import {
-  Col, Button, Form, FormGroup, Label, Input, FormText,
-  Container,
+  Col, Button, Form, FormGroup, Label, Input, FormText, Container, Alert,
 } from 'reactstrap';
 
 /////////////////////////////////
@@ -25,23 +24,23 @@ export default class SignUpBootstrap extends React.Component {
       password: '',
       bio: '',
       optin: true,
-      inviteCode: '',
+      code: '',
       originIsInvite: false,
       emailValid: false,
       redirect: this.props.redirect || '/welcome', // TODO: Props val
-      quick: this.props.quick || false
+      quick: this.props.quick || false,
+      errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
+  componentWillMount() {
+    const urlParams = new window.URLSearchParams(window.location.search);
     if (urlParams.has('invite_code')) {
-      this.setState({
-        inviteCode: urlParams.get('invite_code'),
-      });
+      const code = urlParams.get('invite_code');
+      this.setState({ code, originIsInvite: true });
     }
   }
 
@@ -73,7 +72,9 @@ export default class SignUpBootstrap extends React.Component {
       password: this.state.password,
       bio: this.state.bio,
       optin: this.state.optin,
+      code: this.state.code,
     };
+    // Guest form will use random defaults
     if (this.state.quick) {
       Object.assign(payload, {
         // Could cause issues if an email conflict occurred
@@ -125,6 +126,27 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
 
+        <FormGroup
+          row
+          hidden={this.state.quick}
+        >
+          <p>
+          {`Lexsury is set to launch January 2018.
+          We know we can make a first impression only once, and want to be sure everything is ready before we blast off.
+          In the meantime we still want to hear your feedback, so we have opened speaker registration to invited beta users.
+          You may contact us to request an invitation.`}
+          </p>
+        </FormGroup>
+
+        <FormGroup
+          row
+          hidden={this.state.errors.length === 0}
+        >
+          <Alert class="col-md-8" color="warning">
+            {this.state.errors.map(error => <strong>{error}</strong>)}
+          </Alert>
+        </FormGroup>
+
         <FormGroup row>
           <Label htmlFor="displayName" sm={2} hidden>Handle</Label>
           <Col sm={8}>
@@ -148,7 +170,7 @@ export default class SignUpBootstrap extends React.Component {
               type="email"
               name="email"
               id="email"
-              placeholder="Email"
+              placeholder="Email *"
               value={this.state.email}
               onChange={this.handleChange}
               required={!this.state.quick}
@@ -169,13 +191,30 @@ export default class SignUpBootstrap extends React.Component {
               type="password"
               name="password"
               id="password"
-              placeholder="Password"
+              placeholder="Password *"
               value={this.state.password}
               onChange={this.handleChange}
               required={!this.state.quick}
             />
           </Col>
         </FormGroup>
+
+        <FormGroup row shape={{ size: 'auto' }}>
+          <Label for="code" sm={2} hidden>Beta Key *</Label>
+          <Col xs={5}>
+            <Input
+              type="text"
+              name="code"
+              id="code"
+              placeholder="Beta Invite Key *"
+              value={this.state.code}
+              onChange={this.handleChange}
+              required={!this.state.quick}
+              hidden={this.state.originIsInvite}
+            />
+          </Col>
+        </FormGroup>
+
         <FormGroup row hidden>
           <Label for="bio" sm={2} hidden>Bio</Label>
           <Col sm={8}>
@@ -189,6 +228,7 @@ export default class SignUpBootstrap extends React.Component {
             />
           </Col>
         </FormGroup>
+
         <FormGroup row hidden>
           <Label for="optin" sm={2} hidden>Email updates</Label>
           <Col sm={{ size: 10 }}>
@@ -206,6 +246,7 @@ export default class SignUpBootstrap extends React.Component {
             </FormGroup>
           </Col>
         </FormGroup>
+
         <FormGroup row
         >
           <Col class="col-auto">

@@ -320,6 +320,17 @@ input.form-control {
   border-left: none;
   border-right: none;
   border-radius: unset;
+  &:placeholder-shown {
+    font-family: 'Lato';
+  }
+}
+
+.form-text {
+  padding-left: 1.25rem;
+}
+
+.alert {
+  text-transform: capitalize;
 }
 
 #room-phrase > div.col {
