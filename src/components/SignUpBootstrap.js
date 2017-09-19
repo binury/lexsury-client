@@ -92,12 +92,39 @@ export default class SignUpBootstrap extends React.Component {
       }).then(() => {
         window.location = this.state.redirect;
       });
-    }).catch(err => console.error(err));
+    }).catch(error => {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        if (error.response.data.errors) {
+          this.setState({ errors: error.response.data.errors.map(error => error.message) });
+          console.log(error.response.data);
+        }
+        if (process.env.NODE_ENV === 'development') {
+          console.log(Object.values(error.response.data.errors));
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      }
+      else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest
+        // http.ClientRequest in node.js
+        if (process.env.NODE_ENV === 'development') console.log(error.request);
+        //this.setState({ error: 'something went wrong. wait a moment then retry.' });
+      }
+      else {
+        // Something happened in setting up the request that triggered an Error
+        if (process.env.NODE_ENV === 'development') console.log('Error', error.message);
+      }
+      if (process.env.NODE_ENV === 'development') console.log(error.config);
+    });
   }
 
   componentDidMount() {
     if (this.state.quick) this.handleSubmit();
   }
+
 
   render() {
     return (
@@ -105,14 +132,17 @@ export default class SignUpBootstrap extends React.Component {
         class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 justify-content-center"
         fluid
       >
+
         <p className="lead" hidden={!this.state.quick}>
           Determining shortest hyperspace route to your event's Lexsur…
         </p>
+
       <Form
         onSubmit={this.handleSubmit}
         encType="application/json"
         hidden={this.state.quick}
       >
+
         <FormGroup class={OAUTH_ENABLE ? 'd-inline' : 'd-none'} row>
           <Col sm="6">
             <Button outline color="primary">
@@ -154,6 +184,7 @@ export default class SignUpBootstrap extends React.Component {
             type="text"
             name="displayName"
             placeholder="Username"
+            maxLength={32}
             value={this.state.displayName}
             onChange={this.handleChange}
           />
@@ -171,6 +202,7 @@ export default class SignUpBootstrap extends React.Component {
               name="email"
               id="email"
               placeholder="Email *"
+              maxLength={128}
               value={this.state.email}
               onChange={this.handleChange}
               required={!this.state.quick}
@@ -192,6 +224,7 @@ export default class SignUpBootstrap extends React.Component {
               name="password"
               id="password"
               placeholder="Password *"
+              maxLength={128}
               value={this.state.password}
               onChange={this.handleChange}
               required={!this.state.quick}

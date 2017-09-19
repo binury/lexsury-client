@@ -64,6 +64,7 @@ class QuestionForm extends React.Component {
                 value={this.state.question}
                 onChange={this.handleChange}
                 placeholder="What would you like to ask?"
+                maxLength={255}
               />
             </Col>
           </FormGroup>
@@ -78,6 +79,7 @@ class QuestionForm extends React.Component {
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
                 placeholder="To whom should we attribute the question?"
+                maxLength={32}
               />
             </Col>
           </FormGroup>
