@@ -18,4 +18,4 @@ const checkAndPurgeGuestToken = () => {
   }
   return false;
 };
-export { checkAndPurgeGuestToken };
+export { getToken, checkAndPurgeGuestToken };

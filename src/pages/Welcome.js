@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Welcome = () => (
   <Container>
-    <Row center>
+    <Row>
       <Col shape={{ size: 'auto' }}>
         <h1 className="display-3" id="welcome">Welcome to Lexsury!</h1>
       </Col>
