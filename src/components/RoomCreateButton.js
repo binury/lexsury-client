@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
+import Proptypes from 'prop-types';
 import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter,
   Container,
@@ -47,7 +48,6 @@ class RoomJoinButton extends React.Component {
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
-          className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>Lets get started!</ModalHeader>
           <ModalBody>
@@ -61,4 +61,9 @@ class RoomJoinButton extends React.Component {
     );
   }
 }
+
+RoomJoinButton.propTypes = {
+  buttonLabel: Proptypes.string.isRequired,
+};
+
 export default RoomJoinButton;
