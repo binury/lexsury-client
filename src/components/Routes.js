@@ -18,7 +18,6 @@ const Routes = () => (
   <Router history={browserHistory}>
     <div>
       <NavBar />
-      <hr />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />
       <Route exact path="/lxr/" component={LexRoom} />

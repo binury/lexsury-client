@@ -110,7 +110,7 @@ class RoomJoinForm extends React.Component {
               />
             </Col>
           </FormGroup>
-          <FormGroup row class="align-items-center">
+          <FormGroup row class="align-items-center mb-0">
             <Col>
               <Button
                 color="dark"

@@ -40,9 +40,9 @@ class RoomJoinButton extends React.Component {
         <Button
           color="dark"
           size="lg"
-          outline
           onClick={this.toggle}
           block
+          class="mb-5 mb-sm-0"
         >{this.props.buttonLabel}</Button>
         <Modal
           isOpen={this.state.modal}

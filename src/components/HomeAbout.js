@@ -10,8 +10,8 @@ import Msg from 'react-icons/lib/ti/message-typing';
 import Msgs from 'react-icons/lib/ti/messages';
 
 const HomeAbout = () => (
-  <Container id="home-about" fluid>
-    <Row>
+  <Container id="about" fluid>
+    <Row class="justify-content-center">
       <h1 className="display-3" id="how">How it works</h1>
     </Row>
     <CardDeck>
@@ -22,7 +22,7 @@ const HomeAbout = () => (
           />
           <CardTitle>Create a new Lexsur</CardTitle>
           <CardText>
-            {`You'll need to create a free account first but once you do it's as easy as clicking the button above.`}
+            {`You'll need to create a free account first but once you do it's truly as easy as clicking the button above. You'll then be automatically taken directly into your own personal Lexsur.`}
           </CardText>
         </CardBlock>
       </Card>
@@ -33,7 +33,7 @@ const HomeAbout = () => (
           />
           <CardTitle>Users join on their devices</CardTitle>
           <CardText>
-            {`Look for the code to join your Lexsur on the right side. Have your audience visit that URL; it will look something like lxsr.us/XYZ123. While you are presenting, users are able to ask questions and show support for the questions of other audience members.`}
+            {`See those three words? That's your unique phrase to give the audience to join your new room. Visit lxsr.us or scan the QR code to join in. While you are presenting, users are able to ask questions and show support for the questions of other audience members.`}
           </CardText>
         </CardBlock>
       </Card>
@@ -43,7 +43,7 @@ const HomeAbout = () => (
         />
         <CardTitle>Connect with your audience</CardTitle>
         <CardText >
-          {`Once your presentation(s) are complete, you can address the audience's questions. This is your chance to shine! Use this time to solicit value feedback and build lasting connections.`}
+          {`Once your presentation is complete you can turn your focus to questions that were collected while you were speaking. This is your chance to shine! Use this time to solicit feedback and build lasting connections.`}
         </CardText>
       </Card>
     </CardDeck>
