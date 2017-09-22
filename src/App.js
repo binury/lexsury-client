@@ -4,8 +4,10 @@ import React from 'react';
 import 'normalize.css';
 import './styles/App.scss';
 import Routes from './components/Routes';
+import { checkAndStoreInvitation } from './helpers';
 
 function App() {
+  checkAndStoreInvitation();
   return (
     <Routes />
   );

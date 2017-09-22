@@ -18,4 +18,11 @@ const checkAndPurgeGuestToken = () => {
   }
   return false;
 };
-export { getToken, checkAndPurgeGuestToken };
+
+const checkAndStoreInvitation = () => {
+  const urlParams = new window.URLSearchParams(window.location.search);
+  if (urlParams.has('invite_code')) {
+    window.localStorage.setItem('invite_code', urlParams.get('invite_code'));
+  }
+};
+export { getToken, checkAndPurgeGuestToken, checkAndStoreInvitation };

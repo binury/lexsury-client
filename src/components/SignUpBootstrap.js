@@ -37,11 +37,8 @@ export default class SignUpBootstrap extends React.Component {
   }
 
   componentWillMount() {
-    const urlParams = new window.URLSearchParams(window.location.search);
-    if (urlParams.has('invite_code')) {
-      const code = urlParams.get('invite_code');
-      this.setState({ code, originIsInvite: true });
-    }
+    const code = localStorage.getItem('invite_code');
+    if (code) this.setState({ code, originIsInvite: true });
   }
 
   handleChange(event) {
@@ -90,9 +87,11 @@ export default class SignUpBootstrap extends React.Component {
         )).then((res) => {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       }).then(() => {
+        localStorage.removeItem('invite_code');
         window.location = this.state.redirect;
       });
     }).catch(error => {
+      // TODO: Refactor this for re-use
       if (error.response) {
         // The request was made and the server responded with a status code
         if (error.response.data.errors) {
