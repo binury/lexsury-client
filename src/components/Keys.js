@@ -113,29 +113,15 @@ class Keys extends React.Component {
     window.setTimeout(() => {
       console.log('Animation notificaiton');
       this.setState({
-        animationIsDone: true,
+        doneAnimating: true,
       });
-    }, 7000);
+    }, 6000);
   }
 
   render() {
-    if (this.state.isLoading) {
-      return <p>{'…'}</p>;
-    } else if (this.state.keys.length === 0) {
-      return (
-        <Container>
-          <Row center>
-            <h4>
-              Invitation Keys
-            </h4>
-          </Row>
-          <Button onClick={this.toggle} color="dark" outline>Generate</Button>
-          <p>No keys</p>
-        </Container>
-      );
-    }
+    if (this.state.isLoading) return <p>{'…'}</p>;
     return (
-      <Container fluid>
+      <Container style={{ paddingLeft: 0 }} fluid>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -147,7 +133,7 @@ class Keys extends React.Component {
             >
               <TreasureChest
                 activated={!!this.state.newKey}
-                isDone={this.state.animationIsDone}
+                isDone={this.state.doneAnimating}
               >
                 <Key
                   id="key"
@@ -157,7 +143,12 @@ class Keys extends React.Component {
               </TreasureChest>
             </Row>
             <Row className="no-gutters">
-              <InputGroup hidden={!this.state.newKeyURL}>
+              <InputGroup
+                style={{
+                  opacity: (this.state.doneAnimating ? 1 : 0),
+                  transition: 'opacity 1.5s ease-out',
+                }}
+              >
                 <Input
                   getRef={(input) => { this.keyBox = input; }}
                   value={this.state.newKeyURL}
@@ -194,20 +185,22 @@ class Keys extends React.Component {
           </Col>
         </Row>
         <ListGroup class="d-flex flex-wrap flex-md-row flex-sm-column">
-          {this.state.keys.map(key => (
-            <ListGroupItem
-              style={{ width: 'unset', border: 'none' }}
-              disabled={key.redeemed}
-            >
-              <Key
-                class="key-icons"
-                style={Object.assign({ border: '1px solid', color: key.code }, keyStyle)}
-              />
-              <span style={{ textDecoration: key.redeemed ? 'line-through' : 'none' }}>
-                {key.code}
-              </span>
-            </ListGroupItem>
-          ))}
+          {this.state.keys.length === 0 ?
+            (null) :
+            (this.state.keys.map(key => (
+              <ListGroupItem
+                style={{ width: 'unset', border: 'none' }}
+                disabled={key.redeemed}
+              >
+                <Key
+                  class="key-icons"
+                  style={Object.assign({ border: '1px solid', color: key.code }, keyStyle)}
+                />
+                <span style={{ textDecoration: key.redeemed ? 'line-through' : 'none' }}>
+                  {key.code}
+                </span>
+              </ListGroupItem>
+          )))}
         </ListGroup>
       </Container>
     );

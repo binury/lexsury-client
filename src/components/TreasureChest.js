@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'reactstrap';
 
 const TreasureChest = props => (
-  <Container id="treasurebox">
+  <Container id="treasurebox" hidden={!props.activated}>
     <input
       type="checkbox"
       id="top-checkbox"
