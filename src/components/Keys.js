@@ -49,13 +49,9 @@ class Keys extends React.Component {
   }
 
   focusUrlInput() {
-    console.log('Debugging.......');
     const field = this.keyBox;
     field.focus();
     field.setSelectionRange(0, field.value.length);
-    console.log(Object.entries(this.keyBox));
-    console.log(Object.entries(field));
-    console.log(`The URL is ${field.value}`);
     document.execCommand('copy');
   }
 
@@ -94,7 +90,8 @@ class Keys extends React.Component {
     }).then(key => this.setState({
       keys: (this.state.keys.concat(key.data)),
       newKey: key.data.code,
-      newKeyURL: `${URL}/?invite_code=${key.data.code}`,
+      // eslint-disable-next-line prefer-template
+      newKeyURL: `${window.location.protocol}//${window.location.host}/?invite_code=${key.data.code}`,
     })).catch((error) => {
       // TODO: Refactor this for re-use
       if (!error.response) return;
@@ -108,10 +105,7 @@ class Keys extends React.Component {
 
 // eslint-disable-next-line class-methods-use-this
   animationIsDone() {
-    console.log(this);
-    console.log('Animation done');
     window.setTimeout(() => {
-      console.log('Animation notificaiton');
       this.setState({
         doneAnimating: true,
       });
