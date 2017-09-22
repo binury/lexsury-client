@@ -53,6 +53,9 @@ class Profile extends React.Component {
         <li>
           Last Name: {this.state.profile.lastName}
         </li>
+        <li>
+          Invitations Remaining: {this.state.profile.invitations}
+        </li>
       </ul>
     );
   }
