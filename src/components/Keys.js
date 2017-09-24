@@ -30,9 +30,11 @@ class Keys extends React.Component {
       newKey: '',
       newKeyURL: '',
       doneAnimating: false,
+      shouldHide: true,
     };
     this.genKey = this.genKey.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.toggleHide = this.toggleHide.bind(this);
     this.focusUrlInput = this.focusUrlInput.bind(this);
     this.animationIsDone = this.animationIsDone.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -45,6 +47,12 @@ class Keys extends React.Component {
   toggle() {
     this.setState({
       modal: !this.state.modal,
+    });
+  }
+
+  toggleHide() {
+    this.setState({
+      shouldHide: !this.state.shouldHide,
     });
   }
 
@@ -175,11 +183,20 @@ class Keys extends React.Component {
             </h4>
           </Col>
           <Col size={6}>
+            <Button
+              onClick={this.toggleHide}
+              color="dark"
+              outline
+              className="mr-3"
+              hidden={this.state.keys.length === 0}
+            >
+              {this.state.shouldHide ? 'Show' : 'Hide'}
+            </Button>
             <Button onClick={this.toggle} color="dark" outline>Generate</Button>
           </Col>
         </Row>
         <ListGroup class="d-flex flex-wrap flex-md-row flex-sm-column">
-          {this.state.keys.length === 0 ?
+          {(this.state.keys.length === 0 || this.state.shouldHide) ?
             (null) :
             (this.state.keys.map(key => (
               <ListGroupItem
