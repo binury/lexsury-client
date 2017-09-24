@@ -10,21 +10,18 @@ import Admin from '../components/Admin'; // TODO: Not yet implemented
 import Presentation from '../components/Presentation';
 import QuestionForm from '../components/QuestionForm';
 import QuestionList from '../components/QuestionList';
-import RoomJoinButton from '../components/RoomCreateButton';
 import RoomJoinForm from '../components/RoomJoinForm';
 
 const navStyle = {
   display: 'flex',
   fontSize: '1.6rem',
   justifyContent: 'space-around',
-  // TODO
 };
 
 const liStyle = {
   display: 'inline-block',
 };
 
-// TODO: Redirect to anon user here?
 const LexRoom = ({ match }) => {
   const roomName = match.params.name;
   const sock = new Socket(window.localStorage.getItem('LEXSECRET'), roomName);
@@ -39,6 +36,8 @@ const LexRoom = ({ match }) => {
       </Container>
     );
   }
+  localStorage.setItem('last_room_visited', roomName);
+
   const sockedLex = () => (
     <Lexsur sock={sock} />
   );

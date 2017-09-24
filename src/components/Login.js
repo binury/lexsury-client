@@ -5,12 +5,9 @@ import {
   Button, Col, Container, Form, Input, InputGroup, InputGroupAddon, Label,
   Row,
 } from 'reactstrap';
-
-/////////////////////////////////
-////////////.FLAGS.//////////////
-/////////////////////////////////
-const OAUTH_ENABLE = false;
-/////////////////////////////////
+import Mail from 'react-icons/lib/ti/mail';
+import { Link } from 'react-router-dom';
+import OAuthButtons from './OAuthButtons';
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -56,26 +53,20 @@ class Login extends React.Component {
       <Container
         class="d-flex align-items-center flex-column"
       >
+        <h1>Sign in to Lexsury</h1>
         <Form
+          id="sign-in-form"
           onSubmit={this.handleSubmit}
           encType="application/json"
+          className="pb-3 pl-3 pr-3"
         >
-          <Row class={OAUTH_ENABLE ? 'd-inline' : 'd-none'}>
-            <Col>
-              <Button outline color="primary">
-                Facebook
-              </Button>
-            </Col>
-            <Col>
-              <Button outline>
-                Github
-              </Button>
-            </Col>
-          </Row>
+          <OAuthButtons />
           <Row>
             <InputGroup>
               <Label htmlFor="email" hidden>Email</Label>
-              <InputGroupAddon>@</InputGroupAddon>
+              <InputGroupAddon>
+                <Mail style={{ color: '#343A3F' }} />
+              </InputGroupAddon>
               <Input
                 type="text"
                 name="email"
@@ -96,13 +87,14 @@ class Login extends React.Component {
             </InputGroup>
           </Row>
           <Row>
-            <InputGroup>
-              <Col sm={{ size: 10, offset: 2 }}>
-                <Button size="lg" color="dark" block>Login</Button>
-              </Col>
-            </InputGroup>
+            <Col>
+              <Button size="lg" color="dark" block>Login</Button>
+            </Col>
           </Row>
         </Form>
+        <Link to="/signup">
+          {'New to Lexsury? Create an account.'}
+        </Link>
       </Container>
     );
   }

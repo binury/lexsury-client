@@ -16,7 +16,7 @@ const SignUp = () => {
     return null;
   }
   return (
-    <Container id="signupcontainer">
+    <Container id="signupcontainer" className="mt-5 mb-5">
       <Row>
         <Col xs="8 mr-auto">
           <h2>

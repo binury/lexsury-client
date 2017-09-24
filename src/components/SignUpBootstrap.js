@@ -5,12 +5,7 @@ import { randomBytes } from 'crypto';
 import {
   Col, Button, Form, FormGroup, Label, Input, FormText, Container, Alert,
 } from 'reactstrap';
-
-/////////////////////////////////
-////////////.FLAGS.//////////////
-/////////////////////////////////
-const OAUTH_ENABLE = false;
-/////////////////////////////////
+import OAuthButtons from './OAuthButtons';
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -128,6 +123,7 @@ export default class SignUpBootstrap extends React.Component {
   render() {
     return (
       <Container
+        id="sign-up-form"
         class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 justify-content-center"
         fluid
       >
@@ -141,31 +137,19 @@ export default class SignUpBootstrap extends React.Component {
         encType="application/json"
         hidden={this.state.quick}
       >
-
-        <FormGroup class={OAUTH_ENABLE ? 'd-inline' : 'd-none'} row>
-          <Col sm="6">
-            <Button outline color="primary">
-              Facebook
-            </Button>
-          </Col>
-          <Col sm="6">
-            <Button outline>
-              Github
-            </Button>
-          </Col>
-        </FormGroup>
-
         <FormGroup
           row
           hidden={this.state.quick}
         >
-          <p>
+          <p style={{ padding: '1em' }}>
           {`Lexsury is set to launch January 2018.
           We know we can make a first impression only once, and want to be sure everything is ready before we blast off.
           In the meantime we still want to hear your feedback, so we have opened speaker registration to invited beta users.
           You may contact us to request an invitation.`}
           </p>
         </FormGroup>
+
+        <OAuthButtons />
 
         <FormGroup
           row
@@ -233,7 +217,7 @@ export default class SignUpBootstrap extends React.Component {
 
         <FormGroup row shape={{ size: 'auto' }}>
           <Label for="code" sm={2} hidden>Beta Key *</Label>
-          <Col xs={5}>
+          <Col className="col-auto">
             <Input
               type="text"
               name="code"
