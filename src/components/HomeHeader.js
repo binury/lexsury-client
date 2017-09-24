@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 import ArrowDownThick from 'react-icons/lib/ti/arrow-down-thick';
 
 const headerStyle = {
-  background: 'radial-gradient(ellipse at 69% 50%, #2d2d39 15%,#343A3F 70%)',
+  background: 'radial-gradient(ellipse at 55% 50%, #2d2d39 15%,#343A3F 70%)',
   color: 'white',
   position: 'relative',
   top: '-1px',

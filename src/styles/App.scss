@@ -227,29 +227,6 @@ p.authors {
   font-family: 'News Cycle', sans-serif;
 }
 
-// NOT working with Bootstrap yet
-nav li {
-  &:hover,
-  &:focus,
-  &:active {
-    cursor: pointer;
-    &:after {
-      width: 99%;
-      border-radius: 45%;
-    }
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    background-color: #d6d6d1;
-    width: 0;
-    transition: width .25s;
-  }
-}
-
 #clickprompt {
   max-width: 80%;
   text-align: center;
