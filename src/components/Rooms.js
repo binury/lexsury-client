@@ -39,11 +39,16 @@ class Rooms extends React.Component {
   }
   render() {
     if (this.state.isLoading) {
-      return <p>{"You haven't created any rooms yet"}</p>;
+      return <p>{"You haven't created any Lexsurs yet!"}</p>;
     }
     // TODO: Change interactivity if room has expired
     return (
-      <ul>{this.state.rooms.map(room => <li key={room.id}> <Link to={`/lxr/${room.name}`}>{room.name}</Link> </li>)}</ul>
+      <ul>{this.state.rooms.map(room => (
+        <li key={room.id}>
+          {room.title || 'Untitled Lexsur'} -
+          <Link to={`/lxr/${room.name}`}> {room.name}</Link>
+        </li>
+      ))}</ul>
     );
   }
 }
