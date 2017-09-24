@@ -43,6 +43,10 @@ export default class QuestionList extends Component {
       return (
         <Container class="text-align-center">
           <Shapes />
+          <p id="no-questions-msg" className="lead">
+            No questions have been asked yet.
+            Be the first one!
+          </p>
           <i className="iphone">
             <QRCode
               bgColor="#343A3F"
@@ -81,7 +85,12 @@ export default class QuestionList extends Component {
       ));
     return (
       <Container id="questions-container" fluid>
-        <Button color="dark" outline onClick={() => this.toggleDateSort()}>
+        <Button
+          className="mt-3"
+          color="dark"
+          outline
+          onClick={() => this.toggleDateSort()}
+        >
           {this.state.sortByDate ? 'Best' : 'Newest'}
         </Button>
         <ul style={listStyle} id="questions-list">

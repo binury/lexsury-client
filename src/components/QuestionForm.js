@@ -52,7 +52,7 @@ class QuestionForm extends React.Component {
 
   render() {
     return (
-      <Container class="d-md-none d-lg-none d-xl-none">
+      <Container class="d-md-none d-lg-none d-xl-none mt-3">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row class="align-items-center">
             <Label htmlFor="question" hidden>Question</Label>

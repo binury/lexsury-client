@@ -138,6 +138,14 @@ h1 {
   }
 }
 
+#no-questions-msg {
+  @media screen and (min-width: 768px) {
+    & {
+      display: none;
+    }
+  }
+}
+
 .question {
   background-color: #efefef;
   border-radius: 0.6em;

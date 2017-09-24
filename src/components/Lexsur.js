@@ -15,6 +15,14 @@ import SignUpBootstrap from './SignUpBootstrap';
 // import SignUpBootstrap from './SignUpBootstrap';
 // import Login from './Login';
 
+const phraseWordStyle = {
+  textTransform: 'capitalize',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  display: 'inline-block',
+  marginBottom: 0,
+};
+
 /////////////////////////////////
 ////////////.FLAGS.//////////////
 /////////////////////////////////
@@ -116,6 +124,7 @@ const joinBadgeStyle = {
   bottom: '20%',
   left: 0,
   zIndex: 999,
+  paddingLeft: '3em',
 };
 
 function toggleFullscreen() {
@@ -225,15 +234,36 @@ class Lex extends React.Component {
             style={{ width: '150px' }}
             value={`http://lxsr.us/${this.state.roomName}`}
           />
-          <p className="lead">
-            Join in on your devices
+          <p className="lead mt-4">
+            Join this Lexsur @
           </p>
-          <p className="lead">
-            www.lxsr.us
-          </p>
-          <p className="lead">
-            {this.state.roomName.split(',').join(' ')}
-          </p>
+          <Container
+            className="d-flex justify-content-between mt-4 ml-0"
+            style={{
+              width: '200px',
+              border: '1px solid black',
+              borderRadius: '1em',
+              position: 'relative',
+              left: '-1em',
+            }}
+            fluid
+          >
+            <p
+              className="lead font-weight-bold"
+              style={{ position: 'absolute', bottom: '0.5em', marginLeft: '1.1em' }}
+            >
+              www.lxsr.us
+            </p>
+            <p style={phraseWordStyle}>
+              {this.state.roomName.split(',')[0]}
+            </p>
+            <p style={phraseWordStyle}>
+              {this.state.roomName.split(',')[1]}
+            </p>
+            <p style={phraseWordStyle}>
+              {this.state.roomName.split(',')[2]}
+            </p>
+          </Container>
         </Container>
       </div>
     );
