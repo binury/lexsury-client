@@ -5,10 +5,8 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reac
 // const normal = { display: 'inline-block', position: 'relative', };
 // const hidden = { display: 'none', };
 // const liStyle = (window.location.href.includes('room')) ? hidden : normal;
-const token = window.localStorage.getItem('LEXSECRET');
-const routeName = !token ? 'Signup' : 'Logout';
-
 const emblem = {
+  color: 'white',
   fontSize: '2em',
   fontFamily: 'Shrikhand',
   letterSpacing: '.25rem',
@@ -34,12 +32,16 @@ export default class NavBar extends React.Component {
     });
   }
   render() {
+    const token = window.localStorage.getItem('LEXSECRET');
+    const routeName = !token ? 'Signup' : 'Logout';
     return (
       <div>
         <Navbar class="navbar-expand-sm navbar-dark" color="dark" toggleable>
           <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand href="/">
-            <span id="emblem" style={emblem}>Lexsury</span>
+          <NavbarBrand>
+            <Link class="nav-link" to="/">
+              <span id="emblem" style={emblem}>Lexsury</span>
+            </Link>
           </NavbarBrand>
           <Collapse
             class="navbar-toggleable-md"
