@@ -6,6 +6,7 @@ import {
   Label, UncontrolledTooltip,
 } from 'reactstrap';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production')
@@ -39,12 +40,16 @@ class RoomCreateForm extends React.Component {
       headers: { Authorization: token },
     })
     // eslint-disable-next-line no-return-assign
-      .then(res => window.location = `/lxr/${res.data.name}`)
+      .then(res => this.setState({ roomCreated: res.data.name }))
+        // window.location = `/lxr/${res.data.name}`)
       .catch(err => console.log(`There was an error: ${err}`));
   }
 
 
   render() {
+    if (this.state.roomCreated) {
+      return <Redirect to={{ pathname: `/lxr/${this.state.roomCreated}` }} />;
+    }
     return (
       <Container fluid>
         <Form

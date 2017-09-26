@@ -1,13 +1,13 @@
 /* eslint-disable spaced-comment,react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
 import { QRCode } from 'react-qr-svg';
 import {
   Button,
   Col, Container, Modal, ModalBody, ModalFooter,
   ModalHeader,
 } from 'reactstrap';
+import { observer } from 'mobx-react';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
@@ -17,6 +17,7 @@ import SignUpBootstrap from './SignUpBootstrap';
 
 const phraseWordStyle = {
   textTransform: 'capitalize',
+  fontSize: '1rem',
   fontWeight: 'bold',
   textAlign: 'center',
   display: 'inline-block',
@@ -127,23 +128,6 @@ const joinBadgeStyle = {
   paddingLeft: '3em',
 };
 
-function toggleFullscreen() {
-  const doc = window.document;
-  const docEl = doc.documentElement;
-
-  const requestFullScreen = docEl.requestFullscreen ||
-    docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen ||
-    docEl.msRequestFullscreen;
-  const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen ||
-    doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-  if (!doc.fullscreenElement && !doc.mozFullScreenElement &&
-    !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-    requestFullScreen.call(docEl);
-  } else {
-    cancelFullScreen.call(doc);
-  }
-}
 
 const sendBrowserNotification = (msg) => {
   if (typeof msg !== 'undefined') {
@@ -151,14 +135,14 @@ const sendBrowserNotification = (msg) => {
   }
 };
 
+@observer
 class Lex extends React.Component {
   constructor(props) {
     super(props);
-    const roomName = window.location.pathname.split('/')[2];
     this.state = {
       newQuestionText: 'Enter a question',
       questions: [],
-      roomName,
+      roomName: props.store.roomName,
       users: [], // Unused
       socket: props.sock,
     };
@@ -166,7 +150,6 @@ class Lex extends React.Component {
     this.setId = this.setId.bind(this);
     this.updateUsers = this.updateUsers.bind(this);
     this.state.socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
-    console.log(`We are at :${this.state.roomName}.`);
   }
 
   setId(newId) {
@@ -177,12 +160,8 @@ class Lex extends React.Component {
   }
 
   updateQuestions(newQuestions) {
-    if (newQuestions.length === 0) {
-      return;
-    }
-    this.setState({
-      questions: newQuestions,
-    });
+    if (newQuestions.length === 0) return;
+    this.props.store.updateQuestions(newQuestions);
     /*
      This relies on the newQs arg to be sorted by ID
      if this changes the code will break and instead
@@ -205,22 +184,13 @@ class Lex extends React.Component {
     if (!localStorage.LEXSECRET) return <AuthModal />;
     return (
       <div>
-        <ArrowMaximize
-          style={{
-            color: '#000',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-          }}
-          size={30}
-          onClick={toggleFullscreen}
-        />
         <QuestionForm sock={this.state.socket} />
         <QuestionList
-          questions={this.state.questions}
+          questions={this.props.store.questions}
           users={this.state.users}
           sock={this.state.socket}
           roomName={this.state.roomName}
+          store={this.props.store}
         />
         <Container
           id="join-badge"
@@ -250,7 +220,7 @@ class Lex extends React.Component {
           >
             <p
               className="lead font-weight-bold"
-              style={{ position: 'absolute', bottom: '0.5em', marginLeft: '1.1em' }}
+              style={{ position: 'absolute', top: '-1.5em', marginLeft: '1.1em' }}
             >
               www.lxsr.us
             </p>
@@ -274,4 +244,5 @@ export default Lex;
 
 Lex.propTypes = {
   sock: PropTypes.instanceOf(Object).isRequired,
+  store: PropTypes.instanceOf(Object).isRequired,
 };

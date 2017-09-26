@@ -3,6 +3,17 @@
 @import 'iphone.scss';
 @import 'treasureChest.scss';
 
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
 body {
   color: black;
   // font-family: 'Roboto', sans-serif;
@@ -133,6 +144,7 @@ h1 {
   flex-direction: column;
   list-style: none;
   align-items: flex-end;
+  clear: both;
   @media (max-width: 768px) {
     align-items: unset;
   }
@@ -150,7 +162,7 @@ h1 {
   background-color: #efefef;
   border-radius: 0.6em;
   color: #343A3F;
-  padding: 0.3em;
+  padding: 1em 0.5em;
   display: inline-block;
   width: 30rem;
   margin: auto;
@@ -222,9 +234,8 @@ h1 {
 p.questions {
   font-style: italic;
 }
-
-p.authors {
-  font-family: 'News Cycle', sans-serif;
+span.authors {
+  padding-left: 2em;
 }
 
 #clickprompt {
@@ -387,6 +398,28 @@ a:-webkit-any-link {
   background: none;
 }
 
-a:visited a:focus .button input {
+a:hover {
+  text-decoration: none;
+  color: $cyan;
+}
+
+a:visited, a:focus, .btn:focus, .btn:visited, input {
   outline: none;
+  box-shadow: unset;
+}
+
+a.active {
+  position: relative;
+  &:hover {
+    color: inherit;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: -3.5%;
+    bottom: -4px;
+    width: 110%;
+    height: 2px;
+    background-color: $cyan;
+  }
 }

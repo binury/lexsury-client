@@ -7,7 +7,7 @@ import { getCookie } from '../helpers';
 const Welcome = () => {
   // If this is an OAuth user we want to assign their cookie to storage
   const cookie = getCookie('lexsury-jwt');
-  if (cookie.value) window.localStorage.setItem('LEXSECRET', cookie.value);
+  if (cookie) window.localStorage.setItem('LEXSECRET', cookie.value);
   // If this is a user who authed from a room we want to send them back
   const lastRoom = window.localStorage.getItem('last_room_visited');
   if (lastRoom) return <Redirect to={{ pathname: `/lxr/${lastRoom}` }} />;

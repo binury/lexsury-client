@@ -17,7 +17,7 @@ import Welcome from '../pages/Welcome';
 const Routes = () => (
   <Router history={browserHistory}>
     <div>
-      <NavBar />
+      <Route path="/" component={NavBar} />
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />
       <Route exact path="/lxr/" component={LexRoom} />

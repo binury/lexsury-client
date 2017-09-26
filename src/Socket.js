@@ -25,5 +25,7 @@ class Socket {
   ask(question, anon) { this.io.emit('questionAsked', question, anon); }
   nick(newName) { this.io.emit('nameChanged', newName); }
   vote(questionId) { this.io.emit('voteCast', questionId); }
+  hide(questionId) { this.io.emit('questionToggled', questionId); }
+  archive(questionId) { this.io.emit('questionArchived', questionId); }
 }
 export default Socket;

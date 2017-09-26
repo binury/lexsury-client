@@ -90,7 +90,10 @@ export default class SignUpBootstrap extends React.Component {
       if (error.response) {
         // The request was made and the server responded with a status code
         if (error.response.data.errors) {
-          this.setState({ errors: error.response.data.errors.map(error => error.message) });
+          this.setState({
+            errors: error.response.data.errors.map(error => error.message),
+            originIsInvite: false,
+          });
           console.log(error.response.data);
         }
         if (process.env.NODE_ENV === 'development') {

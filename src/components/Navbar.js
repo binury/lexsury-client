@@ -17,6 +17,7 @@ const emblem = {
 
 // TODO: We should collapse when an item is clicked too
 // since we're using a router the page doesn't reload
+// TODO: Hide in presentation view
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +32,18 @@ export default class NavBar extends React.Component {
       isOpen: !this.state.isOpen,
     });
   }
+
   render() {
     const token = window.localStorage.getItem('LEXSECRET');
     const routeName = !token ? 'Signup' : 'Logout';
     return (
-      <div>
-        <Navbar class="navbar-expand-sm navbar-dark" color="dark" toggleable>
+      <div hidden={this.state.isFullscreen}>
+        <Navbar
+          class="navbar-expand-sm navbar-dark"
+          color="dark"
+          toggleable
+          hidden={window.location.pathname.includes('lxr')}
+        >
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand>
             <Link class="nav-link" to="/">

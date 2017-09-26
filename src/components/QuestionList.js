@@ -1,13 +1,14 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len,react/jsx-no-bind */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { format, isBefore } from 'date-fns';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Button, Container } from 'reactstrap';
+import { isBefore } from 'date-fns';
 import { QRCode } from 'react-qr-svg';
-import VoteButton from './VoteButton';
-import * as Avatar from '../assets/avatars';
+import { observer } from 'mobx-react';
 import Shapes from './Shapes';
+import Question from './Question';
+import Socket from '../Socket';
 
 const listStyle = {
 };
@@ -22,7 +23,8 @@ const colors = [
   '#95A9FF',
 ];
 
-export default class QuestionList extends Component {
+@observer
+class QuestionList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +41,7 @@ export default class QuestionList extends Component {
   }
 
   render() {
-    if (this.props.questions.length === 0) {
+    if (this.props.store.questions.length === 0) {
       return (
         <Container class="text-align-center">
           <Shapes />
@@ -53,7 +55,7 @@ export default class QuestionList extends Component {
               fgColor="#FFF"
               level="Q"
               style={{ width: '80%', marginLeft: '0.85em' }}
-              value={`http://lxsr.us/${this.state.roomName}`}
+              value={`http://lxsr.us/${this.props.store.roomName}`}
             />
           </i>
         </Container>
@@ -61,28 +63,16 @@ export default class QuestionList extends Component {
     }
     const sortDate = (x, y) => isBefore(new Date(y.date), new Date(x.date)) ? -1 : 1; // eslint-disable-line no-confusing-arrow
     const sortVotes = (x, y) => y.votes.length - x.votes.length;
-    const questions = this.props.questions
+    const questions = this.props.store.questions
+      .filter(question => (!question.hidden && !question.archived) || this.props.admin) // TODO: Implement as props
       .sort(this.state.sortByDate ? sortDate : sortVotes)
       .map(question => (
-        <li style={{ padding: '1.25em' }} key={question.id}>
-          <div className="question">
-            <div className="avatar-container">
-              <img src={Avatar.ChillDude} width="150px" height="150px" alt="avatar" />
-            </div>
-            <p className="timestamps">
-              {format(new Date(question.date), 'H:mm:ss')}
-            </p>
-            <p>
-              <span className="authors">{question.author}</span> asks:
-            </p>
-            <p className="questions">{question.text}</p>
-            <p>
-              <span className="votes">{question.votes.length}</span>
-              <VoteButton qid={question.id} sock={this.props.sock} />
-            </p>
-          </div>
-        </li>
-      ));
+        <Question
+          question={question}
+          sock={this.props.sock}
+          admin={this.props.admin}
+        />
+        ));
     return (
       <Container id="questions-container" fluid>
         <Button
@@ -90,6 +80,7 @@ export default class QuestionList extends Component {
           color="dark"
           outline
           onClick={() => this.toggleDateSort()}
+          style={{ float: 'right' }}
         >
           {this.state.sortByDate ? 'Best' : 'Newest'}
         </Button>
@@ -109,7 +100,13 @@ export default class QuestionList extends Component {
 }
 
 QuestionList.propTypes = {
-  questions: PropTypes.instanceOf(Array).isRequired,
-  sock: PropTypes.instanceOf(Object).isRequired,
-  roomName: PropTypes.instanceOf(String).isRequired,
+  admin: PropTypes.bool,
+  sock: PropTypes.instanceOf(Socket).isRequired,
 };
+
+QuestionList.defaultProps = {
+  admin: false,
+};
+
+export default QuestionList;
+
