@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto:300,500,900" rel="stylesheet">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <meta property="og:title" content="Lexsury: Activate your Audience" />
     <meta property="og:description" content="Let's do away with the boring presentations of yesterday. A Lexsur is the easiest
  way to setup your next speaking event with real-time audience interaction. An active audience is a happy one."/>
@@ -15,11 +14,24 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106462738-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-
-      function gtag () {dataLayer.push(arguments)};
+      function gtag () {dataLayer.push(arguments)}
       gtag('js', new Date());
-
       gtag('config', 'UA-106462738-1');
+    </script>
+    <script>
+      !function (g, s, q, r, d) {
+        r = g[r] = g[r] || function () {
+          (r.q = r.q || []).push(
+            arguments)
+        };
+        d = s.createElement(q);
+        q = s.getElementsByTagName(q)[0];
+        d.src = '//d1l6p2sc9645hc.cloudfront.net/tracker.js';
+        q.parentNode.
+          insertBefore(d, q)
+      }(window, document, 'script', '_gs');
+      // _gs('set', 'trackLocal', 'true');
+      _gs('GSN-303939-I');
     </script>
 </head>
 <body>
