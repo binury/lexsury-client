@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const, prefer-template */
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import browserHistory from 'history';
 import Home from '../pages/Home';
 import Rooms from './Rooms';
@@ -14,6 +14,21 @@ import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
 import Welcome from '../pages/Welcome';
 
+// https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md
+class ScrollToTop extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+const ScrollRestore = withRouter(ScrollToTop);
+
 const Routes = () => (
   <Router history={browserHistory}>
     <div>
@@ -21,7 +36,9 @@ const Routes = () => (
       <Route exact path="/" component={Home} />
       <Route path="/rooms" component={Rooms} />
       <Route exact path="/lxr/" component={LexRoom} />
-      <Route path="/lxr/:name" component={LexRoom} />
+      <ScrollRestore>
+        <Route path="/lxr/:name" component={LexRoom} />
+      </ScrollRestore>
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
       <Route path="/signup" component={SignUp} />
