@@ -83,7 +83,7 @@ export default class SignUpBootstrap extends React.Component {
         localStorage.setItem('LEXSECRET', res.data.accessToken);
       }).then(() => {
         localStorage.removeItem('invite_code');
-        window.location = this.state.redirect;
+        window.location = this.state.redirect; // TODO: Use router
       });
     }).catch(error => {
       // TODO: Refactor this for re-use

@@ -2,7 +2,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Container } from 'reactstrap';
+import {
+  Button, Col, Container, Modal, ModalBody,
+  ModalFooter, ModalHeader,
+} from 'reactstrap';
 import { observer } from 'mobx-react';
 import HomeOutline from 'react-icons/lib/ti/home-outline';
 import ArrowMaximize from 'react-icons/lib/ti/arrow-maximise';
@@ -18,6 +21,7 @@ import QuestionList from '../components/QuestionList';
 import RoomJoinForm from '../components/RoomJoinForm';
 import ObservableLexStore from '../components/LexStore';
 import { getToken } from '../helpers';
+import SignUpBootstrap from '../components/SignUpBootstrap';
 
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
@@ -38,7 +42,97 @@ const liStyle = {
  */
 const POLLS_ENABLED = false;
 
+class AuthModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      signUp: false,
+      guest: false,
+    };
+    this.toggle = this.toggle.bind(this);
+    this.toggleSignUp = this.toggleSignUp.bind(this);
+    this.toggleGuest = this.toggleGuest.bind(this);
+  }
+
+  componentDidMount() {
+    const token = window.localStorage.getItem('LEXSECRET');
+    if (!token) this.toggle();
+  }
+
+  toggle() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+  toggleSignUp() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      signUp: !this.state.signUp,
+    });
+  }
+  toggleGuest() {
+    // TODO: Anonymous registration of temporary user
+    this.setState({
+      guest: !this.state.guest,
+    });
+  }
+
+  render() {
+    return (
+      <Container>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalHeader toggle={this.toggle}>Join the event</ModalHeader>
+          <ModalBody class="d-flex justify-content-center">
+            <Button
+              color="primary"
+              onClick={this.toggleSignUp}
+            >Create your profile</Button>
+            <Modal
+              isOpen={this.state.signUp}
+              toggle={this.toggleSignUp}
+            >
+              <ModalBody>
+                <Container fluid>
+                  <SignUpBootstrap redirect={window.location.href} />
+                </Container>
+              </ModalBody>
+            </Modal>
+            <Col xs={1} sm={2} md={3} lg={4} id="or-container" style={{ paddingBottom: '0.5em' }}>
+              <hr id="or-hr" />
+              <div id="or">or</div>
+            </Col>
+            <Button
+              color="secondary"
+              onClick={this.toggleGuest}
+            >Join as guest</Button>
+            <Modal
+              isOpen={this.state.guest}
+              toggle={this.guest}
+            >
+              <ModalBody>
+                <Container fluid>
+                  <SignUpBootstrap redirect={window.location.href} quick />
+                </Container>
+              </ModalBody>
+            </Modal>
+          </ModalBody>
+          <ModalFooter hidden>
+            #EIGHT_TOES
+          </ModalFooter>
+        </Modal>
+      </Container>
+    );
+  }
+}
+
 const LexRoom = ({ match }) => {
+  if (!getToken()) return <AuthModal />;
   const roomName = match.params.name;
   const sock = new Socket(getToken(), roomName);
   const lexstore = new ObservableLexStore({ roomName });
@@ -52,11 +146,6 @@ const LexRoom = ({ match }) => {
         <RoomJoinForm />
       </Container>
     );
-  }
-
-  if (!getToken()) {
-    localStorage.setItem('last_room_visited', roomName);
-    return <Redirect to="/signup" />;
   }
 
   const SockedLex = observer(() => (
