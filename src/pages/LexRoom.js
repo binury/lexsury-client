@@ -53,9 +53,11 @@ const LexRoom = ({ match }) => {
       </Container>
     );
   }
-  localStorage.setItem('last_room_visited', roomName);
 
-  if (!getToken()) return <Redirect to="/signup" />;
+  if (!getToken()) {
+    localStorage.setItem('last_room_visited', roomName);
+    return <Redirect to="/signup" />;
+  }
 
   const SockedLex = observer(() => (
     <Lexsur sock={sock} store={lexstore} />

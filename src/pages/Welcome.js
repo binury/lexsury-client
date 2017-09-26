@@ -9,8 +9,12 @@ const Welcome = () => {
   const cookie = getCookie('lexsury-jwt');
   if (cookie) window.localStorage.setItem('LEXSECRET', cookie.value);
   // If this is a user who authed from a room we want to send them back
+  // TODO: Should also work for returning users
   const lastRoom = window.localStorage.getItem('last_room_visited');
-  if (lastRoom) return <Redirect to={{ pathname: `/lxr/${lastRoom}` }} />;
+  if (lastRoom) {
+    localStorage.removeItem('last_room_visited');
+    return <Redirect to={{ pathname: `/lxr/${lastRoom}` }} />;
+  }
   return (
     <Container>
       <Row>
