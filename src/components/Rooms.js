@@ -24,7 +24,7 @@ class Rooms extends React.Component {
     this.setState({ isLoading: true });
     axios({
       method: 'get',
-      url: `${URL}/room?creatorId=${claims.userId}`,
+      url: `${URL}/room?creatorId=${claims.userId}&$sort[createdAt]=-1`,
       timeout: 20000,
       responseType: 'json',
       headers: {
@@ -46,7 +46,7 @@ class Rooms extends React.Component {
       <ul>{this.state.rooms.map(room => (
         <li key={room.id}>
           {room.title || 'Untitled Lexsur'} -
-          <Link to={`/lxr/${room.name}`}> {room.name}</Link>
+          <Link to={`/lxr/${room.name}/admin`}> {room.name}</Link>
         </li>
       ))}</ul>
     );

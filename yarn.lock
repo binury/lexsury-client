@@ -145,6 +145,20 @@
     address "^1.0.1"
     debug "^2.6.0"
 
+"@trendmicro/react-anchor@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@trendmicro/react-anchor/-/react-anchor-0.5.5.tgz#ebda47213b2c6909a2ee444ff934c773abff4f3f"
+  dependencies:
+    prop-types "^15.5.8"
+
+"@trendmicro/react-toggle-switch@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@trendmicro/react-toggle-switch/-/react-toggle-switch-0.5.5.tgz#83fbb1361f0467419ba95f8bc0960e1696241baa"
+  dependencies:
+    "@trendmicro/react-anchor" "^0.5.5"
+    classnames "^2.2.5"
+    prop-types "^15.5.8"
+
 "@types/express-serve-static-core@*":
   version "4.0.50"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.50.tgz#c5a139b5d29d2305aae6d982f69cef36120beacf"
@@ -7573,12 +7587,6 @@ react-router@4.1.1, react-router@^4.1.1:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-screenfull@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-screenfull/-/react-screenfull-0.1.2.tgz#46904064aed8193834f71437e669fc5e33923c7a"
-  dependencies:
-    screenfull "^3.0.2"
-
 react-simple-di@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-simple-di/-/react-simple-di-1.2.0.tgz#dde0e5bf689f391ef2ab02c9043b213fe239c6d0"
@@ -8189,7 +8197,7 @@ schema-utils@^0.3.0, schema-utils@^0.x:
   dependencies:
     ajv "^5.0.0"
 
-screenfull@^3.0.2, screenfull@^3.3.1:
+screenfull@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-3.3.1.tgz#5eea886b412043af89e2e5cc4433f894d0ebb90b"
 

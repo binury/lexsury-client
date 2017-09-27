@@ -14,6 +14,7 @@
     "url": "github.com:mutiny/lexsur-react-client"
   },
   "dependencies": {
+    "@trendmicro/react-toggle-switch": "^0.5.5",
     "axios": "0.16.1",
     "bootstrap": "next",
     "date-fns": "^1.28.5",

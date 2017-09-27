@@ -57,13 +57,7 @@ class RoomCreateForm extends React.Component {
         >
           <FormGroup>
             <Col sm={6}>
-              <UncontrolledTooltip
-                placement="right"
-                target="pop-title"
-              >The title will be displayed at the top or your LXSR
-            </UncontrolledTooltip>
               <label htmlFor="title">Title</label>
-              <small id="pop-title" className="pop-marker">?</small>
               <Input
                 id="title"
                 ref={(input) => { this.title = input; }}
@@ -77,15 +71,7 @@ class RoomCreateForm extends React.Component {
           </FormGroup>
           <FormGroup>
             <Col sm={12}>
-              <UncontrolledTooltip
-                placement="right"
-                target="pop-descr"
-              >
-                {`The description is primarily for bookkeeping but will be shown
-               in some informational areas.`}
-              </UncontrolledTooltip>
               <label htmlFor="descr">Description</label>
-              <small id="pop-descr" className="pop-marker">?</small>
               <Input
                 ref={(input) => { this.descr = input; }}
                 type="text"
@@ -107,13 +93,6 @@ class RoomCreateForm extends React.Component {
                   disabled
                 />{' '}Public
               </Label>
-              <UncontrolledTooltip
-                placement="right"
-                target="pop-public"
-              >{`Public rooms are viewable by anyone who has the room code.
-                Private rooms are available to subscribing members.`}
-              </UncontrolledTooltip>
-              <small id="pop-public" className="pop-marker">?</small>
             </Col>
           </FormGroup>
           <FormGroup>

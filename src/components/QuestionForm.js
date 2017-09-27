@@ -5,6 +5,7 @@ import {
   Button, Col, Container, Form, FormGroup, Input,
   Label,
 } from 'reactstrap';
+import Socket from '../Socket';
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -113,5 +114,5 @@ QuestionForm.defaultProps = {
 
 QuestionForm.propTypes = {
   uid: PropTypes.func,
-  sock: PropTypes.instanceOf(Object).isRequired,
+  sock: PropTypes.instanceOf(Socket).isRequired,
 };

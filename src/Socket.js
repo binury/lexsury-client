@@ -9,16 +9,19 @@ class Socket {
     this.io = io(`${URL}/${ns.split(',').join('')}`, { query: `token=${token}` });
     this.id = this.io.id;
     // Bindings allow usage in exported environment
-    this.initSocket = this.initSocket.bind(this);
+    this.onQuestionAsked = this.onQuestionAsked.bind(this);
+    this.onSettingUpdated = this.onSettingUpdated.bind(this);
     this.ask = this.ask.bind(this);
     this.nick = this.nick.bind(this);
   }
 
   // Functions invoked upon message receipt
-  initSocket(callback, idhandler, userhandler) {
-    this.io.on('assignment', idhandler);
+  // TODO: Refactor- not really needed anymore
+  onQuestionAsked(callback) {
     this.io.on('questionAsked', callback);
-    this.io.on('newUser', userhandler);
+  }
+  onSettingUpdated(callback) {
+    this.io.on('settingUpdated', callback);
   }
 
   // Methods for emitting messages
@@ -27,5 +30,7 @@ class Socket {
   vote(questionId) { this.io.emit('voteCast', questionId); }
   hide(questionId) { this.io.emit('questionToggled', questionId); }
   archive(questionId) { this.io.emit('questionArchived', questionId); }
+  updateSetting(setting) { this.io.emit('settingUpdated', setting); }
+  moderate(question) { this.io.emit('questionModerated', question); }
 }
 export default Socket;

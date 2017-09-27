@@ -1,24 +1,32 @@
-/* eslint-disable react/no-multi-comp,import/no-duplicates */
+/* eslint-disable react/no-multi-comp,import/no-duplicates,spaced-comment */
 // import mobx from 'mobx';
 import { computed, observable } from 'mobx';
-// import Socket from '../Socket';
-// import { getToken } from '../helpers';
+import * as mobx from 'mobx';
+import decode from 'jwt-decode';
+import Socket from '../Socket';
+import { getToken } from '../helpers';
 
 class ObservableLexStore {
   @observable todos = [];
   @observable pendingRequests = 0;
   @observable questions = [];
   @observable roomName = '';
-  @observable isRoomOwner = false;
+  @observable roomInfo;
   @observable socket = {};
   @observable newQuestionText = 'Enter a question';
   @observable isFullscreen = false;
+  @observable moderationEnabled;
 
   constructor(props) {
     this.roomName = props.roomName;
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
-    // this.socket = new Socket(getToken(), params.roomName);
-    // mobx.autorun(() => console.log(this.report));
+    this.toggleModeration = this.toggleModeration.bind(this);
+    if (getToken() && props.roomName) {
+      this.sock = new Socket(getToken(), props.roomName);
+      this.sock.onQuestionAsked(this.updateQuestions.bind(this));
+      this.sock.onSettingUpdated(this.updateSetting.bind(this));
+    }
+    mobx.autorun(() => console.log(this.report));
   }
 
   @computed
@@ -30,8 +38,22 @@ class ObservableLexStore {
 
   @computed
   get report() {
-    if (this.questions.length === 0) { return '<none>'; }
-    return Object.entries(this.questions[this.questions.length - 1]);
+    return (this.roomInfo) ? Object.entries(this.roomInfo) : null;
+  }
+
+  @computed
+  get isRoomOwner() {
+    return (getToken() && this.roomInfo) ?
+      this.roomInfo.creatorId === decode(getToken()).userId :
+      false;
+  }
+
+  @computed
+  get validQuestions() {
+    return this.questions.filter(question => (
+      !question.hidden &&
+      !question.archived &&
+      (!this.roomInfo.moderationEnabled || question.approved)));
   }
 
   addTodo(task) {
@@ -43,7 +65,19 @@ class ObservableLexStore {
   }
 
   updateQuestions(questions) {
+    console.log('Update questions');
     this.questions = questions;
+  }
+
+  // test
+  updateSetting(setting) {
+    console.log('Update setting');
+    this.roomInfo = setting;
+    // Object.assign(this.roomInfo, setting);
+  }
+
+  toggleModeration() {
+    this.sock.updateSetting({ moderationEnabled: !this.roomInfo.moderationEnabled });
   }
 
   toggleFullScreen() { this.isFullscreen = !this.isFullscreen; console.log(this.isFullscreen); }

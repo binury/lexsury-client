@@ -8,7 +8,6 @@ import { QRCode } from 'react-qr-svg';
 import { observer } from 'mobx-react';
 import Shapes from './Shapes';
 import Question from './Question';
-import Socket from '../Socket';
 
 const listStyle = {
 };
@@ -63,13 +62,12 @@ class QuestionList extends Component {
     }
     const sortDate = (x, y) => isBefore(new Date(y.date), new Date(x.date)) ? -1 : 1; // eslint-disable-line no-confusing-arrow
     const sortVotes = (x, y) => y.votes.length - x.votes.length;
-    const questions = this.props.store.questions
-      .filter(question => (!question.hidden && !question.archived) || this.props.admin) // TODO: Implement as props
+    const questions = this.props.store.validQuestions
       .sort(this.state.sortByDate ? sortDate : sortVotes)
       .map(question => (
         <Question
           question={question}
-          sock={this.props.sock}
+          sock={this.props.store.sock}
           admin={this.props.admin}
         />
         ));
@@ -101,7 +99,6 @@ class QuestionList extends Component {
 
 QuestionList.propTypes = {
   admin: PropTypes.bool,
-  sock: PropTypes.instanceOf(Socket).isRequired,
 };
 
 QuestionList.defaultProps = {

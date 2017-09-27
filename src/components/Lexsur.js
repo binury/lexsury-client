@@ -19,13 +19,6 @@ const phraseWordStyle = {
   marginBottom: 0,
 };
 
-/////////////////////////////////
-////////////.FLAGS.//////////////
-/////////////////////////////////
-const NOTIFICATIONS_ENABLED = false;
-/////////////////////////////////
-
-
 const joinBadgeStyle = {
   backgroundColor: '#FFF',
   position: 'fixed',
@@ -33,13 +26,6 @@ const joinBadgeStyle = {
   left: 0,
   zIndex: 999,
   paddingLeft: '3em',
-};
-
-
-const sendBrowserNotification = (msg) => {
-  if (typeof msg !== 'undefined') {
-    Notification.requestPermission(() => new Notification(msg));
-  }
 };
 
 @observer
@@ -50,50 +36,15 @@ class Lex extends React.Component {
       newQuestionText: 'Enter a question',
       questions: [],
       roomName: props.store.roomName,
-      users: [], // Unused
-      socket: props.sock,
     };
-    this.updateQuestions = this.updateQuestions.bind(this);
-    this.setId = this.setId.bind(this);
-    this.updateUsers = this.updateUsers.bind(this);
-    this.state.socket.initSocket(this.updateQuestions, this.setId, this.updateUsers);
-  }
-
-  setId(newId) {
-    this.setState({
-      userId: newId,
-    });
-    console.log(newId);
-  }
-
-  updateQuestions(newQuestions) {
-    if (newQuestions.length === 0) return;
-    this.props.store.updateQuestions(newQuestions);
-    /*
-     This relies on the newQs arg to be sorted by ID
-     if this changes the code will break and instead
-     should be sorted manually before dereferencing the array.
-    */
-    if (NOTIFICATIONS_ENABLED) {
-      const newQ = newQuestions[newQuestions.length - 1];
-      sendBrowserNotification(`${newQ.author} asks:${newQ.text}`);
-    }
-  }
-
-  updateUsers(newUsers) {
-    this.setState({
-      users: newUsers,
-    });
-    console.log(newUsers);
   }
 
   render() {
     return (
       <div>
-        <QuestionForm sock={this.state.socket} />
+        <QuestionForm sock={this.props.store.sock} />
         <QuestionList
           questions={this.props.store.questions}
-          users={this.state.users}
           sock={this.state.socket}
           roomName={this.state.roomName}
           store={this.props.store}
@@ -149,6 +100,5 @@ class Lex extends React.Component {
 export default Lex;
 
 Lex.propTypes = {
-  sock: PropTypes.instanceOf(Object).isRequired,
   store: PropTypes.instanceOf(Object).isRequired,
 };
