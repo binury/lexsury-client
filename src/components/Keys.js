@@ -32,38 +32,32 @@ class Keys extends React.Component {
       doneAnimating: false,
       shouldHide: true,
     };
-    this.genKey = this.genKey.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.toggleHide = this.toggleHide.bind(this);
-    this.focusUrlInput = this.focusUrlInput.bind(this);
-    this.animationIsDone = this.animationIsDone.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.fetchKeys();
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       modal: !this.state.modal,
     });
-  }
+  };
 
-  toggleHide() {
+  toggleHide = () => {
     this.setState({
       shouldHide: !this.state.shouldHide,
     });
-  }
+  };
 
-  focusUrlInput() {
+  focusUrlInput = () => {
     const field = this.keyBox;
     field.focus();
     field.setSelectionRange(0, field.value.length);
     document.execCommand('copy');
-  }
+  };
 
-  fetchKeys() {
+  fetchKeys = () => {
     this.setState({ isLoading: true });
     Axios({
       method: 'get',
@@ -80,45 +74,43 @@ class Keys extends React.Component {
         keys: keys.data.data,
       });
     });
-  }
+  };
 
-  handleClick() {
+  handleClick = () => {
     this.genKey().then(() => this.animationIsDone());
-  }
+  };
 
-  genKey() {
-    return Axios({
-      method: 'post',
-      url: `${URL}/invite`,
-      timeout: 20000,
-      responseType: 'json',
-      headers: {
-        Authorization: window.localStorage.getItem('LEXSECRET'),
-      },
-    }).then(key => this.setState({
-      keys: (this.state.keys.concat(key.data)),
-      newKey: key.data.code,
+  genKey = () => Axios({
+    method: 'post',
+    url: `${URL}/invite`,
+    timeout: 20000,
+    responseType: 'json',
+    headers: {
+      Authorization: window.localStorage.getItem('LEXSECRET'),
+    },
+  }).then(key => this.setState({
+    keys: (this.state.keys.concat(key.data)),
+    newKey: key.data.code,
       // eslint-disable-next-line prefer-template
-      newKeyURL: `${window.location.protocol}//${window.location.host}/?invite_code=${key.data.code}`,
-    })).catch((error) => {
+    newKeyURL: `${window.location.protocol}//${window.location.host}/?invite_code=${key.data.code}`,
+  })).catch((error) => {
       // TODO: Refactor this for re-use
-      if (!error.response) return;
-      if (error.response.data.message.includes('remaining')) {
-        alert('Sorry! You do not have any invitation codes left');
-      } else {
-        alert('Something went wrong. Please try again.');
-      }
-    });
-  }
+    if (!error.response) return;
+    if (error.response.data.message.includes('remaining')) {
+      alert('Sorry! You do not have any invitation codes left');
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+  });
 
 // eslint-disable-next-line class-methods-use-this
-  animationIsDone() {
+  animationIsDone = () => {
     window.setTimeout(() => {
       this.setState({
         doneAnimating: true,
       });
     }, 6000);
-  }
+  };
 
   render() {
     if (this.state.isLoading) return <p>{'…'}</p>;

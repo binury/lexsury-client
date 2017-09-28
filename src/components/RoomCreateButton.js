@@ -13,7 +13,6 @@ class RoomJoinButton extends React.Component {
     this.state = {
       modal: false,
     };
-    this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {
@@ -23,8 +22,7 @@ class RoomJoinButton extends React.Component {
     }
   }
 
-  toggle() {
-    // TODO: Anonymous registration of temporary user
+  toggle = () => {
     const token = window.localStorage.getItem('LEXSECRET');
     if (!token) {
       window.location.assign('/signup');
@@ -33,7 +31,7 @@ class RoomJoinButton extends React.Component {
     this.setState({
       modal: !this.state.modal,
     });
-  }
+  };
 
   render() {
     return (

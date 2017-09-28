@@ -19,19 +19,17 @@ class Login extends React.Component {
       password: '',
       redirect: this.props.redirect || '/?welcomeback',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
       [name]: value,
     });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     Axios.post(`${URL}/authentication`, {
       strategy: 'local',
@@ -44,7 +42,7 @@ class Login extends React.Component {
       window.location = this.state.redirect;
     })
     .catch(err => console.error(err)); // Invalid login or 500 ?
-  }
+  };
 
   // loginError() {} TODO
 

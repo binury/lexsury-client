@@ -21,19 +21,17 @@ class RoomCreateForm extends React.Component {
       descr: '',
       public: true, // TODO MANY MANY Things
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.genNewRoom = this.genNewRoom.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
       [name]: value,
     });
-  }
+  };
 
-  genNewRoom(event) {
+  genNewRoom = (event) => {
     event.preventDefault();
     const token = window.localStorage.getItem('LEXSECRET');
     axios.post(`${URL}/room`, this.state, {
@@ -43,12 +41,12 @@ class RoomCreateForm extends React.Component {
       .then(res => this.setState({ roomCreated: res.data.name }))
         // window.location = `/lxr/${res.data.name}`)
       .catch(err => console.log(`There was an error: ${err}`));
-  }
+  };
 
 
   render() {
     if (this.state.roomCreated) {
-      return <Redirect to={{ pathname: `/lxr/${this.state.roomCreated}` }} />;
+      return <Redirect to={{ pathname: `/lxr/${this.state.roomCreated}/admin` }} />;
     }
     return (
       <Container fluid>

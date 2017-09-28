@@ -26,9 +26,6 @@ export default class SignUpBootstrap extends React.Component {
       quick: this.props.quick || false,
       errors: [],
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentWillMount() {
@@ -36,7 +33,7 @@ export default class SignUpBootstrap extends React.Component {
     if (code) this.setState({ code, originIsInvite: true });
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -53,9 +50,9 @@ export default class SignUpBootstrap extends React.Component {
       this.setState(
         { passwordConfirmed: this.state.password === value });
     }
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     if (typeof event !== 'undefined') event.preventDefault();
     const payload = {
       // TODO: Maybe just trim as needed and pass state object?
@@ -94,7 +91,6 @@ export default class SignUpBootstrap extends React.Component {
             errors: error.response.data.errors.map(error => error.message),
             originIsInvite: false,
           });
-          console.log(error.response.data);
         }
         if (process.env.NODE_ENV === 'development') {
           console.log(Object.values(error.response.data.errors));
@@ -116,7 +112,7 @@ export default class SignUpBootstrap extends React.Component {
       }
       if (process.env.NODE_ENV === 'development') console.log(error.config);
     });
-  }
+  };
 
   componentDidMount() {
     if (this.state.quick) this.handleSubmit();
@@ -127,7 +123,7 @@ export default class SignUpBootstrap extends React.Component {
     return (
       <Container
         id="sign-up-form"
-        class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 justify-content-center"
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 justify-content-center"
         fluid
       >
 
@@ -229,7 +225,6 @@ export default class SignUpBootstrap extends React.Component {
               value={this.state.code}
               onChange={this.handleChange}
               required={!this.state.quick}
-              hidden={this.state.originIsInvite}
             />
           </Col>
         </FormGroup>

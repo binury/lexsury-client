@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-
 import PropTypes from 'prop-types';
 import {
   Button, Col, Container, Modal, ModalBody,
-  ModalFooter, ModalHeader,
+  ModalFooter, ModalHeader, Row,
 } from 'reactstrap';
 import { observer } from 'mobx-react';
 import HomeOutline from 'react-icons/lib/ti/home-outline';
@@ -20,6 +20,7 @@ import RoomJoinForm from '../components/RoomJoinForm';
 import ObservableLexStore from '../components/LexStore'; // TODO: Move this out of state
 import { getToken } from '../helpers';
 import SignUpBootstrap from '../components/SignUpBootstrap';
+import Login from '../components/Login';
 
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
@@ -45,12 +46,9 @@ class AuthModal extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      signUp: false,
+      auth: false,
       guest: false,
     };
-    this.toggle = this.toggle.bind(this);
-    this.toggleSignUp = this.toggleSignUp.bind(this);
-    this.toggleGuest = this.toggleGuest.bind(this);
   }
 
   componentDidMount() {
@@ -58,24 +56,23 @@ class AuthModal extends React.Component {
     if (!token) this.toggle();
   }
 
-  toggle() {
-    // TODO: Anonymous registration of temporary user
+  toggle = () => {
     this.setState({
       modal: !this.state.modal,
     });
-  }
-  toggleSignUp() {
-    // TODO: Anonymous registration of temporary user
+  };
+
+  toggleAuth = () => {
     this.setState({
-      signUp: !this.state.signUp,
+      auth: !this.state.auth,
     });
-  }
-  toggleGuest() {
-    // TODO: Anonymous registration of temporary user
+  };
+
+  toggleGuest = () => {
     this.setState({
       guest: !this.state.guest,
     });
-  }
+  };
 
   render() {
     return (
@@ -84,31 +81,24 @@ class AuthModal extends React.Component {
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
+          backdrop="static"
         >
-          <ModalHeader toggle={this.toggle}>Join the event</ModalHeader>
+          <ModalHeader>Join the event</ModalHeader>
           <ModalBody class="d-flex justify-content-center">
-            <Button
-              color="primary"
-              onClick={this.toggleSignUp}
-            >Create your profile</Button>
-            <Modal
-              isOpen={this.state.signUp}
-              toggle={this.toggleSignUp}
-            >
-              <ModalBody>
-                <Container fluid>
-                  <SignUpBootstrap redirect={window.location.href} />
-                </Container>
-              </ModalBody>
-            </Modal>
-            <Col xs={1} sm={2} md={3} lg={4} id="or-container" style={{ paddingBottom: '0.5em' }}>
-              <hr id="or-hr" />
-              <div id="or">or</div>
-            </Col>
-            <Button
-              color="secondary"
-              onClick={this.toggleGuest}
-            >Join as guest</Button>
+            <Row>
+              <Button
+                color="secondary"
+                onClick={this.toggleGuest}
+                size="lg"
+                block
+              >Join as guest</Button>
+              <Button
+                color="info"
+                onClick={this.toggleAuth}
+                size="lg"
+                block
+              >Create your profile</Button>
+            </Row>
             <Modal
               isOpen={this.state.guest}
               toggle={this.guest}
@@ -117,6 +107,15 @@ class AuthModal extends React.Component {
                 <Container fluid>
                   <SignUpBootstrap redirect={window.location.href} quick />
                 </Container>
+              </ModalBody>
+            </Modal>
+            <Modal
+              isOpen={this.state.auth}
+              toggle={this.toggleAuth}
+            >
+              <ModalHeader toggle={this.toggleAuth} />
+              <ModalBody>
+                <Login redirect={window.location.href} />
               </ModalBody>
             </Modal>
           </ModalBody>

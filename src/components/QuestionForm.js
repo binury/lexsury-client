@@ -20,10 +20,6 @@ class QuestionForm extends React.Component {
       socket: this.props.sock,
       anonymous: false,
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -33,23 +29,23 @@ class QuestionForm extends React.Component {
     }).then(setName);
   }
 
-  handleBlur() {
+  handleBlur = () => {
     // console.log(event.target.name + ' ' + event.target.value)
     this.state.socket.nick(this.state.author);
-  }
+  };
 
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.state.socket.ask(this.state.question, this.state.anonymous);
     this.setState({ question: '' });
-  }
+  };
 
   render() {
     return (

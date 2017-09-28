@@ -51,10 +51,15 @@
     "babel-core": "6.24.1",
     "babel-eslint": "7",
     "babel-jest": "20.0.3",
-    "babel-loader": "7.0.0",
+    "babel-loader": "7.1.2",
     "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-syntax-pipeline": "^0.1.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-pipeline": "^0.1.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-app": "^3.0.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "6.23.0",
     "case-sensitive-paths-webpack-plugin": "2.0.0",
     "chalk": "^1.1.3",
@@ -136,12 +141,14 @@
   },
   "babel": {
     "presets": [
+      "es2015",
       "react-app",
-      "stage-1"
+      "stage-0"
     ],
     "plugins": [
       "transform-decorators-legacy",
-      "react-html-attrs"
+      "react-html-attrs",
+      "syntax-object-rest-spread"
     ]
   }
 }

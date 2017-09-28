@@ -14,19 +14,17 @@ class RoomJoinForm extends React.Component {
       word2: '',
       word3: '',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
       [name]: value.toLowerCase(),
     });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     const roomname = Object.values(this.state).join(',');
     window.location = `/lxr/${roomname}`;
@@ -46,7 +44,7 @@ class RoomJoinForm extends React.Component {
       if (roomData.data.total !== 0) { window.location = `/lxr/${roomname}`; }
     })
     .catch(err => console.error(err));
-  }
+  };
 
   // loginError() {} TODO
 

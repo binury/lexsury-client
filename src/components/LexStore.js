@@ -19,14 +19,14 @@ class ObservableLexStore {
 
   constructor(props) {
     this.roomName = props.roomName;
-    this.toggleFullScreen = this.toggleFullScreen.bind(this);
-    this.toggleModeration = this.toggleModeration.bind(this);
+    this.toggleFullScreen = ::this.toggleFullScreen;
+    this.toggleModeration = ::this.toggleModeration;
     if (getToken() && props.roomName) {
       this.sock = new Socket(getToken(), props.roomName);
-      this.sock.onQuestionAsked(this.updateQuestions.bind(this));
-      this.sock.onSettingUpdated(this.updateSetting.bind(this));
+      this.sock.onQuestionAsked(this.updateQuestions);
+      this.sock.onSettingUpdated(this.updateSetting);
     }
-    mobx.autorun(() => console.log(this.report));
+    mobx.autorun(() => this.report); // TODO
   }
 
   @computed
@@ -56,31 +56,21 @@ class ObservableLexStore {
       (!this.roomInfo.moderationEnabled || question.approved)));
   }
 
-  addTodo(task) {
-    this.todos.push({
-      task,
-      completed: false,
-      assignee: null,
-    });
-  }
-
-  updateQuestions(questions) {
-    console.log('Update questions');
+  updateQuestions = (questions) => {
     this.questions = questions;
-  }
+  };
 
   // test
-  updateSetting(setting) {
-    console.log('Update setting');
+  updateSetting = (setting) => {
     this.roomInfo = setting;
     // Object.assign(this.roomInfo, setting);
-  }
+  };
 
   toggleModeration() {
     this.sock.updateSetting({ moderationEnabled: !this.roomInfo.moderationEnabled });
   }
 
-  toggleFullScreen() { this.isFullscreen = !this.isFullscreen; console.log(this.isFullscreen); }
+  toggleFullScreen() { this.isFullscreen = !this.isFullscreen; }
 
 
 }

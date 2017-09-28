@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactSwipe from 'react-swipe';
-import * as Avatar from '../assets/avatars';
 import * as LeftArrow from 'react-icons/lib/ti/arrow-left';
 import * as RightArrow from 'react-icons/lib/ti/arrow-right';
+import * as Avatar from '../assets/avatars';
 
 const avatarStyle = {
   width: '150px',
@@ -23,7 +23,8 @@ const arrowRightStyle = {
   zIndex: '1', // Maybe not needed
 };
 
-const paneNodes = Object.values(Avatar).map(avatar => <img style={avatarStyle} src={avatar} alt="avatar" />);
+const paneNodes = Object.values(Avatar)
+  .map(avatar => <img style={avatarStyle} src={avatar} alt="avatar" />);
 
 // change Swipe.js options by query params
 const startSlide = 0;

@@ -21,10 +21,10 @@ const OAuthButtons = () => (
         className="btn btn-outline-dark btn-lg btn-block col-5 mt-0"
       >Github</a>
     </Row>
-    <Row className="justify-content-center">
+    <Row className="justify-content-center align-items-end">
       <Col
         id="or-container"
-        className="col-10 mb-4"
+        className="col-5"
       >
         <hr id="or-hr" />
         <div id="or">or</div>

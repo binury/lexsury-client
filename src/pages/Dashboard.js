@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import Rooms from '../components/Rooms';
 import Profile from '../components/Profile';
 import Keys from '../components/Keys';
@@ -7,10 +8,7 @@ import { checkAndPurgeGuestToken } from '../helpers';
 
 const Dashboard = () => {
   const token = window.localStorage.getItem('LEXSECRET');
-  if (!token) {
-    window.location.assign('/signup'); // TODO: This shouldn't reload the page
-    return null;
-  }
+  if (!token) return <Redirect to="/signup" />;
   if (checkAndPurgeGuestToken()) return null;
   return (
     <Container id="dashboard" fluid>
