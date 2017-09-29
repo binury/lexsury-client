@@ -30,13 +30,6 @@ class ObservableLexStore {
   }
 
   @computed
-  get completedTodosCount() {
-    return this.todos.filter(
-      todo => todo.completed === true,
-    ).length;
-  }
-
-  @computed
   get report() {
     return (this.roomInfo) ? Object.entries(this.roomInfo) : null;
   }
