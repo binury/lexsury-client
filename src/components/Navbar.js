@@ -65,6 +65,9 @@ export default class NavBar extends React.Component {
                 <Link class="nav-link" to="/dashboard">Dashboard</Link>
               </NavItem>
               <NavItem>
+                <Link class="nav-link" to="/contact">Contact</Link>
+              </NavItem>
+              <NavItem>
                 <Link class="nav-link" to={`/${routeName.toLowerCase()}`}>{routeName}</Link>
               </NavItem>
             </Nav>

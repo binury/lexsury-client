@@ -13,6 +13,7 @@ import Features from '../pages/Features';
 import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
 import Welcome from '../pages/Welcome';
+import Contact from '../pages/Contact';
 
 // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md
 class ScrollToTop extends React.Component {
@@ -46,6 +47,7 @@ const Routes = () => (
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/welcome" component={Welcome} />
+      <Route path="/contact" component={Contact} />
     </div>
   </Router>
 );

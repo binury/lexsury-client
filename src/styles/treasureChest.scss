@@ -24,6 +24,7 @@ $pixel_size: 10px;
   }
   25% {
     transform: rotate(60deg);
+  }  
   30% {
     transform: rotate(120deg);
   }
@@ -66,7 +67,6 @@ $pixel_size: 10px;
   95% {
     transform: rotate(675deg);
     z-index: 10
-  }
   }
   100% {
     transform: rotate(720deg);
