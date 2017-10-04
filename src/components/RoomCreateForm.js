@@ -39,7 +39,7 @@ class RoomCreateForm extends React.Component {
     })
     // eslint-disable-next-line no-return-assign
       .then(res => this.setState({ roomCreated: res.data.name }))
-        // window.location = `/lxr/${res.data.name}`)
+    // window.location = `/lxr/${res.data.name}`)
       .catch(err => console.log(`There was an error: ${err}`));
   };
 

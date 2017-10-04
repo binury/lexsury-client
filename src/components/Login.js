@@ -37,11 +37,11 @@ class Login extends React.Component {
       password: this.state.password,
       responseType: 'json',
     })
-    .then((res) => {
-      localStorage.setItem('LEXSECRET', res.data.accessToken);
-      window.location = this.state.redirect;
-    })
-    .catch(err => console.error(err)); // Invalid login or 500 ?
+      .then((res) => {
+        localStorage.setItem('LEXSECRET', res.data.accessToken);
+        window.location = this.state.redirect;
+      })
+      .catch(err => console.error(err)); // Invalid login or 500 ?
   };
 
   // loginError() {} TODO

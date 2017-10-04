@@ -64,8 +64,6 @@ class ObservableLexStore {
   }
 
   toggleFullScreen() { this.isFullscreen = !this.isFullscreen; }
-
-
 }
 
 export default ObservableLexStore;

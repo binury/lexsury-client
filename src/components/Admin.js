@@ -73,7 +73,7 @@ export default observer((props) => {
             />
           </p>
           {!props.store.roomInfo.moderationEnabled ? 'Questions will show live without needing review' :
-          questions.needReview.length > 0 ? questions.needReview : 'There are no questions in need of approval'}
+            questions.needReview.length > 0 ? questions.needReview : 'There are no questions in need of approval'}
         </ListGroup>
         <ListGroup class="d-inline-flex col-12 col-lg-4 col-xl-4">
           <p className="lead">Inactive Questions</p>

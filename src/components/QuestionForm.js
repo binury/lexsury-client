@@ -93,7 +93,7 @@ class QuestionForm extends React.Component {
                   onChange={this.handleChange}
                 />{' '}
               Ask anonymously
-            </Label>
+              </Label>
             </Col>
           </FormGroup>
         </Form>

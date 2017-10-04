@@ -70,7 +70,7 @@ class QuestionList extends Component {
           sock={this.props.store.sock}
           admin={this.props.admin}
         />
-        ));
+      ));
     return (
       <Container id="questions-container" fluid>
         <Button

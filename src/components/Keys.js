@@ -91,10 +91,9 @@ class Keys extends React.Component {
   }).then(key => this.setState({
     keys: (this.state.keys.concat(key.data)),
     newKey: key.data.code,
-      // eslint-disable-next-line prefer-template
     newKeyURL: `${window.location.protocol}//${window.location.host}/?invite_code=${key.data.code}`,
   })).catch((error) => {
-      // TODO: Refactor this for re-use
+    // TODO: Refactor this for re-use
     if (!error.response) return;
     if (error.response.data.message.includes('remaining')) {
       alert('Sorry! You do not have any invitation codes left');
@@ -103,7 +102,7 @@ class Keys extends React.Component {
     }
   });
 
-// eslint-disable-next-line class-methods-use-this
+  // eslint-disable-next-line class-methods-use-this
   animationIsDone = () => {
     window.setTimeout(() => {
       this.setState({
@@ -203,7 +202,7 @@ class Keys extends React.Component {
                   {key.code}
                 </span>
               </ListGroupItem>
-          )))}
+            )))}
         </ListGroup>
       </Container>
     );

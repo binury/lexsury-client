@@ -40,10 +40,10 @@ class RoomJoinForm extends React.Component {
       timeout: 5000,
       responseType: 'json',
     })
-    .then((roomData) => {
-      if (roomData.data.total !== 0) { window.location = `/lxr/${roomname}`; }
-    })
-    .catch(err => console.error(err));
+      .then((roomData) => {
+        if (roomData.data.total !== 0) { window.location = `/lxr/${roomname}`; }
+      })
+      .catch(err => console.error(err));
   };
 
   // loginError() {} TODO
