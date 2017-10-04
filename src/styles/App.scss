@@ -1,21 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Shrikhand');
 @import url('https://fonts.googleapis.com/css?family=Lato');
-@import 'iphone.scss';
-@import 'treasureChest.scss';
+@import 'iphone';
+@import 'treasureChest';
+@import 'partials/globals';
+@import 'partials/mixins';
+@import 'partials/variables';
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+// $blue:    #007bff !default;
+// $indigo:  #6610f2 !default;
+// $purple:  #6f42c1 !default;
+// $pink:    #e83e8c !default;
+// $red:     #dc3545 !default;
+// $orange:  #fd7e14 !default;
+// $yellow:  #ffc107 !default;
+// $green:   #28a745 !default;
+// $teal:    #20c997 !default;
+// $cyan:    #17a2b8 !default;
 
 body {
-  color: black;
+  color: $black;
   // font-family: 'Roboto', sans-serif;
   font-family: 'Lato', sans-serif;
   text-rendering: optimizeLegibility;
@@ -60,26 +63,20 @@ h1 {
   letter-spacing: 1.86px;
   line-height: 76px;
   margin-bottom: 0;
-  @media only screen and (max-width: 767px) {
-    & {
+  @media (max-width: $screen-sm) {
       font-size: 22px;
       letter-spacing: 0.3px;
       line-height: 28px;
-    }
   }
-  @media only screen and (max-width: 991px) {
-    & {
+  @media (max-width: $screen-md) {
       font-size: 42px;
       letter-spacing: 1.2px;
       line-height: 48px;
-    }
   }
-  @media only screen and (max-width: 1024px) {
-    & {
+  @media (max-width: $screen-lg) {
       font-size: 42px;
       letter-spacing: 1.2px;
       line-height: 48px;
-    }
   }
 }
 
@@ -145,16 +142,14 @@ h1 {
   list-style: none;
   align-items: flex-end;
   clear: both;
-  @media (max-width: 768px) {
+  @media (max-width: $screen-sm) {
     align-items: unset;
   }
 }
 
 #no-questions-msg {
-  @media screen and (min-width: 768px) {
-    & {
+  @media (min-width: $screen-sm) {
       display: none;
-    }
   }
 }
 
@@ -183,10 +178,8 @@ h1 {
       margin-right: 1em;
     }
   }
-  @media screen and (max-width: 568px) {
-    & {
+  @media (max-width: $screen-xs) {
       width: 100%;
-    }
   }
 }
 
@@ -196,40 +189,37 @@ h1 {
   position: absolute;
   right: 35rem;
   z-index: 1;
-  @media screen and (max-width: 700px) {
-    & {
-      justify-content: center;
-      border: 3px solid #343A3F;
-      border-radius: 50%;
-      overflow: hidden;
-      height: 5rem;
-      width: 5rem;
-      float: left;
-      position: unset;
-      img {
-        position: relative;
-        top: -1.5em;
-      }
+  @media (max-width: $screen-sm) {
+    justify-content: center;
+    border: 3px solid #343A3F;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 5rem;
+    width: 5rem;
+    float: left;
+    position: unset;
+    img {
+      position: relative;
+      top: -1.5em;
     }
   }
 }
 .questions-enter {
   opacity: 0.01;
-}
-
-.questions-enter.questions-enter-active {
-  opacity: 1;
-  transition: opacity 2500ms ease-in;
+  &-active {
+    opacity: 1;
+    transition: opacity 2500ms ease-in ;
+  }
 }
 
 .questions-leave {
   opacity: 1;
+  &-leave {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
 }
 
-.questions-leave.questions-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
 
 p.questions {
   font-style: italic;
@@ -253,14 +243,14 @@ $colors: #F2BB2A, #FFF8DC, #DB7093, #C2B7FE, #95A9FF;
 $shapes: '\f005', '\f0c8', '\f1db', '\f096', '\f1d8', '\f1cb';
 $shape-count: 8;
 @for $i from 1 through $shape-count {
-  $shape-size: random(10) + 10;
-  $rotation: random(360);
-  $speed: 40 + random(10);
   $color-key: random(length($colors));
+  $speed: 40 + random(10);
+  $rotation: random(360);
+  $text: random(10);
+  $shape-size: random(10) + 10;
   $shape-color: nth($colors, $color-key);
   $shape-key: random(length($shapes));
   $shape-type: nth($shapes, $shape-key);
-  $text: random(10);
 
   @keyframes shape-#{$i} {
     0% {
@@ -289,7 +279,6 @@ $shape-count: 8;
   font-variant: small-caps;
   padding: 0;
   border: 0;
-  vertical-align: baseline;
   display: block;
   height: 50px;
 }
@@ -351,17 +340,14 @@ $shape-count: 8;
 }
 
 #sign-in-form, #sign-up-form {
-  border-top: 1px solid #d8dee2;
-  border-radius: 5px;
-  background-color: #fff;
-  border: 1px solid #d8dee2;
+  @include formContainer;
 }
 
 //////////////////////////
 //  Bootstrap Overrides //
 //////////////////////////
 .card {
-  border-color: #FFF;
+  border-color: $white;
 }
 
 input.form-control {

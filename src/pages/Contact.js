@@ -96,7 +96,16 @@ export default class ContactForm extends React.Component {
           </Alert>
         </FormGroup>
 
-     
+        <FormGroup row>
+          <FormText
+            class="col-md-8"
+            color="muted"
+          >
+          <h2>Questions or Feedback?</h2>
+          We love to get feedback from our customers to improve our services so that you can engage your audiences better.
+          </FormText>
+        </FormGroup>
+
         <FormGroup row>
           <Label for="from" sm={2} hidden>Email *</Label>
           <Col sm={8}>
@@ -115,7 +124,6 @@ export default class ContactForm extends React.Component {
             class="col-md-8"
             color="muted"
           >
-            We value privacy. No unsolicited emails. Ever.
           </FormText>
         </FormGroup>
 

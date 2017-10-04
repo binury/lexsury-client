@@ -1,8 +1,5 @@
-$black: #000;
-$brown: #b52121;
-$white: #FFF;
-$gold: #ffbb00;
-$green: #52962d;
+@import 'partials/globals';
+
 $pixel_size: 10px;
 
 @mixin pixelsize {
@@ -114,9 +111,9 @@ $pixel_size: 10px;
 }
 
 #treasurechest {
-  border-top: $pixel_size solid #000;
-  border-left: $pixel_size solid #000;
-  border-right: $pixel_size solid #000;
+  border-top: $pixel_size solid $black;
+  border-left: $pixel_size solid $black;
+  border-right: $pixel_size solid $black;
   position: absolute;
   display: block;
   left: 50%;
