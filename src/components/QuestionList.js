@@ -1,7 +1,7 @@
 /* eslint-disable max-len,react/jsx-no-bind */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Button, Container } from 'reactstrap';
 import { isBefore } from 'date-fns';
 import { QRCode } from 'react-qr-svg';
@@ -65,11 +65,16 @@ class QuestionList extends Component {
     const questions = this.props.store.validQuestions
       .sort(this.state.sortByDate ? sortDate : sortVotes)
       .map(question => (
-        <Question
-          question={question}
-          sock={this.props.store.sock}
-          admin={this.props.admin}
-        />
+        <CSSTransition
+          classNames="questions"
+          timeout={{ enter: 2500, exit: 300 }}
+        >
+          <Question
+            question={question}
+            sock={this.props.store.sock}
+            admin={this.props.admin}
+          />
+        </CSSTransition>
       ));
     return (
       <Container id="questions-container" fluid>
@@ -83,14 +88,9 @@ class QuestionList extends Component {
           {this.state.sortByDate ? 'Best' : 'Newest'}
         </Button>
         <ul style={listStyle} id="questions-list">
-          <CSSTransitionGroup
-            transitionName="questions"
-            transitionEnterTimeout={2500}
-            transitionLeaveTimeout={300}
-            transitionAppearTimeout={500}
-          >
+          <TransitionGroup >
             {questions}
-          </CSSTransitionGroup>
+          </TransitionGroup>
         </ul>
       </Container>
     );
