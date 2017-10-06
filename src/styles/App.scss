@@ -76,15 +76,16 @@ h1 {
   }
   @media only screen and (max-width: 1024px) {
     & {
-      font-size: 42px;
+      font-size: 64px;
       letter-spacing: 1.2px;
-      line-height: 48px;
+      line-height: 52px;
     }
   }
 }
 
 #hero-subtitle {
-  margin-bottom: 0.5em;
+  margin: 1em;
+  padding: 0 2vw;
 }
 
 #learn-more-link {
@@ -94,17 +95,19 @@ h1 {
   }
 }
 #arrow-down {
+  font-size: 64px;
   animation: arrow-bounce 2s infinite;
+  z-index: 2;
 }
 @keyframes arrow-bounce {
   0% {
-    transform: translate(-10%, 0);
+    transform: translate(-5%, 0);
   }
   50% {
-    transform: translate(-10%, -4px);
+    transform: translate(-5%, 24px);
   }
   100% {
-    transform: translate(-10%, 0);
+    transform: translate(-5%, 0);
   }
 }
 
@@ -129,6 +132,22 @@ h1 {
   button {
     display: block; // yo
   }
+}
+
+.styled-select {
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  height: 29px;
+  overflow: hidden;
+  width: 240px;
+}
+
+select {
+  background: transparent;
+  padding: 5px; /* If you add too much padding here, the options won't show in IE */
+  border: 1px solid #ccc;
+  font-size: 16px;
+  height: 34px;
+  width: 90%;
 }
 
 #about {
@@ -360,6 +379,28 @@ $shape-count: 8;
 //////////////////////////
 //  Bootstrap Overrides //
 //////////////////////////
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  @media (min-width: 576px) {
+    & {
+    }
+    .navbar-collapse {
+      flex-basis: 50%
+    }
+    .navbar-nav {
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      width: 100%;
+      margin-right: auto;
+    }
+    .nav-link {
+      padding: unset;
+      color: unset; // This is set to be 70% opacity by default ???
+    }
+  }
+}
 .card {
   border-color: #FFF;
 }

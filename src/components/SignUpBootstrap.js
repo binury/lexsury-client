@@ -123,7 +123,7 @@ export default class SignUpBootstrap extends React.Component {
     return (
       <Container
         id="sign-up-form"
-        class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 justify-content-center"
+        className="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 mt-auto justify-content-center"
         fluid
       >
 
@@ -221,10 +221,9 @@ export default class SignUpBootstrap extends React.Component {
               type="text"
               name="code"
               id="code"
-              placeholder="Beta Invite Key *"
+              placeholder="Invitation Code"
               value={this.state.code}
               onChange={this.handleChange}
-              required={!this.state.quick}
             />
           </Col>
         </FormGroup>

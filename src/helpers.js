@@ -2,21 +2,30 @@
 import decode from 'jwt-decode';
 
 const getToken = () => window.localStorage.getItem('LEXSECRET');
+const remToken = () => localStorage.removeItem('LEXSECRET');
+const remCookie = () => {
+  document.cookie = 'lexsury-jwt="";expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+};
 
 const checkAndPurgeGuestToken = () => {
-  if (!getToken()) return false;
-  const email = decode(getToken()).email;
-  if (email == null) {
-    localStorage.removeItem('LEXSECRET');
+  if (!getToken()) return;
+  let email;
+
+  try {
+    email = decode(getToken()).email;
+  } catch (e) {
+    // Malformed normal user
+    remToken();
+    remCookie();
     window.location.assign('/login');
-    return false;
+    return;
   }
-  if (email.includes('@lxr.io')) {
-    window.localStorage.removeItem('LEXSECRET');
+  // Guest users
+  if (email.includes('@lxr.io') || email == null) {
+    remToken();
+    remCookie();
     window.location.assign('/signup');
-    return true;
   }
-  return false;
 };
 
 const checkAndStoreInvitation = () => {
@@ -32,4 +41,11 @@ const getCookie = needle => document.cookie.split(';').map((cookiestring) => {
   return { name: '', value: '' };
 }).filter(cookieObject => (cookieObject.name === needle))[0];
 
-export { getToken, checkAndPurgeGuestToken, checkAndStoreInvitation, getCookie };
+export {
+  getToken,
+  remToken,
+  checkAndPurgeGuestToken,
+  checkAndStoreInvitation,
+  getCookie,
+  remCookie,
+};

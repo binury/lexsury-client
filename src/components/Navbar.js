@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import ContactForm from '../pages/Contact';
 
 // const normal = { display: 'inline-block', position: 'relative', };
 // const hidden = { display: 'none', };
@@ -13,6 +14,8 @@ const emblem = {
   textShadow: '0 0 20px #4a4848, 5px 5px 0 #292b2a',
   paddingLeft: '0.25em',
   position: 'relative',
+  top: 0,
+  left: 0,
 };
 
 // TODO: We should collapse when an item is clicked too
@@ -54,7 +57,7 @@ export default class NavBar extends React.Component {
             isOpen={this.state.isOpen}
             navbar
           >
-            <Nav class="mr-auto" navbar>
+            <Nav navbar>
               <NavItem hidden>
                 <Link class="nav-link" to="/pricing">Pricing</Link>
               </NavItem>
@@ -65,7 +68,7 @@ export default class NavBar extends React.Component {
                 <Link class="nav-link" to="/dashboard">Dashboard</Link>
               </NavItem>
               <NavItem>
-                <Link class="nav-link" to="/contact">Contact</Link>
+                <ContactForm />
               </NavItem>
               <NavItem>
                 <Link class="nav-link" to={`/${routeName.toLowerCase()}`}>{routeName}</Link>

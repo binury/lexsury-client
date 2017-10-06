@@ -27,7 +27,7 @@ const HomeHeader = () => (
         className="d-flex flex-column justify-content-between align-items-center"
       >
         <span>Learn More</span>
-        <ArrowDownThick id="arrow-down" style={{ fontSize: '30px' }} />
+        <ArrowDownThick id="arrow-down" style={{ fontSize: '48px' }} />
       </a>
     </Container>
   </Container>
