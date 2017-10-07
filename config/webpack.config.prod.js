@@ -10,6 +10,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -142,6 +143,7 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.svg$/,
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -210,6 +212,10 @@ module.exports = {
             loader: 'sass-loader',
           },
         ],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'raw-loader',
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
@@ -297,6 +303,7 @@ module.exports = {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new FaviconsWebpackPlugin(`${paths.appSrc}/assets/favicon.png`),
+    new GoogleFontsPlugin({ fonts: [{ family: 'Lato' }] }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

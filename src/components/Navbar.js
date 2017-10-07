@@ -1,26 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import SVGInline from 'react-svg-inline';
 import ContactForm from '../pages/Contact';
-
-// const normal = { display: 'inline-block', position: 'relative', };
-// const hidden = { display: 'none', };
-// const liStyle = (window.location.href.includes('room')) ? hidden : normal;
-const emblem = {
-  color: 'white',
-  fontSize: '2em',
-  fontFamily: 'Shrikhand',
-  letterSpacing: '.25rem',
-  textShadow: '0 0 20px #4a4848, 5px 5px 0 #292b2a',
-  paddingLeft: '0.25em',
-  position: 'relative',
-  top: 0,
-  left: 0,
-};
+import Emblem from '../assets/emblem-sm.svg';
 
 // TODO: We should collapse when an item is clicked too
 // since we're using a router the page doesn't reload
-// TODO: Hide in presentation view
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +35,7 @@ export default class NavBar extends React.Component {
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand>
             <Link class="nav-link" to="/">
-              <span id="emblem" style={emblem}>Lexsury</span>
+              <SVGInline svg={Emblem} />
             </Link>
           </NavbarBrand>
           <Collapse
