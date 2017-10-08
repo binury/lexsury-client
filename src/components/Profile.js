@@ -1,11 +1,9 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 // import { Link } from 'react-router-dom';
+import { URL } from '../helpers';
 
 const axios = require('axios');
-
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
 class Profile extends React.Component {
   constructor(props) {

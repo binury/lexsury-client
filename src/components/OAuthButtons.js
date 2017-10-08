@@ -1,8 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
+import { URL } from '../helpers';
 
 const OAUTH_ENABLE = true;
 const OAuthButtons = () => (

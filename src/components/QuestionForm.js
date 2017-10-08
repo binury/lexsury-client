@@ -6,9 +6,7 @@ import {
   Label,
 } from 'reactstrap';
 import Socket from '../Socket';
-
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
+import { URL } from '../helpers';
 
 class QuestionForm extends React.Component {
   constructor(props) {

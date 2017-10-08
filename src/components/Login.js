@@ -8,9 +8,8 @@ import {
 import Mail from 'react-icons/lib/ti/mail';
 import { Link } from 'react-router-dom';
 import OAuthButtons from './OAuthButtons';
+import { URL } from '../helpers';
 
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 class Login extends React.Component {
   constructor(props) {
     super(props);

@@ -1,13 +1,10 @@
 import React from 'react';
 import { ListGroup } from 'reactstrap';
 import RoomCard from './RoomCard';
+import { URL } from '../helpers';
 
 const axios = require('axios');
 const decode = require('jwt-decode');
-
-
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
 
 class Rooms extends React.Component {
   constructor(props) {

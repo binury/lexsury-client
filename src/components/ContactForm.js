@@ -4,11 +4,7 @@ import Axios from 'axios';
 import {
   Col, Button, Form, FormGroup, Label, Input, Container, Alert
 } from 'reactstrap';
-
-// Client development server runs on different port than actual backend server
-const URL = (process.env.NODE_ENV === 'production')
-  ? process.env.PUBLIC_URL
-  : 'http://localhost:3030';
+import { URL } from '../helpers';
 
 
 export default class ContactForm extends React.Component {
