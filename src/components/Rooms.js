@@ -1,7 +1,8 @@
 import React from 'react';
-import { ListGroup } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
 import RoomCard from './RoomCard';
 import { URL } from '../helpers';
+import RoomCreateButton from './RoomCreateButton';
 
 const axios = require('axios');
 const decode = require('jwt-decode');
@@ -57,7 +58,30 @@ class Rooms extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <p>{"You haven't created any Lexsurs yet!"}</p>;
+      return <p>{'Fetching…'}</p>;
+    }
+    if (this.state.rooms.length < 1) {
+      return (
+        <ListGroup>
+          <ListGroupItem
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+            }}
+          >
+            <ListGroupItemText>
+              {'You haven\'t created any Lexsurs yet!'}
+              <br />
+              {'Ready to try one out?'}
+            </ListGroupItemText>
+            <div style={{ maxWidth: '200px' }}>
+              <RoomCreateButton buttonLabel="Create a Lexsur" />
+            </div>
+          </ListGroupItem>
+        </ListGroup>
+      );
     }
     // TODO: Change interactivity if room has expired
     return (

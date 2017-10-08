@@ -47,7 +47,7 @@ class RoomJoinButton extends React.Component {
           isOpen={this.state.modal}
           toggle={this.toggle}
         >
-          <ModalHeader toggle={this.toggle}>Lets get started!</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Create a new Lexsur</ModalHeader>
           <ModalBody>
             <RoomCreateForm />
           </ModalBody>

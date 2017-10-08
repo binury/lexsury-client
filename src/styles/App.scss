@@ -12,6 +12,26 @@ $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
+@mixin border-gradient($from, $to, $width) {
+  border-left: $width solid $from;
+  border-right: $width solid $to;
+  background-image: // both needed for top & bottom
+          linear-gradient(left, $from, $to),
+          linear-gradient(left, $from, $to);
+
+  // 100% left & right, $width px top & bottom
+  background-size: 100% $width;
+  background-position: 0 100%, 0 0;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+}
+
+@mixin font-gradient($from, $to, $dir) {
+  background: -webkit-linear-gradient($dir, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 body {
   color: black;
   background-color: #f9f9f9;
@@ -528,3 +548,46 @@ button.btn {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
 }
+
+.btn.fun {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1em 0;
+  padding: .5em 1em;
+  text-align: center;
+  background-image: linear-gradient(left, $blue, $purple);
+  background-color: unset;
+  border-left: 3px solid $blue;
+  border-right: 3px solid $purple;
+  border-radius: 3px;
+  span {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    -webkit-text-fill-color: white;
+  }
+  &:hover {
+    @include border-gradient($blue, $purple, 3px);
+    cursor: pointer;
+    animation: wiggle 0.85s linear infinite;
+    animation-delay: 0s;
+    span {
+      @include font-gradient($blue, $purple, left);
+    }
+    // The only way to transition the background image is with a &:before
+  }
+
+  @keyframes wiggle {
+    0%, 50%, 100% {
+      transform: rotateZ(0);
+    }
+    25% {
+      transform: rotateZ(-4deg);
+    }
+    75% {
+      transform: rotateZ(4deg);
+    }
+  }
+}
+

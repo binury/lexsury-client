@@ -50,8 +50,8 @@ class RoomCreateForm extends React.Component {
           onSubmit={this.genNewRoom}
         >
           <FormGroup>
-            <Col sm={6}>
-              <label htmlFor="title">Title</label>
+            <Col sm={10}>
+              <label htmlFor="title">Title *</label>
               <Input
                 id="title"
                 ref={(input) => { this.title = input; }}
@@ -60,6 +60,7 @@ class RoomCreateForm extends React.Component {
                 value={this.state.title}
                 onChange={this.handleChange}
                 placeholder="A Meeting of Ricks"
+                required
               />
             </Col>
           </FormGroup>
@@ -92,12 +93,9 @@ class RoomCreateForm extends React.Component {
           <FormGroup>
             <Col sm={{ size: 12, offset: 2 }}>
               <Button
-                class="col-xs-12"
-                size="lg"
-                color="dark"
-                outline
-                block
-              >Lex a go-go
+                className="btn btn-lg col-xs-12 fun btn-block"
+              >
+                <span>Lex a go-go!</span>
               </Button>
             </Col>
           </FormGroup>
