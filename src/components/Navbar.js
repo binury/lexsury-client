@@ -21,6 +21,12 @@ export default class NavBar extends React.Component {
     });
   };
 
+  close = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+
   render() {
     const token = window.localStorage.getItem('LEXSECRET');
     const routeName = !token ? 'Signup' : 'Logout';
@@ -29,15 +35,15 @@ export default class NavBar extends React.Component {
         <Navbar
           class="navbar-expand-sm navbar-dark"
           color="dark"
-          toggleable
+          expand="md"
           hidden={window.location.pathname.includes('lxr')}
         >
-          <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand>
             <Link class="nav-link" to="/">
               <SVGInline svg={Emblem} />
             </Link>
           </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
           <Collapse
             class="navbar-toggleable-md"
             isOpen={this.state.isOpen}
@@ -50,13 +56,13 @@ export default class NavBar extends React.Component {
               <NavItem hidden>
                 <Link class="nav-link" to="/features">Features</Link>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={this.close}>
                 <Link class="nav-link" to="/dashboard">Dashboard</Link>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={this.close}>
                 <ContactForm />
               </NavItem>
-              <NavItem>
+              <NavItem onClick={this.close}>
                 <Link class="nav-link" to={`/${routeName.toLowerCase()}`}>{routeName}</Link>
               </NavItem>
             </Nav>
