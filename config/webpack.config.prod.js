@@ -293,7 +293,6 @@ module.exports = {
         console.log(message);
       },
       minify: true,
-      navigateFallback: `${publicUrl}/index.html`,
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
     // Moment.js is an extremely popular library that bundles large locale files
