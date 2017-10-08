@@ -14,6 +14,7 @@ $cyan:    #17a2b8 !default;
 
 body {
   color: black;
+  background-color: #f9f9f9;
   // font-family: 'Roboto', sans-serif;
   font-family: 'Lato', sans-serif;
   text-rendering: optimizeLegibility;
@@ -44,8 +45,7 @@ a {
   color: inherit;
 }
 
-// button { color: black; font-family: 'Nunito', sans-serif; text-decoration: none; text-transform: uppercase; border: 2px solid black; border-radius: 20px; transition-duration: .2s; -webkit-transition-duration: .2s; -moz-transition-duration: .2s; background-color: white; padding: 4px 30px; outline: none; &:hover, &:active { &:not([disabled]) { color: white; background-color: black; transition-duration: .2s; -webkit-transition-duration: .2s; -moz-transition-duration: .2s; } } &:disabled { opacity: 0.39; } }
-
+// Home Page
 h1 {
   font-style: italic;
   font-weight: normal;
@@ -154,6 +154,75 @@ select {
   color: white;
 }
 
+.card.borderless {
+  border: none;
+  background: none;
+}
+
+
+// Dashboard
+#dashboard {
+  margin-top: 32px;
+
+  #db-profile {
+    font-size: 24px;
+  }
+}
+
+#room-list {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.room-card {
+  cursor: pointer;
+  span {
+    display: block;
+  }
+}
+
+.room-header {
+  font-weight: bold;
+}
+.room-type {
+  background-color: transparent;
+  color: #a2a2a2;
+  font-size: 12px;
+  border: 1px solid #a2a2a2;
+  display: inline-block;
+  padding: 0 15px;
+  height: 20px;
+  line-height: 19px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.ellipsis {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .5em 2vw;
+  font-size: 24px;
+  cursor: pointer;
+  transform: rotate(90deg);
+  &:before {
+    content: "…";
+  }
+  color: #a2a2a2;
+  transition: color .3s ease-in-out;
+  &:hover {
+    color: $cyan;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+// Lexsur
 #questions-list {
   margin-top: 3vw;
   padding: 0;
@@ -399,10 +468,6 @@ $shape-count: 8;
     }
   }
 }
-.card {
-  border-color: #FFF;
-}
-
 input.form-control {
   border-top: none;
   border-left: none;
@@ -433,11 +498,6 @@ a:-webkit-any-link {
   cursor: pointer;
 }
 
-.card {
-  border: none;
-  background: none;
-}
-
 a:hover {
   text-decoration: none;
   color: $cyan;
@@ -462,4 +522,9 @@ a.active {
     height: 2px;
     background-color: $cyan;
   }
+}
+
+button.btn {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
 }

@@ -142,9 +142,8 @@ export default class SignUpBootstrap extends React.Component {
         >
           <p style={{ padding: '1em' }}>
           {`Lexsury is set to launch January 2018.
-          We know we can make a first impression only once, and want to be sure everything is ready before we blast off.
-          In the meantime we still want to hear your feedback, so we have opened speaker registration to invited beta users.
-          You may contact us to request an invitation.`}
+          We know we can make a first impression only once and want to be sure everything is ready before we blast off.
+          In the meantime we still want to hear your feedback so we have opened registration to all users for our open beta.`}
           </p>
         </FormGroup>
 

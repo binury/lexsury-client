@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'reactstrap';
 // import { Link } from 'react-router-dom';
 
 const axios = require('axios');
@@ -40,23 +41,28 @@ class Profile extends React.Component {
       return <p>{'…'}</p>;
     }
     return (
-      <ul>
-        <li>
-          Email: {this.state.profile.email}
-        </li>
-        <li>
-          Handle: {this.state.profile.displayName}
-        </li>
-        <li>
-          First Name: {this.state.profile.firstName}
-        </li>
-        <li>
-          Last Name: {this.state.profile.lastName}
-        </li>
-        <li>
-          Invitations Remaining: {this.state.profile.invitations}
-        </li>
-      </ul>
+      <Container>
+        <ul>
+          <li>
+            Email: {this.state.profile.email}
+          </li>
+          <li>
+            Handle: {this.state.profile.displayName}
+          </li>
+          <li>
+            First Name: {this.state.profile.firstName}
+          </li>
+          <li>
+            Last Name: {this.state.profile.lastName}
+          </li>
+          <li>
+            {this.state.profile.invitations > 0 ?
+              `Invitations Remaining: ${this.state.profile.invitations}` :
+              null
+            }
+          </li>
+        </ul>
+      </Container>
     );
   }
 }

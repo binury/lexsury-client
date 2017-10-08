@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ListGroup } from 'reactstrap';
+import RoomCard from './RoomCard';
 
 const axios = require('axios');
 const decode = require('jwt-decode');
+
 
 // Client development server runs on different port than actual backend server
 const URL = (process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'http://localhost:3030';
@@ -30,25 +32,46 @@ class Rooms extends React.Component {
       headers: {
         Authorization: token,
       },
-    }).then((newRooms) => {
+    }).then(({ data }) => {
       this.setState({
         isLoading: false,
-        rooms: newRooms.data.data,
+        rooms: data.data,
       });
     });
   }
+
+  deleteRoom = (id) => {
+    console.log(`Deleting room: ${id}`);
+    // eslint-disable-next-line no-unreachable
+    const token = window.localStorage.getItem('LEXSECRET');
+    axios({
+      method: 'delete',
+      url: `${URL}/room/${id}`,
+      timeout: 20000,
+      responseType: 'json',
+      headers: {
+        Authorization: token,
+      },
+    }).then((newRooms) => {
+      console.log(newRooms);
+      this.fetchRooms();
+    });
+  };
+
   render() {
     if (this.state.isLoading) {
       return <p>{"You haven't created any Lexsurs yet!"}</p>;
     }
     // TODO: Change interactivity if room has expired
     return (
-      <ul>{this.state.rooms.map(room => (
-        <li key={room.id}>
-          {room.title || 'Untitled Lexsur'} -
-          <Link to={`/lxr/${room.name}/admin`}> {room.name}</Link>
-        </li>
-      ))}</ul>
+      <ListGroup class="d-block">
+        {this.state.rooms.map(room => (
+          <RoomCard
+            roomInfo={room}
+            handler={this.deleteRoom}
+          />
+        ))}
+      </ListGroup>
     );
   }
 }

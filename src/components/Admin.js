@@ -8,12 +8,14 @@ import ToggleSwitch from '@trendmicro/react-toggle-switch';
 import '@trendmicro/react-toggle-switch/dist/react-toggle-switch.css';
 
 export default observer((props) => {
+  // Question Display Logic
   const isDone = question => (question.hidden || question.archived);
   const awaitingMod = question => (props.store.roomInfo.moderationEnabled &&
       (question.approved === null && !isDone(question)));
   // Denied must be tested this way as question.approved can be null, 0, or false
   const isDenied = question => question.approved === false;
   const isLive = question => !isDone(question) && !awaitingMod(question) && !isDenied(question);
+  // Question Control Logic
   const parseQuestions = filter => props.store.questions.filter(filter).map((question) => {
     const archive = () => props.sock.archive(question.id);
     const hide = () => props.sock.hide(question.id);

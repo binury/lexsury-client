@@ -43,7 +43,7 @@ class RoomJoinForm extends React.Component {
       .then((roomData) => {
         if (roomData.data.total !== 0) { window.location = `/lxr/${roomname}`; }
       })
-      .catch(err => console.error(err));
+      .catch(/* TODO */);
   };
 
   // loginError() {} TODO

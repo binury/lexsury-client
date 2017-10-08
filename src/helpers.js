@@ -1,6 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import decode from 'jwt-decode';
 
+const URL = (process.env.NODE_ENV === 'production') ?
+  process.env.PUBLIC_URL :
+  'http://localhost:3030';
 const getToken = () => window.localStorage.getItem('LEXSECRET');
 const remToken = () => localStorage.removeItem('LEXSECRET');
 const remCookie = () => {
@@ -48,4 +51,5 @@ export {
   checkAndStoreInvitation,
   getCookie,
   remCookie,
+  URL,
 };
