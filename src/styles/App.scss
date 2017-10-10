@@ -408,7 +408,7 @@ $shape-count: 8;
   border: 0;
   border-top: 1px solid #e4e6e8;
   color: #9fa6ad;
-  background-color: #9fa6ad;
+  background-color: #f9f9f9;
   display: block;
   unicode-bidi: isolate;
   -webkit-margin-before: 0.5em;
@@ -422,7 +422,7 @@ $shape-count: 8;
   display: inline-block;
   position: relative;
   padding: 2px;
-  background-color: #FFF;
+  background-color: #f9f9f9;
   margin: auto;
   border: 0;
   vertical-align: baseline;
@@ -510,7 +510,8 @@ input.form-control {
   padding: 0;
 
   input {
-    padding-left: 1.5rem;
+    text-align: center;
+    // padding-left: 1.5rem;
   }
 }
 
@@ -547,6 +548,18 @@ a.active {
 button.btn {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
+  border-radius: 0.4em;
+  &:hover {
+    cursor: pointer;
+    &.brn-dark {
+      border-color: #414850;
+    }
+  }
+  &.btn-dark {
+    border-width: 0 0 4px 0;
+    border-color: #586169;
+    border-radius: 3px;
+  }
 }
 
 .btn.fun {

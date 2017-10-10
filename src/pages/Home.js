@@ -39,7 +39,7 @@ function Home() {
         </Row>
         <p id="clickprompt">{}</p>
         <Row id="home-actions" class="justify-content-center align-items-end">
-          <Col xs={10} sm={8} md={8} lg={4}>
+          <Col xs={10} sm={8} md={8} lg={4} class="px-sm-4 px-md-5 px-lg-5">
             <RoomCreateButton buttonLabel={createLabel} />
           </Col>
           <Col
@@ -49,7 +49,7 @@ function Home() {
             <hr id="or-hr" />
             <div id="or">or</div>
           </Col>
-          <Col xs={10} sm={8} md={8} lg={4}>
+          <Col xs={10} sm={8} md={8} lg={4} class="px-sm-4 px-md-5 px-lg-5">
             <RoomJoinForm />
           </Col>
         </Row>
