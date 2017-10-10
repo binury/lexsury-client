@@ -2,10 +2,9 @@
 import React from 'react';
 import Axios from 'axios';
 import {
-  Button, Col, Container, Form, Input, InputGroup, InputGroupAddon, Label,
+  Button, Col, Container, Form, Input, InputGroup, Label,
   Row,
 } from 'reactstrap';
-import Mail from 'react-icons/lib/ti/mail';
 import { Link } from 'react-router-dom';
 import OAuthButtons from './OAuthButtons';
 import { URL } from '../helpers';
@@ -61,9 +60,6 @@ class Login extends React.Component {
           <Row>
             <InputGroup>
               <Label htmlFor="email" hidden>Email</Label>
-              <InputGroupAddon>
-                <Mail style={{ color: '#343A3F' }} />
-              </InputGroupAddon>
               <Input
                 type="text"
                 name="email"
