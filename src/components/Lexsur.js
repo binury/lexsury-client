@@ -76,6 +76,9 @@ class Lex extends React.Component {
               borderRadius: '1em',
               position: 'relative',
               left: '-1em',
+              paddingRight: '1em',
+              paddingLeft: '1em',
+              flexFlow: this.state.roomName.length <= 23 ? 'row' : 'column', // Guessing
             }}
             fluid
           >
