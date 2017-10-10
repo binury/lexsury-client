@@ -4,6 +4,7 @@ import Axios from 'axios';
 import {
   Col, Button, Form, FormGroup, Label, Input, Container, Alert
 } from 'reactstrap';
+import Mail from 'react-icons/lib/ti/mail';
 import { URL } from '../helpers';
 
 
@@ -80,7 +81,6 @@ export default class ContactForm extends React.Component {
   render() {
     return (
       <Container
-        class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 mx-auto justify-content-center"
         fluid
       >
         <Form
@@ -148,9 +148,12 @@ export default class ContactForm extends React.Component {
             </Col>
           </FormGroup>
 
-          <FormGroup row>
+          <FormGroup class="justify-content-end" row>
             <Col class="col-auto">
-              <Button size="lg" color="dark" block>Send</Button>
+              <Button size="lg" color="dark" block>
+                <Mail style={{ paddingBottom: '0.1em', marginRight: '4px' }}/>
+                Send
+              </Button>
             </Col>
           </FormGroup>
         </Form>
