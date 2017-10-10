@@ -3,7 +3,7 @@ import React from 'react';
 import Axios from 'axios';
 import { randomBytes } from 'crypto';
 import {
-  Col, Button, Form, FormGroup, Label, Input, FormText, Container, Alert,
+  Col, Button, Form, FormGroup, Label, Input, FormText, Container, Alert, Row,
 } from 'reactstrap';
 import OAuthButtons from './OAuthButtons';
 import { URL } from '../helpers';
@@ -125,40 +125,29 @@ export default class SignUpBootstrap extends React.Component {
         fluid
       >
 
+        <Row hidden={this.state.errors.length === 0}>
+          <Alert color="warning" class="text-center" style={{ width: '100%' }}>
+            {this.state.errors.map(error => <strong>{error}</strong>)}
+          </Alert>
+        </Row>
+
         <p className="lead" hidden={!this.state.quick}>
           Determining shortest hyperspace route to your event's Lexsur…
         </p>
 
-      <Form
-        onSubmit={this.handleSubmit}
-        encType="application/json"
-        hidden={this.state.quick}
-      >
-        <FormGroup
-          row
-          hidden={this.state.quick}
-        >
-          <p style={{ padding: '1em' }}>
-          {`Lexsury is set to launch January 2018.
-          We know we can make a first impression only once and want to be sure everything is ready before we blast off.
-          In the meantime we still want to hear your feedback so we have opened registration to all users for our open beta.`}
-          </p>
-        </FormGroup>
-
         <OAuthButtons />
 
-        <FormGroup
-          row
-          hidden={this.state.errors.length === 0}
+        <Form
+          onSubmit={this.handleSubmit}
+          encType="application/json"
+          hidden={this.state.quick}
+          class="d-flex flex-column align-items-center"
         >
-          <Alert class="col-md-8" color="warning">
-            {this.state.errors.map(error => <strong>{error}</strong>)}
-          </Alert>
-        </FormGroup>
 
-        <FormGroup row>
+
+        <FormGroup row class="col-10">
           <Label htmlFor="displayName" sm={2} hidden>Handle</Label>
-          <Col sm={8}>
+          <Col sm={12}>
           <Input
             type="text"
             name="displayName"
@@ -168,14 +157,11 @@ export default class SignUpBootstrap extends React.Component {
             onChange={this.handleChange}
           />
           </Col>
-          <FormText class="col-md-8" color="muted">
-            Displayed alongside your submissions.
-          </FormText>
         </FormGroup>
 
-        <FormGroup row>
+        <FormGroup row class="col-10">
           <Label for="email" sm={2} hidden>Email *</Label>
-          <Col sm={8}>
+          <Col sm={12}>
             <Input
               type="email"
               name="email"
@@ -195,9 +181,9 @@ export default class SignUpBootstrap extends React.Component {
           </FormText>
         </FormGroup>
 
-        <FormGroup row shape={{ size: 'auto' }}>
+        <FormGroup row class="col-10">
           <Label for="password" sm={2} hidden>Password *</Label>
-          <Col sm={8}>
+          <Col sm={12}>
             <Input
               type="password"
               name="password"
@@ -211,7 +197,7 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
 
-        <FormGroup row shape={{ size: 'auto' }}>
+        <FormGroup row class="col-10">
           <Label for="code" sm={2} hidden>Beta Key *</Label>
           <Col className="col-auto">
             <Input
@@ -225,9 +211,9 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
 
-        <FormGroup row hidden>
+        <FormGroup row hidden class="col-10">
           <Label for="bio" sm={2} hidden>Bio</Label>
-          <Col sm={8}>
+          <Col sm={12}>
             <Input
               type="textarea"
               name="bio"
@@ -239,7 +225,7 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
 
-        <FormGroup row hidden>
+        <FormGroup row hidden class="col-10">
           <Label for="optin" sm={2} hidden>Email updates</Label>
           <Col sm={{ size: 10 }}>
             <FormGroup check>
@@ -257,11 +243,16 @@ export default class SignUpBootstrap extends React.Component {
           </Col>
         </FormGroup>
 
-        <FormGroup row
+        <FormGroup row class="col-10 d-flex justify-content-end"
         >
           <Col class="col-auto">
             <Button size="lg" color="dark" block>Submit</Button>
           </Col>
+        </FormGroup>
+        <FormGroup class="col-10"
+          row
+          hidden={this.state.quick}
+        >
         </FormGroup>
       </Form>
       </Container>
