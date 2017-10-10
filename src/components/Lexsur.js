@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { QRCode } from 'react-qr-svg';
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import { observer } from 'mobx-react';
 
 import QuestionForm from './QuestionForm';
@@ -20,7 +20,6 @@ const phraseWordStyle = {
 };
 
 const joinBadgeStyle = {
-  backgroundColor: '#FFF',
   position: 'fixed',
   bottom: '20%',
   left: 0,
@@ -33,15 +32,19 @@ class Lex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newQuestionText: 'Enter a question',
-      questions: [],
+      newQuestionText: 'What would you like to ask?',
       roomName: props.store.roomName,
     };
   }
 
   render() {
     return (
-      <div>
+      <Container>
+        <Row class="justify-content-center">
+          <h1 className="d-none d-sm-none d-md-inline d-lg-inline d-xl-inline m-0 display-3">
+            {typeof this.props.store.roomInfo !== 'undefined' && this.props.store.roomInfo.title}
+          </h1>
+        </Row>
         <QuestionForm sock={this.props.store.sock} />
         <QuestionList
           questions={this.props.store.questions}
@@ -55,11 +58,12 @@ class Lex extends React.Component {
           className="d-none d-sm-none d-md-inline d-lg-inline d-xl-inline col-sm-4"
         >
           <QRCode
-            bgColor="#FFFFFF"
+            bgColor="#F9F9F9"
             fgColor="#000000"
             level="Q"
             style={{ width: '150px' }}
             value={`http://lxsr.us/${this.state.roomName}`}
+            hidden={this.props.store.questions.length === 0}
           />
           <p className="lead mt-4">
             Join this Lexsur @
@@ -92,7 +96,7 @@ class Lex extends React.Component {
             </p>
           </Container>
         </Container>
-      </div>
+      </Container>
     );
   }
 }

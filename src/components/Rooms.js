@@ -50,10 +50,7 @@ class Rooms extends React.Component {
       headers: {
         Authorization: token,
       },
-    }).then((newRooms) => {
-      console.log(newRooms);
-      this.fetchRooms();
-    });
+    }).then(() => this.fetchRooms()); // TODO: Could probably optimize this
   };
 
   render() {

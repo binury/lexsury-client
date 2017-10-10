@@ -80,7 +80,7 @@ class QuestionForm extends React.Component {
           </FormGroup>
           <FormGroup row class="align-items-center">
             <Col xs={4}>
-              <Button>Ask!</Button>
+              <Button color="dark">Ask!</Button>
             </Col>
             <Col xs={7}>
               <Label check>
