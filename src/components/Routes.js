@@ -14,6 +14,11 @@ import Dashboard from '../pages/Dashboard';
 import Pricing from '../pages/Pricing';
 import Welcome from '../pages/Welcome';
 import Contact from '../pages/Contact';
+import Demo from '../pages/Demo';
+// TODO: Index.js of pages import as module
+
+// FLAGS
+const DEMO_ENABLED = false;
 
 // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md
 class ScrollToTop extends React.Component {
@@ -48,6 +53,9 @@ const Routes = () => (
       <Route path="/pricing" component={Pricing} />
       <Route path="/welcome" component={Welcome} />
       <Route path="/contact" component={Contact} />
+      {(DEMO_ENABLED && Demo) ?
+        <Route path="/demo" component={Demo} /> :
+        null}
     </div>
   </Router>
 );

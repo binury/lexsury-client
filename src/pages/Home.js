@@ -24,7 +24,7 @@ function Home() {
   if (checkAndPurgeGuestToken()) return null;
   const createLabel = (getToken()) ?
     'Start a new Lexsur' :
-    'Try it Out';
+    'See it in Action';
   return (
     <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
       <Container
