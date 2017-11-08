@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
-import SVGInline from 'react-svg-inline';
 import ContactForm from '../pages/Contact';
-import Emblem from '../assets/emblem-sm.svg';
+import Emblem from '../assets/emblem-hires.png';
 
 // TODO: We should collapse when an item is clicked too
 // since we're using a router the page doesn't reload
@@ -40,7 +39,11 @@ export default class NavBar extends React.Component {
         >
           <NavbarBrand>
             <Link class="nav-link" to="/">
-              <SVGInline svg={Emblem} />
+              <img
+                src={Emblem}
+                alt="Lexsury"
+                style={{ width: '12rem' }}
+              />
             </Link>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
